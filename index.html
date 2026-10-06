@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>「自分の言葉」で進める就活 | REFLAME</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 0 48px;
+    }
+
+    /* ヒーロー画像 */
+    .hero-wrap { position: relative; line-height: 0; }
+    .hero-img {
+      width: 100%;
+      display: block;
+    }
+    /* バナー別コピー（bid一致時のみ表示）。plain背景の「空きバンド」に収める。
+       画像なので枠にfitさせれば必ず収まる＝テキストのような折り返し事故が起きない。
+       既定値はSP（〜640px）基準。PCは下のメディアクエリで上書き。 */
+    .hero-copy {
+      position: absolute;
+      left: 6%;
+      top: 28%;
+      width: 53%;
+      height: auto;
+      display: block;
+      z-index: 2;
+      pointer-events: none;
+    }
+    @media (min-width: 641px) {
+      .hero-copy { left: 7%; top: 28%; width: 46%; }
+    }
+
+    /* メディア掲載 */
+    .media-section {
+      background: #FFF5F5;
+      padding: 20px 16px 20px;
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    .media-stars {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .star-icon {
+      height: 20px;
+      width: auto;
+    }
+
+    .media-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .media-laurel {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .media-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.6;
+      color: #B91C1C;
+      text-align: center;
+    }
+
+    .media-text {
+      flex: none;
+    }
+
+    .media-sub {
+      font-size: 11px;
+      color: #666;
+      margin-top: 2px;
+      margin-bottom: 0;
+      letter-spacing: 0.02em;
+    }
+
+
+    .media-grid {
+      display: flex;
+      width: max-content;
+      gap: 8px;
+      animation: logo-marquee 30s linear infinite;
+      will-change: transform;
+    }
+
+    .media-marquee {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .media-item.media-item-clone {
+      display: flex;
+    }
+
+    .media-item {
+      background: #ffffff;
+      border-radius: 2px;
+      border: 1px solid #FEE2E2;
+      display: flex;
+      flex: 0 0 132px;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+    }
+
+    .media-item img {
+      width: 100%;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    @keyframes logo-marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(calc(-50% - 4px));
+      }
+    }
+
+    .media-marquee::before,
+    .media-marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      width: 42px;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .media-marquee::before {
+      left: 0;
+      background: linear-gradient(90deg, #FFF5F5 0%, rgba(250,251,254,0) 100%);
+    }
+
+    .media-marquee::after {
+      right: 0;
+      background: linear-gradient(270deg, #FFF5F5 0%, rgba(250,251,254,0) 100%);
+    }
+
+    @media (max-width: 640px) {
+      .media-section {
+        overflow: hidden;
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      .media-stars,
+      .media-title-row {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+
+      .media-grid {
+        animation-duration: 28s;
+      }
+
+      .media-item {
+        flex: 0 0 112px;
+      }
+
+      .media-item img {
+        height: 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .media-grid {
+        animation: none;
+      }
+    }
+
+    /* チャットUI */
+    .chat-wrap {
+      margin: 16px 16px 0;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(127,29,29,0.08);
+    }
+
+    /* エージェント行（アバター＋バブル） */
+    .agent-row {
+      --advisor-avatar-size: 58px;
+      --advisor-profile-gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px 16px 0;
+      align-items: stretch;
+    }
+
+    .agent-profile {
+      display: flex;
+      align-items: center;
+      gap: var(--advisor-profile-gap);
+    }
+
+    .avatar-badge {
+      width: var(--advisor-avatar-size);
+      height: var(--advisor-avatar-size);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E63946, #B91C1C);
+      flex-shrink: 0;
+      display: grid;
+      place-items: end center;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(230, 57, 70, 0.28);
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 18%;
+      transform: scale(1.4);
+      transform-origin: center 18%;
+    }
+
+    .agent-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      padding-left: calc(var(--advisor-avatar-size) + var(--advisor-profile-gap));
+    }
+
+    .agent-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+    }
+
+    .bubble {
+      background: #f0f3f8;
+      border-radius: 4px 14px 14px 14px;
+      padding: 13px 15px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #1a1a1a;
+      display: block;
+      width: fit-content;
+      max-width: min(100%, 430px);
+    }
+
+    .bubble strong {
+      color: #B91C1C;
+    }
+
+    .bubble-gap {
+      margin-top: 8px;
+    }
+
+    /* 質問エリア */
+    .question-area {
+      padding: 20px 16px;
+    }
+
+    .question-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .question-label::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: linear-gradient(180deg, #E63946, #7F1D1D);
+      border-radius: 2px;
+    }
+
+    /* ラジオ選択肢 */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f7f9fc;
+      border: 2px solid #e4eaf4;
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .option-label input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #c8d4e8;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+
+    .option-label input[type="radio"]::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 10px;
+      height: 10px;
+      background: #E63946;
+      border-radius: 50%;
+      transition: transform 0.15s;
+    }
+
+    .option-label input[type="radio"]:checked {
+      border-color: #E63946;
+    }
+
+    .option-label input[type="radio"]:checked::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .option-label:has(input:checked) {
+      border-color: #E63946;
+      background: #FEF2F2;
+    }
+
+    /* 返答バブル（選択後に表示） */
+    .reply-area {
+      padding: 0 16px 4px;
+      display: none;
+    }
+
+    .reply-area.show {
+      display: block;
+    }
+
+    /* 仕切り */
+    .divider {
+      margin: 8px 16px;
+      border: none;
+      border-top: 1px solid #f0f3f8;
+    }
+
+    /* CTAエリア */
+    .cta-area {
+      padding: 16px 16px 20px;
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #E63946, #7F1D1D);
+      color: #ffffff;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(230, 57, 70, 0.35);
+      transition: opacity 0.15s, transform 0.1s;
+      text-align: center;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    .cta-btn:active {
+      opacity: 0.9;
+      transform: translateY(1px);
+    }
+
+    /* 固定CTAバー（SPのみ）。FVを通過したら出て、最終CTAが見えている間は引っ込む。
+       2026-09-18 追加。構成変更で予約フォームが641px→1701px（+1,060px）まで下がり、
+       スマホの初期表示からフォームが消えたことへの緩和策。summer LP の .sticky-cta と同型。 */
+    .sticky-cta { display: none; }
+    @media (max-width: 640px) {
+      .sticky-cta {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.10);
+        transform: translateY(110%);
+        transition: transform 0.25s ease;
+      }
+      .sticky-cta.show { transform: translateY(0); }
+
+      /* 固定バーのボタンだけオレンジの立体ピル（2026-09-18 本人指定のデザイン）。
+         メインLPの赤 .cta-btn は据え置きで、ここだけ上書きする。 */
+      .sticky-cta .cta-inner { max-width: 480px; margin: 0 auto; }
+      .sticky-cta .cta-badge {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 6px;
+        padding: 3px 14px;
+        border-radius: 999px;
+        background: #FFE879;
+        color: #6B3F00;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: 0.02em;
+        position: relative;
+      }
+      /* 左右の集中線（装飾） */
+      .sticky-cta .cta-badge::before,
+      .sticky-cta .cta-badge::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 2px;
+        height: 14px;
+        background: #FFD426;
+        transform: translateY(-50%) rotate(20deg);
+      }
+      .sticky-cta .cta-badge::before { left: -8px; transform: translateY(-50%) rotate(-20deg); }
+      .sticky-cta .cta-badge::after { right: -8px; }
+
+      .sticky-cta .cta-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 15px 52px 15px 20px;
+        font-size: 17px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #FFA43A 0%, #FB8C1E 45%, #F4701A 100%);
+        box-shadow: 0 5px 0 #C9500D, 0 10px 18px rgba(244, 112, 26, 0.32), inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+      }
+      .sticky-cta .cta-btn:active {
+        transform: translateY(3px);
+        box-shadow: 0 2px 0 #C9500D, 0 5px 10px rgba(244, 112, 26, 0.28), inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+      }
+      /* 右端の丸矢印 */
+      .sticky-cta .cta-arrow {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .sticky-cta .cta-arrow svg { width: 12px; height: 12px; display: block; }
+
+      /* バーが最下部の内容に被らないよう逃がす */
+      footer { padding-bottom: 116px; }
+    }
+
+    .cta-sub {
+      font-size: 11px;
+      text-align: center;
+      color: #aaa;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .cta-sub a {
+      color: #E63946;
+      text-decoration: none;
+    }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-size: 11px;
+      color: #bbb;
+      line-height: 1.8;
+    }
+
+    .review-slide {
+      display: none;
+    }
+
+    .review-slide.is-active {
+      display: block;
+    }
+
+    .review-dot {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 999px;
+      background: #FCA5A5;
+      cursor: pointer;
+      transition: width 0.2s ease, background 0.2s ease;
+    }
+
+    .review-dot.is-active {
+      width: 18px;
+      background: #E63946;
+    }
+
+    @media (min-width: 1280px) {
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .lp-shell,
+      .lp-grid {
+        height: 100vh;
+        min-height: 0;
+      }
+
+      .center-scroll {
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .center-scroll::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      main,
+      footer {
+        max-width: 560px;
+      }
+
+      main {
+        padding-bottom: 64px;
+      }
+
+      .side-data-label {
+        position: relative;
+        z-index: 2;
+        margin-bottom: 0.5rem !important;
+        padding-left: 0.25rem !important;
+      }
+
+      .side-data-watermark {
+        display: none;
+      }
+
+      .side-column .side-stat-card,
+      .side-column .side-problem-item,
+      .side-column .side-consult-bubble,
+      .side-column .side-cta-card,
+      .side-column .side-review-card {
+        border-color: rgba(255, 255, 255, 0.92) !important;
+        background: rgba(255, 255, 255, 0.68) !important;
+        box-shadow: none !important;
+      }
+
+      .side-column .side-chat-cta {
+        box-shadow: 0 12px 28px rgba(185, 28, 28, 0.18) !important;
+      }
+    }
+
+    @media (min-width: 1280px) and (max-height: 760px) {
+      .side-column {
+        gap: 0.5rem !important;
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+      }
+
+      .side-column {
+        font-size: 12px;
+      }
+
+      .side-data-label {
+        margin-bottom: 0.25rem !important;
+        font-size: 0.75rem;
+      }
+
+      .side-data-watermark {
+        display: none;
+      }
+
+      .side-stat-stack,
+      .side-problem-list {
+        gap: 0.5rem;
+      }
+
+      .side-stat-stack > :not([hidden]) ~ :not([hidden]),
+      .side-problem-list > :not([hidden]) ~ :not([hidden]) {
+        margin-top: 0.375rem !important;
+      }
+
+      .side-stat-card {
+        padding: 0.625rem !important;
+      }
+
+      .side-stat-icon {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        font-size: 1rem !important;
+      }
+
+      .side-stat-value {
+        font-size: 1.375rem !important;
+      }
+
+      .side-stat-caption {
+        display: none;
+      }
+
+      .side-problem-item {
+        padding-top: 0.375rem !important;
+        padding-bottom: 0.375rem !important;
+      }
+
+      .side-consult {
+        margin-top: 0;
+      }
+
+      .side-consult-bubble {
+        width: 100% !important;
+        padding-top: 0.625rem !important;
+        padding-bottom: 0.625rem !important;
+      }
+
+      .side-illustration {
+        display: none;
+      }
+    }
+    /* 打消し表示（本文と近接・可読サイズ） */
+    .disclaimer-inline{
+      margin:0;font-size:11px;line-height:1.6;font-weight:600;color:#6B7280;
+    }
+    .media-note{
+      margin:10px 0 0;font-size:11px;line-height:1.6;font-weight:600;color:#8A6D6D;text-align:center;
+    }
+
+    /* 掲載メディア：テキスト表記版（他社ロゴを使わない） */
+    .media-item{
+      flex:0 0 auto;
+      min-width:132px;
+      min-height:44px;
+      border-color:#FCA5A5;
+      border-radius:4px;
+      padding:6px 10px;
+    }
+    .media-name{
+      font-family:'Noto Sans JP',system-ui,sans-serif;
+      font-size:12.5px;
+      font-weight:700;
+      letter-spacing:.01em;
+      line-height:1.3;
+      color:#4B5563;
+      text-align:center;
+      white-space:nowrap;
+    }
+    @media (max-width:640px){
+      .media-item{flex:0 0 auto;min-width:118px;min-height:40px;padding:6px 12px}
+      .media-name{font-size:11.5px}
+    }
+    /* 面談特典：面接対策シート（FV直下バナー）2026-09-15 ES添削サイトから差し替え */
+    .gift-band{
+      position:relative;overflow:hidden;isolation:isolate;
+      margin:14px 16px 0;padding:13px 16px 12px;border-radius:14px;text-align:center;
+      background:
+        radial-gradient(120% 140% at 12% 0%, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 46%),
+        linear-gradient(135deg,#EF5350 0%,#B71C1C 100%);
+      box-shadow:0 14px 34px rgba(183,28,28,.30), inset 0 0 0 1px rgba(255,233,168,.55);
+    }
+    .gift-inner{position:relative;z-index:2}
+    /* 斜めに走る光沢 */
+    .gift-shine{
+      position:absolute;top:-60%;left:-40%;z-index:1;width:38%;height:220%;
+      transform:rotate(18deg);pointer-events:none;
+      background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%);
+      filter:blur(2px);animation:giftShine 4.6s ease-in-out infinite;
+    }
+    @keyframes giftShine{0%{left:-45%}55%{left:118%}100%{left:118%}}
+    /* きらめき */
+    .gift-spark{
+      position:absolute;z-index:1;width:12px;height:12px;pointer-events:none;opacity:0;
+      background:
+        linear-gradient(to right,rgba(255,255,255,0),#fff 50%,rgba(255,255,255,0)) center/100% 1.6px no-repeat,
+        linear-gradient(to bottom,rgba(255,255,255,0),#fff 50%,rgba(255,255,255,0)) center/1.6px 100% no-repeat;
+      animation:giftSpark 3.2s ease-in-out infinite;
+    }
+    .gift-spark-1{top:14px;left:7%;animation-delay:.1s}
+    .gift-spark-2{top:66%;right:9%;width:16px;height:16px;animation-delay:1.1s}
+    .gift-spark-3{top:26%;right:20%;width:9px;height:9px;animation-delay:2.1s}
+    @keyframes giftSpark{
+      0%,100%{opacity:0;transform:scale(.5) rotate(0deg)}
+      50%{opacity:.95;transform:scale(1) rotate(90deg)}
+    }
+    /* 限定バッジ */
+    .gift-badge{
+      display:inline-block;margin:0 0 7px;padding:4px 11px;border-radius:999px;
+      font-size:11px;font-weight:800;letter-spacing:.10em;color:#7F1D1D;
+      background:linear-gradient(135deg,#FFF6DC 0%,#F7D774 55%,#E7BE55 100%);
+      box-shadow:0 4px 12px rgba(0,0,0,.16);
+    }
+    /* 見出し */
+    .gift-title{
+      margin:0 0 6px;font-size:20px;font-weight:800;line-height:1.3;color:#fff;
+      letter-spacing:.01em;text-shadow:0 2px 10px rgba(94,10,20,.34);
+    }
+    .gift-em{
+      display:inline-block;
+      background:linear-gradient(180deg,#FFFBEA 0%,#FFE9A8 42%,#F0C75E 72%,#FFF3C4 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 2px 6px rgba(94,10,20,.40));
+    }
+    .gift-lead{margin:0;font-size:14px;font-weight:700;line-height:1.75;color:rgba(255,255,255,.95)}
+    .gift-lead b{color:#FFE9A8;font-size:16px;font-weight:800;padding:0 1px}
+    .gift-note{margin:8px 0 0;font-size:11px;line-height:1.65;color:rgba(255,255,255,.80);font-weight:400;text-wrap:pretty}
+    @media (max-width:640px){
+      .gift-band{margin:12px 12px 0;padding:11px 13px 10px;border-radius:13px}
+      .gift-title{font-size:18px}
+      .gift-lead{font-size:14px}
+      .gift-lead b{font-size:15px}
+      .gift-note{font-size:11px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .gift-shine,.gift-spark{animation:none}
+      .gift-shine{opacity:.22;left:30%}
+    }
+
+    /* ===== 予約カレンダー（SF日程調整ツール埋め込み） ===== */
+    .booking-wrap {
+      margin: 16px auto 0;
+      max-width: 640px;
+      width: calc(100% - 32px);
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 18px 44px rgba(185, 28, 28, 0.14);
+      overflow: hidden;
+      scroll-margin-top: 16px;
+    }
+    .booking-head {
+      padding: 22px 16px 14px;
+      text-align: center;
+      background: linear-gradient(135deg, #E63946, #B91C1C);
+      color: #fff;
+    }
+    .booking-title { font-size: 20px; font-weight: 700; line-height: 1.5; }
+    .booking-lead { margin-top: 6px; font-size: 14px; font-weight: 700; opacity: .92; }
+    .booking-body { padding: 8px 12px 4px; min-height: 420px; }
+    .booking-note { padding: 4px 16px 20px; font-size: 14px; text-align: center; color: #9a9aa5; }
+    .booking-note a { color: #B91C1C; text-decoration: none; }
+
+
+    /* ============ 年内内定セクション（2026-09-15 新設・summerの③悩み/④POINT/⑤CTAを移植＋リライト） ============
+       summer の該当CSSを持ち込むにあたり、メインLPに合わせて2点変えている:
+       ①CTAボタン: summerはオレンジグラデ(#F59E0B→#EA580C)だが、鉄則7（新卒=赤・135deg）に反するため
+         メインLP既存の .cta-btn（赤）を流用。予約フォームも赤化した直後なので、1ページに2色のCTAを作らない。
+       ②文字サイズ: summerは point-body 13.5px / cta-note 12px / sec-label 12px だが、
+         スマホ最低14px（メモリ feedback_mobile_min_font_14px）に合わせて全て14px以上へ引き上げた。 */
+    .sec-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.22em;
+      color: #E63946; text-align: center; margin: 0;
+    }
+    .sec-title {
+      font-size: 21px; font-weight: 700; line-height: 1.5;
+      text-align: center; margin: 6px 0 0; color: #1a1a1a;
+    }
+    .nen-sec { padding: 24px 16px 24px; }
+
+    .problem-sec { background: #F4F5F7; padding-bottom: 0; }
+    .problem-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .problem-item {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff; border: 1px solid #e7e9ee; border-radius: 12px;
+      padding: 12px 14px; font-size: 14px; font-weight: 700; color: #444;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .problem-text {
+      flex: 1; min-width: 0;
+      /* 1文字だけ次行に落ちる孤立を避ける。未対応ブラウザでは通常の折り返しに戻るだけ */
+      text-wrap: balance;
+    }
+    .problem-item .check {
+      display: grid; place-items: center; width: 22px; height: 22px; flex-shrink: 0;
+      border-radius: 50%; background: #FEE2E2; color: #E63946; font-size: 14px; font-weight: 700;
+    }
+    .problem-figures { display: flex; justify-content: center; align-items: flex-end; margin-top: 24px; }
+    .problem-fig { height: 240px; width: auto; display: block; }
+
+    .lead-band { background: #E63946; text-align: center; color: #fff; padding: 18px 20px 20px; }
+    .lead-band-sub { font-size: 14px; font-weight: 700; opacity: 0.95; margin: 0; }
+    .lead-band-main { font-size: 19px; font-weight: 700; letter-spacing: 0.02em; margin: 6px 0 0; }
+
+    .point-sec { background: #FFF5F5; }
+    .point-card {
+      background: #fff; border: 1px solid #FEE2E2; border-radius: 16px;
+      padding: 17px 16px; margin-top: 12px; box-shadow: 0 8px 24px rgba(185,28,28,0.06);
+    }
+    .point-no {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.18em; color: #E63946; margin: 0;
+    }
+    .point-title { font-size: 17px; font-weight: 700; line-height: 1.45; margin: 4px 0 0; color: #1a1a1a; text-wrap: balance; }
+    .point-body { font-size: 14px; line-height: 1.8; color: #444; margin: 8px 0 0; text-wrap: pretty; }
+
+    .cta-note { font-size: 14px; font-weight: 700; text-align: center; color: #B91C1C; margin: 10px 0 0; }
+
+    /* ============ 2026-09-16 構成変更で追加したセクション ============
+       ・nen-sec--tight … FV直下に来る悩みセクション用の詰めたpadding
+       ・voice / flow / faq / final-cta … summerから移植。
+         summer側は voice-attr12px / flow-tag10px / flow-body13px / faq-a13.5px / final-cta p12.5px と
+         14pxを下回っていたため、**全て14px以上へ引き上げてから**移植している
+         （メモリ feedback_mobile_min_font_14px）。
+       ・voice-card は summer では横スクロールのカルーセルだが、横スクロール事故を避けるため
+         縦積みのリストに変更した（JS不要） */
+    .nen-sec--tight { padding: 20px 16px 18px; }
+
+    /* 2026-09-16: 縦積み → summerと同じ横スライダーへ変更（本人指示）。
+       touch-action:pan-x と overscroll-behavior-x:contain で、
+       カルーセル内のスワイプがページの縦スクロールを奪わないようにしている。 */
+    .voice-carousel {
+      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+      margin-top: 18px; padding: 4px 2px 8px; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; touch-action: pan-x; overscroll-behavior-x: contain;
+    }
+    .voice-carousel::-webkit-scrollbar { display: none; }
+    .voice-card {
+      flex: 0 0 82%; scroll-snap-align: center;
+      background: #FEF2F2; border-radius: 16px; padding: 16px 18px;
+    }
+    .voice-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+    .voice-dot {
+      width: 8px; height: 8px; border: 0; border-radius: 999px;
+      background: #FCA5A5; cursor: pointer; padding: 0;
+      transition: width 0.2s ease, background 0.2s ease;
+    }
+    .voice-dot.active { width: 18px; background: #E63946; }
+    .voice-stars { color: #E89A4D; font-size: 14px; letter-spacing: 0.14em; }
+    .voice-text { font-size: 14px; font-weight: 700; line-height: 1.85; color: #333; margin: 8px 0 0; text-wrap: pretty; }
+    .voice-person { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+    .voice-avatar {
+      display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0;
+      border-radius: 50%; background: #FEE2E2; font-size: 18px;
+    }
+    .voice-attr { font-size: 14px; font-weight: 700; color: #666; }
+    .voice-note { margin: 12px 0 0; font-size: 14px; line-height: 1.7; color: #888; text-align: center; }
+
+    .flow-list { margin-top: 18px; }
+    .flow-step { display: flex; gap: 16px; position: relative; padding-bottom: 24px; }
+    .flow-no {
+      display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 50%; background: #E63946; color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800;
+      box-shadow: 0 6px 16px rgba(230, 57, 70, 0.3);
+    }
+    .flow-title { font-size: 16px; font-weight: 700; padding-top: 2px; margin: 0; }
+    .flow-tag {
+      display: inline-block; font-size: 14px; font-weight: 700; color: #B91C1C;
+      background: #FEF2F2; border-radius: 999px; padding: 1px 9px; margin-left: 6px;
+      vertical-align: 1px;
+    }
+    .flow-body { font-size: 14px; line-height: 1.8; color: #555; margin: 4px 0 0; text-wrap: pretty; }
+
+    .faq-item { border: 1px solid #eee; border-radius: 12px; margin-top: 12px; overflow: hidden; }
+    .faq-item summary {
+      list-style: none; display: flex; align-items: center; gap: 10px;
+      padding: 15px 16px; font-size: 14px; font-weight: 700; cursor: pointer; user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-q {
+      display: grid; place-items: center; width: 24px; height: 24px; flex-shrink: 0;
+      border-radius: 50%; background: #E63946; color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800;
+    }
+    .faq-arrow { margin-left: auto; color: #E63946; font-size: 14px; transition: transform 0.2s; }
+    .faq-item[open] .faq-arrow { transform: rotate(180deg); }
+    .faq-a { padding: 0 16px 16px 50px; font-size: 14px; line-height: 1.9; color: #555; margin: 0; text-wrap: pretty; }
+
+    .final-cta {
+      background: linear-gradient(135deg, #E63946, #B91C1C);
+      border-radius: 20px; margin: 8px 16px 24px; padding: 28px 20px;
+      text-align: center; color: #fff;
+    }
+    .final-cta h2 { font-size: 19px; font-weight: 700; line-height: 1.6; margin: 0; }
+    .final-cta p { font-size: 14px; line-height: 1.8; opacity: 0.94; margin: 8px 0 0; }
+    .final-cta .cta-btn { margin-top: 18px; background: #fff; color: #B91C1C; box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+    .cta-note--onred { color: #FFE9A8; }
+  </style>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5KH7WRCP');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- ============ 広告流入パラメータの着地時キャプチャ（Meta / TikTok） ============
+       広告 → LP → SF日程調整の埋め込み → CV の間にクエリが落ちても媒体を特定できるよう、
+       着地した瞬間の utm_* とクリックID(fbclid/ttclid/gclid)を sessionStorage に退避する。
+       aff引き継ぎカードの「UTM1本依存＝リダイレクトでクエリが落ちると経路が永久に不明」
+       というリスクへの対策を、広告流入にも同じ思想で適用したもの。
+
+       ★このLPはメイン（広告＋SNS＋自然検索が同居）。ASP（A8.net / レントラックス）の
+         基本タグ・成果タグは絶対に載せない。載せると広告経由CVがアフィ成果として
+         計上され、報酬の誤支払いになる。ASPタグは /lp/newgrads/aff/ のみ。
+  ============================================================================== -->
+  <script>
+  (function () {
+    var KEY  = 'rf_attr_newgrads';
+    // 2026-09-15: bid を追加。バナー別の着地を GA4/SF から見られるようにする。
+    //   ※バナー識別の正本は utm_content={{ad.name}}。bid は「FV出し分けキー兼、付いていれば拾う補助」。
+    var KEEP = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term',
+                'bid','fbclid','ttclid','gclid'];
+    var p = new URLSearchParams(location.search);
+
+    var landed = {};
+    KEEP.forEach(function (k) { var v = p.get(k); if (v) landed[k] = v; });
+
+    var stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+    // 初回着地を正とする。同一セッション内の再訪・内部遷移で媒体が上書きされないようにする。
+    var attr = Object.keys(landed).length ? landed : stored;
+    try { if (Object.keys(attr).length) sessionStorage.setItem(KEY, JSON.stringify(attr)); } catch (e) {}
+
+    // 媒体判定。utm_source が欠けてもクリックIDから救済する。
+    var src = (attr.utm_source || '').toLowerCase();
+    var channel = 'organic';
+    if      (/^(meta|facebook|fb|instagram|ig)$/.test(src) || attr.fbclid) channel = 'meta';
+    else if (/^(tiktok|tt)$/.test(src)              || attr.ttclid) channel = 'tiktok';
+    else if (/^(google|googleads|adwords)$/.test(src) || attr.gclid) channel = 'google';
+    else if (/^line$/.test(src))                                     channel = 'line';
+    else if (/^(a8|rentracks)$/.test(src) || /^aff/.test(src))       channel = 'affiliate';
+    else if (src)                                                    channel = src;
+
+    var isPaid = (channel === 'meta' || channel === 'tiktok' ||
+                  channel === 'google' || channel === 'line');
+
+    window.RF_ATTR    = attr;
+    window.RF_CHANNEL = channel;
+    window.RF_IS_PAID = isPaid;
+
+    // event を付けずに変数だけ流す＝新しいトリガーを作らず、後続の lead_submit から読める。
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      lp: 'newgrads',
+      channel: channel,
+      is_paid: isPaid,
+      utm_source:   attr.utm_source   || '',
+      utm_medium:   attr.utm_medium   || '',
+      utm_campaign: attr.utm_campaign || '',
+      utm_content:  attr.utm_content  || '',
+      bid:          attr.bid          || '',
+      fbclid: attr.fbclid || '',
+      ttclid: attr.ttclid || ''
+    });
+  })();
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KH7WRCP"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="lp-shell relative min-h-screen overflow-hidden bg-white xl:bg-[linear-gradient(115deg,#FFF5F5_0%,#FEE2E2_45%,#FFF5F5_100%)]">
+    <div class="pointer-events-none absolute inset-0 hidden xl:block" aria-hidden="true">
+      <div class="absolute -left-24 top-24 h-96 w-96 rounded-full bg-white/45 blur-3xl"></div>
+      <div class="absolute left-[13%] -top-28 h-80 w-80 rounded-full bg-[#FECACA]/45 blur-3xl"></div>
+      <div class="absolute right-[7%] -top-20 h-96 w-96 rounded-full border border-white/70 bg-white/25 blur-[2px]"></div>
+      <div class="absolute -right-28 bottom-10 h-[420px] w-[420px] rounded-full bg-[#FCA5A5]/45 blur-3xl"></div>
+      <div class="absolute -left-52 bottom-8 h-[520px] w-[520px] rounded-full border border-white/70"></div>
+      <div class="absolute left-0 top-0 h-64 w-48 opacity-60 bg-[radial-gradient(circle,_rgba(230,57,70,0.32)_1.4px,_transparent_1.5px)] [background-size:14px_14px]"></div>
+      <div class="absolute bottom-0 right-0 h-56 w-48 opacity-55 bg-[radial-gradient(circle,_rgba(230,57,70,0.28)_1.4px,_transparent_1.5px)] [background-size:14px_14px]"></div>
+    </div>
+
+    <div class="lp-grid relative z-10 mx-auto grid min-h-screen w-full grid-cols-1 xl:max-w-[1156px] xl:grid-cols-[250px_560px_250px] xl:gap-6 xl:px-6 2xl:max-w-[1248px] 2xl:grid-cols-[280px_560px_280px] 2xl:gap-8 2xl:px-8">
+      <aside class="side-column hidden min-w-0 flex-col gap-3 py-5 xl:flex xl:h-screen xl:overflow-hidden" aria-label="実績と相談前の悩み">
+        <section>
+          <p class="side-data-label pl-3 text-sm font-bold text-[#B91C1C]">数字で見る実績</p>
+          <p class="side-data-watermark pointer-events-none mb-2 select-none font-['Plus_Jakarta_Sans'] text-[48px] font-extrabold leading-none tracking-[0.08em] text-white/50">DATA</p>
+          <div class="side-stat-stack space-y-3">
+            <div class="side-stat-card rounded-2xl border border-white/75 bg-white/80 p-4 shadow-[0_18px_45px_rgba(185, 28, 28,0.14)] backdrop-blur-xl">
+              <div class="flex items-center gap-3">
+                <div class="side-stat-icon grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#FEE2E2] text-xl">👥</div>
+                <div>
+                  <p class="text-xs font-bold text-slate-700">支援実績</p>
+                  <p class="side-stat-value font-['Plus_Jakarta_Sans'] text-2xl font-extrabold leading-tight text-[#E63946]">4,200<span class="ml-1 text-sm">名以上</span></p>
+                  <p class="side-stat-caption text-xs font-bold text-slate-500">内定獲得をサポート</p>
+                </div>
+              </div>
+            </div>
+            <div class="side-stat-card rounded-2xl border border-white/75 bg-white/80 p-4 shadow-[0_18px_45px_rgba(185, 28, 28,0.14)] backdrop-blur-xl">
+              <div class="flex items-center gap-3">
+                <div class="side-stat-icon grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#FEE2E2] text-xl">🏢</div>
+                <div>
+                  <p class="text-xs font-bold text-slate-700">内定実績企業多数</p>
+                  <p class="side-stat-value font-['Plus_Jakarta_Sans'] text-lg font-extrabold leading-tight text-[#E63946]">大手・優良企業</p>
+                  <p class="side-stat-caption text-xs font-bold text-slate-500">への内定実績あり</p>
+                </div>
+              </div>
+            </div>
+            <div class="side-stat-card rounded-2xl border border-white/75 bg-white/80 p-4 shadow-[0_18px_45px_rgba(185, 28, 28,0.14)] backdrop-blur-xl">
+              <div class="flex items-center gap-3">
+                <div class="side-stat-icon grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#FEE2E2] text-xl">★</div>
+                <div>
+                  <p class="text-xs font-bold text-slate-700">満足度</p>
+                  <p class="side-stat-value font-['Plus_Jakarta_Sans'] text-2xl font-extrabold leading-tight text-[#E63946]">97<span class="ml-1 text-sm">%</span></p>
+                  <p class="disclaimer-inline mt-1">※自社調べ／2025年4月〜2026年4月／有効回答数2,000件</p>
+                  <p class="side-stat-caption text-xs font-bold text-slate-500">就活生から高評価</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2026-09-15: 左サイドの「こんな就活の悩み」4項目は撤去。本文に年内内定版のCHECKセクションを新設し一本化したため
+             （PCで悩みリストが2つ並ぶ重複を解消）。撤去した4項目= 業界が決められない／ガクチカ・ESに自信がない／
+             自分の市場価値が分からない／ファーストキャリアで失敗したくない -->
+
+        <section class="side-consult mt-1">
+          <div class="side-consult-bubble relative mx-auto w-[200px] rounded-2xl bg-white/90 px-4 py-3 text-xs font-bold leading-relaxed text-slate-700 shadow-[0_18px_40px_rgba(185, 28, 28,0.14)] backdrop-blur-xl">
+            一人で悩まず、<br>プロに相談してみませんか？
+            <span class="absolute -bottom-3 left-1/2 h-6 w-6 -translate-x-1/2 rotate-45 bg-white/90"></span>
+          </div>
+          <div class="side-illustration mt-5 flex justify-center">
+            <div class="relative h-24 w-36">
+              <div class="absolute bottom-0 left-2 h-2 w-28 rounded-full bg-[#FECACA]/60 blur-sm"></div>
+              <div class="absolute bottom-4 left-4 h-11 w-20 rounded-md border border-[#FCA5A5] bg-white/85 shadow-sm"></div>
+              <div class="absolute bottom-6 left-8 h-6 w-14 rounded-sm bg-[#FEE2E2]"></div>
+              <div class="absolute bottom-4 right-5 h-16 w-8 rounded-t-full bg-[#E63946]"></div>
+              <div class="absolute bottom-[70px] right-6 h-7 w-7 rounded-full bg-[#ffd2a4]"></div>
+              <div class="absolute bottom-1 right-2 h-12 w-3 rotate-[18deg] rounded-full bg-[#7F1D1D]"></div>
+              <div class="absolute bottom-1 right-9 h-12 w-3 -rotate-[20deg] rounded-full bg-[#7F1D1D]"></div>
+              <div class="absolute bottom-0 right-0 h-12 w-6 rounded-t-full bg-[#FECACA]"></div>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <div class="center-scroll min-w-0">
+
+  <main>
+
+    <!-- ヒーロー画像
+         キャッチコピー：「自分の言葉」で進める就活を。
+         スポークスパーソン：就活アドバイザー 森下
+         画像ファイル：fv_shinsotsu.png をこのディレクトリに配置（CMO渡部承認済 2026-05-19） -->
+    <div class="hero-wrap">
+      <picture id="hero-pic">
+        <source id="hero-src" media="(max-width: 640px)" srcset="assets/fv_shinsotsu_sp.jpg">
+        <img id="hero-img" src="assets/fv_shinsotsu.jpg" alt="『自分の言葉』で進める就活を。" class="hero-img">
+      </picture>
+      <!-- バナー別コピー（bid一致時だけ表示。既定は焼き込み画像のままなので何も起きない） -->
+      <img id="hero-copy" class="hero-copy" src="" alt="" hidden>
+    </div>
+    <script>
+      // ============ FV差し替え（メッセージマッチ） ============
+      // 広告コピーとFVの見出しが同じ約束になっていないと、下流の改善は全部無駄になる。
+      //
+      // 【2026-09-15 改修】bid（バナーID）によるFVコピーの出し分けを追加。
+      //   現行FV `fv_shinsotsu.jpg` はコピーが画像に焼き込まれているため、コピーだけを
+      //   差し替えられない。そこで bid が一致したときだけ
+      //     ①背景を「コピー非焼き込み版」 fv_shinsotsu_plain(_sp).jpg に差し替え
+      //     ②その上に広告と同じコピー画像（fv_copy_0XX.png・透過）を絶対配置で重ねる
+      //   という2段構えにした。plain背景は現行FVと**比率が完全一致**（PC 2.378 / SP 1.667）なので
+      //   レイアウトは1pxも動かない。
+      //   ★既定（bidなし・直アクセス・オーガニック）は一切変更していない＝従来の焼き込み画像のまま。
+      //     コピーを全面テキスト化する案は、SP画像が5:3の横長でコピー枠が375px幅で199×86pxしか
+      //     取れず現行コピーすら入らないため見送った（検証= _検証_FV画像v2_2026-09-15/検証メモ.md）。
+      //     コピー画像なら枠にfitさせるだけで必ず収まり、広告バナーとフォントまで完全一致する。
+      //
+      // 優先順位: bid > utm_content（広告名から自動判別）> utm_source（アフィのタレント別）> 既定
+      // 新しい訴求軸を足すときは FV_COPY_BY_BID に1行足し、assets/ にコピー画像を1枚置くだけ。
+      (function () {
+        // バナーID → 重ねるコピー画像。altは画像内の文言と必ず同一にする。
+        var FV_COPY_BY_BID = {
+          // ng-S-013（資料配布オファー・着地=content LP）と
+          // ng-S-015（面談予約オファー・着地=メインLP）は**バナーの見出しが同一文言**のため
+          // 同じコピー画像を共有する。訴求軸は同じ「年内内定」で、違うのはオファーとCTA。
+          'ng-s-013': { copy: 'assets/fv_copy_013.png', alt: '年内に、内定が欲しいあなたへ' },
+          'ng-s-015': { copy: 'assets/fv_copy_013.png', alt: '年内に、内定が欲しいあなたへ' },
+          // ng-S-014（サマー全落ちリスタート）。2026-09-18 コピー画像を作成・有効化。
+          // 元画像は 2170×725（透過余白あり）→ 余白トリム後 560×175 に統一して配置。
+          'ng-s-014': { copy: 'assets/fv_copy_014.png', alt: 'サマー全落ち。でも、就活はここから。' }
+          // 'ng-s-012': { copy: 'assets/fv_copy_012.png', alt: 'お祈りメールは、もういらない' }
+          //   ↑ ng-S-012 の着地は content LP。メインLPにも向けるなら
+          //     content/img/fv_copy_012.png を assets/ にコピーして上の行を有効化するだけ。
+        };
+        // 背景（コピー非焼き込み版）。全bid共通。
+        var PLAIN = { pc: 'assets/fv_shinsotsu_plain.jpg', sp: 'assets/fv_shinsotsu_plain_sp.jpg' };
+
+        // 旧M番のエイリアス（content LP と同じ変換。旧URL・旧ドキュメントを生かす）
+        var LEGACY = { 'ng-m-001':'ng-s-014', 'ng-m-002':'ng-s-015',
+                       'ng-m-003':'ng-s-013', 'ng-m-004':'ng-s-012' };
+
+        // FV画像ごと差し替える軸（コピー焼き込み済みの専用画像を持つ場合はこちら）
+        var FV_BY_ANGLE = {};
+        var FV_BY_SOURCE = {
+          'aff_azassusasu': {
+            pc: 'assets/fv_ng_azassusan.jpg',
+            sp: 'assets/fv_ng_azassusan.jpg',
+            alt: '今の自分、どこまで通用する？'
+          }
+        };
+
+        var p   = new URLSearchParams(location.search);
+        var pic = document.getElementById('hero-pic');
+        var img = document.getElementById('hero-img');
+        var src = document.getElementById('hero-src');
+        var cp  = document.getElementById('hero-copy');
+
+        // ── バナーIDを決める ──
+        // 記法が estate 内で割れているため両方受ける（2026-09-15）:
+        //   ?bid= … content LP / line LP で 2026-08-19 から使用。値はバナーIDそのもの（ng-S-013）
+        //   ?fv=  … summer LP（2026-07-22〜）/ 建設 pro で使用。summerの実装は下3桁のみ（001〜009）
+        // summer の `/^00[1-9]$/` は ng-S-010 以降を表現できないので、こちらでは
+        // 「数字だけなら ng-s-0XX に展開」して 010 以降も通す。
+        // どちらも無ければ広告名（utm_content）から ng-S-0XX を自動抽出する。
+        function normId(v) {
+          v = (v || '').toLowerCase().trim();
+          if (!v) return '';
+          if (/^ng-[svm]-\d{3}$/.test(v)) return v;          // ng-s-013
+          var d = v.replace(/[^0-9]/g, '');
+          if (/^\d{1,3}$/.test(d)) return 'ng-s-' + ('00' + d).slice(-3); // 13 / 013 → ng-s-013
+          return v;
+        }
+        var bid = normId(p.get('bid')) || normId(p.get('fv'));
+        if (!bid) {
+          var m = (p.get('utm_content') || '').toLowerCase().match(/ng-[svm]-\d{3}/);
+          if (m) bid = m[0];
+        }
+        if (LEGACY[bid]) bid = LEGACY[bid];
+
+        var hit = FV_COPY_BY_BID[bid];
+        if (hit && cp && img) {
+          if (src) src.srcset = PLAIN.sp;
+          img.src = PLAIN.pc;
+          img.alt = hit.alt;
+          cp.src  = hit.copy;
+          cp.alt  = hit.alt;
+          cp.hidden = false;
+          return;
+        }
+
+        // 従来の画像まるごと差し替え（アフィのタレント別など）
+        var angle  = (p.get('utm_content') || '').toLowerCase();
+        var source = (p.get('utm_source')  || '').toLowerCase();
+        var fv = FV_BY_ANGLE[angle] || FV_BY_SOURCE[source];
+        if (!fv) return;
+        if (src) src.srcset = fv.sp;
+        if (img) { img.src = fv.pc; img.alt = fv.alt; }
+      })();
+    </script>
+
+
+    <!-- ============================================================================
+         構成（2026-09-16 本人指定で並べ替え）
+           ① FV
+           ② 悩み（CHECK・短縮／人物イラスト撤去）  ← FV直下へ移動
+           ③ そんなあなたに（lead-band）
+           ④ 年内に決めきるための3つ（POINT）
+           ⑤ 面談特典（縮小）
+           ⑥ 予約フォーム
+           ⑦ メディア掲載                          ← FV直下から移動
+           ⑧ 相談者の声
+           ⑨ サポートの流れ
+           ⑩ よくある質問
+           ⑪ 最終CTA
+         ※変更前は FV→メディア→特典→フォーム→悩み→POINT で、フォームが375px幅の641px地点
+           ＝スマホ初期表示(812px)内にあった。悩みを前に出したぶんフォームは下がる。
+         ============================================================================ -->
+    <!-- メディア掲載 -->
+    <div class="media-section">
+      <div class="media-stars">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjI4MSIgdmlld0JveD0iMCAwIDUwMCAyODEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxtYXNrIGlkPSJtYXNrMF83MzhfMzMzIiBzdHlsZT0ibWFzay10eXBlOmx1bWluYW5jZSIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeD0iMCIgeT0iMTMxIiB3aWR0aD0iMTU2IiBoZWlnaHQ9IjE1MCI+CjxwYXRoIGQ9Ik0wIDEzMS45MTJIMTU2VjI4MS4wMDFIMFYxMzEuOTEyWiIgZmlsbD0id2hpdGUiLz4KPC9tYXNrPgo8ZyBtYXNrPSJ1cmwoI21hc2swXzczOF8zMzMpIj4KPHBhdGggZD0iTTU5LjE3NzcgMTg5LjQxN0wtMC4wNzIyNjU2IDE4OS4xNTFMNDcuNjkzNCAyMjQuMTYxTDI5LjEwNDggMjgwLjM3TDc3LjIxNDIgMjQ1LjgwN0wxMjQuOTkgMjgwLjgzM0wxMDYuOTU0IDIyNC40NDhMMTU1LjA2MyAxODkuODhMOTUuODA3OSAxODkuNjE1TDc3Ljc2NjMgMTMzLjIwM0w1OS4xNzc3IDE4OS40MTdaIiBmaWxsPSIjRkVDMTA3Ii8+CjwvZz4KPG1hc2sgaWQ9Im1hc2sxXzczOF8zMzMiIHN0eWxlPSJtYXNrLXR5cGU6bHVtaW5hbmNlIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIxMjIiIHk9IjAiIHdpZHRoPSIyNTYiIGhlaWdodD0iMjQyIj4KPHBhdGggZD0iTTEyMi42NjYgMEgzNzcuMzMzVjI0MS4yNDVIMTIyLjY2NlYwWiIgZmlsbD0id2hpdGUiLz4KPC9tYXNrPgo8ZyBtYXNrPSJ1cmwoI21hc2sxXzczOF8zMzMpIj4KPHBhdGggZD0iTTI1MC4zNjkgMC4xMzA4NTlMMjc5LjcxMyA5MS44ODYxTDM3Ni4xMTkgOTIuMzcwNEwyOTcuODMzIDE0OC41ODlMMzI3LjE4NyAyNDAuMzM5TDI0OS40NTggMTgzLjM1NUwxNzEuMTgyIDIzOS41ODlMMjAxLjQxNiAxNDguMTI2TDEyMy42ODIgOTEuMTMwOUwyMjAuMDg4IDkxLjYyMDRMMjUwLjM2OSAwLjEzMDg1OVoiIGZpbGw9IiNGRUMxMDciLz4KPC9nPgo8bWFzayBpZD0ibWFzazJfNzM4XzMzMyIgc3R5bGU9Im1hc2stdHlwZTpsdW1pbmFuY2UiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjM0NCIgeT0iMTMxIiB3aWR0aD0iMTU2IiBoZWlnaHQ9IjE1MCI+CjxwYXRoIGQ9Ik0zNDQgMTMxLjkxMkg1MDBWMjgxLjAwMUgzNDRWMTMxLjkxMloiIGZpbGw9IndoaXRlIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMl83MzhfMzMzKSI+CjxwYXRoIGQ9Ik00MDQuMDYzIDE4OS40MTdMMzQ0LjgxMiAxODkuMTUxTDM5Mi41ODMgMjI0LjE2MUwzNzMuOTkgMjgwLjM3TDQyMi4xMDQgMjQ1LjgwN0w0NjkuODggMjgwLjgzM0w0NTEuODM5IDIyNC40NDhMNDk5Ljk0OCAxODkuODhMNDQwLjY5OCAxODkuNjE1TDQyMi42NTEgMTMzLjIwM0w0MDQuMDYzIDE4OS40MTdaIiBmaWxsPSIjRkVDMTA3Ii8+CjwvZz4KPC9zdmc+Cg==" alt="★★★" class="star-icon">
+      </div>
+      <div class="media-title-row">
+        <img src="assets/leaf-1.png" alt="" class="media-laurel">
+        <div class="media-text">
+          <div class="media-title">「自分の言葉」で進める、就活の新スタンダード</div>
+          <div class="media-sub">自己分析からES添削、面接対策まで。就活のプロが伴走。</div>
+        </div>
+        <img src="assets/leaf-2.png" alt="" class="media-laurel">
+      </div>
+      <div class="media-marquee">
+        <div class="media-grid">
+          <div class="media-item"><span class="media-name">NewsPicks</span></div>
+          <div class="media-item"><span class="media-name">日刊SPA!</span></div>
+          <div class="media-item"><span class="media-name">新R25</span></div>
+          <div class="media-item"><span class="media-name">読売新聞オンライン</span></div>
+          <div class="media-item"><span class="media-name">朝日新聞DIGITAL</span></div>
+          <div class="media-item"><span class="media-name">毎日新聞社</span></div>
+          <div class="media-item"><span class="media-name">東洋経済ONLINE</span></div>
+          <div class="media-item"><span class="media-name">現代ビジネス</span></div>
+          <div class="media-item"><span class="media-name">PRESIDENT Online</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">NewsPicks</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">日刊SPA!</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">新R25</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">読売新聞オンライン</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">朝日新聞DIGITAL</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">毎日新聞社</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">東洋経済ONLINE</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">現代ビジネス</span></div>
+          <div class="media-item media-item-clone" aria-hidden="true"><span class="media-name">PRESIDENT Online</span></div>
+        </div>
+      </div>
+      <p class="media-note">※プレスリリース配信による掲載を含みます</p>
+    </div>
+
+    <section class="problem-sec nen-sec nen-sec--tight">
+      <p class="sec-label">CHECK</p>
+      <h2 class="sec-title">こんなお悩みありませんか？</h2>
+      <div class="problem-list">
+        <div class="problem-item"><span class="check">✓</span><span class="problem-text">早く決めて、残りの学生生活を自由に使いたい</span></div>
+        <div class="problem-item"><span class="check">✓</span><span class="problem-text">年内に決める人が何をしているのか知りたい</span></div>
+        <div class="problem-item"><span class="check">✓</span><span class="problem-text">何から逆算すればいいか分からない</span></div>
+      </div>
+      <!-- 2026-09-16: FV直下へ移動するにあたり人物イラスト（240px）を撤去。
+           画像 img/mika_check_720.png はフォルダに残してあるのでいつでも戻せる。 -->
+    </section>
+
+    <div class="lead-band">
+      <p class="lead-band-sub">そんなあなたにおすすめしたいのが</p>
+      <p class="lead-band-main">REFLAME</p>
+    </div>
+
+    <section class="point-sec nen-sec">
+      <p class="sec-label">POINT</p>
+      <h2 class="sec-title">おすすめする3つの理由</h2>
+
+      <div class="point-card">
+        <p class="point-no">POINT 01</p>
+        <h3 class="point-title">一人では届かない解像度まで、<br>一緒に整理する</h3>
+        <p class="point-body">
+          就活のプロが、自己分析と強みの言語化を一緒に進めます。企業を比べる軸と、<strong>ESや面接でそのまま使える「自分の言葉」</strong>が残ります。<strong>支援実績は4,200名以上</strong>です。
+        </p>
+      </div>
+
+      <div class="point-card">
+        <p class="point-no">POINT 02</p>
+        <h3 class="point-title">表に出ていない求人と、<br>選考ルートを持っている</h3>
+        <p class="point-body">
+          <strong>一般には公開されていない求人</strong>や、選考ステップの短い<strong>特別選考ルート</strong>のご案内も可能です。年内までの残り時間から逆算してご提案します。
+        </p>
+      </div>
+
+      <div class="point-card">
+        <p class="point-no">POINT 03</p>
+        <h3 class="point-title">押し売りしない。<br>最後の判断まで付き合う</h3>
+        <p class="point-body">
+          <strong>ご希望がない限り、求人のご紹介は<span style="display:inline-block">いたしません。</span></strong>完全無料で、複数の内定の比較や最後の意思決定まで一緒に考えます。
+        </p>
+      </div>
+    </section>
+
+    <!-- 2026-09-16: 面談特典（面接対策シート）のバンドは本人指示で撤去。
+         CSS（.gift-band 等）は残してあるので、markupを戻せば復活する。
+         直前の姿は index_backup_構成変更前_2026-09-16.html を参照。
+         ※サンクスページ /lp/newgrads/thanks/ には特典枠が残っている（そちらは未変更）。 -->
+    <!-- 予約カレンダー（SF日程調整ツール / 2026-08-26 Jicooから置換） -->
+    <div class="booking-wrap" id="booking-section">
+      <div class="booking-head">
+        <p class="booking-title">まずは、あなたの<span style="display:inline-block">就活状況を教えてください</span></p>
+        <p class="booking-lead">かんたん入力｜<span style="display:inline-block">回答後に空いている日程を選べます</span></p>
+      </div>
+      <div class="booking-body">
+        <!-- 予約枠 slug: ng-ad-mk（SHINSO / gateEnabled=false / 予約可能10日 / 面談60分）
+             linkId a1TQ800000JfRVxMAN。2026-09-03 に slug が ng-mk → ng-ad-mk へリネームされた
+             （レコードは同一。旧 ng-mk は /config が Link not found を返すので使ってはいけない）。
+             ng-reflame は手渡しリンク経由で既に稼働中（直近1週間15件）で枠と担当ラウンドロビンを
+             食い合うため、実質未使用のこの枠へ移した。
+
+             ★★ アップ前の必須条件 ★★
+             ng-ad-mk は SF側が Measure_CV_Enabled__c = true。この状態だと埋め込みの
+             fireConversion() が schedule_complete を dataLayer に積み、GTMで
+             tag57 が発火する。tag38(lead_submit) と tag57(schedule_complete) は
+             ★どちらも GA4 イベント名 generate_lead を G-4J8QDCXKCV へ送る★ ため、
+             1件の予約が generate_lead 2件として計上される（コンテナ実機解析で確認）。
+
+             schedule_complete を dataLayer に積むのは埋め込みだけで、その入口が
+             embed.js:531 `if (!m || !m.cvEnabled || cvFired) return;`。
+             つまり Measure_CV_Enabled__c=false が tag57 を止める唯一の手段。
+
+             （tag59 は同じ schedule_complete で中途ピクセル 874617905346145 へ
+              fbq trackSingle を撃つが、このLPでは当該ピクセルが未初期化のため
+              実測で通信ゼロ＝現状は届いていない。ただし潜在リスクとして残る）
+             SF側で Measure_CV_Enabled__c を false にしてからアップすること。
+             （SF側CVは fbclid / ttclid / channel を運べないため、広告用途ではLP側を正にする） -->
+        <div id="reflame-booking"></div>
+        <script src="https://designer.my.site.com/schedulingvforcesite/services/apexrest/booking/v1/embed.js" data-slug="ng-ad-mk" data-target="#reflame-booking"></script>
+
+        <!-- ============ 予約フォームのブランド色上書き（2026-09-15 新設） ============
+             SF日程調整ツール(embed.js)は Shadow DOM(mode:'open') で描画されるため、LP側のCSSは届かない。
+             embed.js のスタイルには アクセント色 #4a5ce0（青紫）が14箇所ハードコードされており、
+             新卒=赤グラデ135deg（鉄則7）に反した状態で本番に出ていた。CSS変数は用意されていない。
+
+             対処: shadowRoot が open なのを利用して上書き用の <style> を1枚差し込む。
+             ・embed.js 本体には一切触れない（SF側資産＝中山さんの管理外）
+             ・先方がクラス名を変えると上書きは外れるが、外れても元の青に戻るだけで壊れない（安全側に倒れる）
+             ・恒久解は embed 側に --brand 等のCSS変数を持たせてもらうこと＝渡部さん/森さんへの依頼案件
+             ・あわせて 13px/12px だった label・エラー文・日付を 14px へ引き上げ（スマホ最低14pxルール）
+             ※ステップ2（日程グリッド・担当者選択）は実予約を入れないと本番で目視確認できないため未検証。
+               CSSは同じ shadowRoot に効くのでクラス名が変わらない限り適用される。 -->
+        <script>
+        (function () {
+          var TARGETS = ['#reflame-booking', '#reflame-booking-widget'];
+          var BRAND_CSS = [
+            '.primary{background:linear-gradient(135deg,#E63946,#B91C1C)!important;border-radius:999px!important;',
+            'padding:16px 22px!important;font-size:17px!important;letter-spacing:.02em!important;',
+            'box-shadow:0 10px 24px rgba(185,28,28,.28)!important}',
+            '.primary:hover{background:linear-gradient(135deg,#D62839,#A31414)!important}',
+            '.primary:disabled{background:#dcc3c3!important;box-shadow:none!important}',
+            'input:focus,select:focus,textarea:focus{outline-color:#E63946!important;border-color:#E63946!important}',
+            'input,select,textarea{border-radius:10px!important;padding:13px 12px!important}',
+            '.date.on,.slot.on{background:#B91C1C!important;border-color:#B91C1C!important}',
+            '.slot:hover{border-color:#E63946!important;color:#B91C1C!important}',
+            '.confirm-dt{color:#B91C1C!important}',
+            '.confirm-go{background:linear-gradient(135deg,#E63946,#B91C1C)!important}',
+            '.wk-cell.open{border-color:#E63946!important;color:#B91C1C!important}',
+            '.wk-cell.open:hover{background:#FDECEC!important}',
+            '.who-b:hover{border-color:#E63946!important;box-shadow:0 2px 10px rgba(230,57,70,.15)!important}',
+            '.who-ini{background:linear-gradient(135deg,#E63946,#B91C1C)!important}',
+            '.who-any:hover{border-color:#E63946!important;color:#B91C1C!important}',
+            '.who-back{color:#B91C1C!important}',
+            /* スマホ最低14px（feedback_mobile_min_font_14px） */
+            'label{font-size:14px!important}',
+            '.step{font-size:14px!important;color:#8a8a9a!important}',
+            '.fe,.wk-hint,.wk-lbl,.date,.who-bio,.who-back{font-size:14px!important}'
+          ].join('');
+
+          function paint(sr) {
+            if (!sr || sr.querySelector('#rf-brand')) return;
+            var s = document.createElement('style');
+            s.id = 'rf-brand';
+            s.textContent = BRAND_CSS;
+            sr.appendChild(s);
+          }
+
+          var tries = 0;
+          (function wait() {
+            var found = 0;
+            TARGETS.forEach(function (sel) {
+              var host = document.querySelector(sel);
+              if (host && host.shadowRoot) {
+                found++;
+                paint(host.shadowRoot);
+                // embed が再描画しても上書きが外れないように監視（消えたら貼り直す）
+                if (!host.__rfObserved) {
+                  host.__rfObserved = true;
+                  new MutationObserver(function () { paint(host.shadowRoot); })
+                    .observe(host.shadowRoot, { childList: true });
+                }
+              }
+            });
+            if (!found && ++tries < 120) setTimeout(wait, 250); // 最大30秒待つ
+          })();
+        })();
+        </script>
+        <!-- /予約フォームのブランド色上書き -->
+
+      </div>
+      <p class="booking-note">
+        <a href="https://reflame.co.jp/privacy/">個人情報の取り扱い</a>に同意して予約します
+      </p>
+    </div>
+    <!-- /予約カレンダー -->
+
+
+    <!-- ⑧ 相談者の声
+         ★summer LP の声は「夏・インターン」文脈（周りがインターンに動き出して…等）で年内内定と噛み合わない。
+           代わりに、このLPの右サイドカラムで既に公開している実例4件をそのまま本文へ出す（文言は一切変更していない）。
+           実例の書き換えは捏造になるため禁止。注記も右サイドと同一。 -->
+    <section class="nen-sec">
+      <p class="sec-label">USER VOICE</p>
+      <h2 class="sec-title">相談者の声</h2>
+      <div class="voice-carousel" id="voiceCarousel">
+        <div class="voice-card">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">業界が決められなかった私が、3週間で大手3社から内定をもらえました！</p>
+          <div class="voice-person"><span class="voice-avatar">👩‍🎓</span><span class="voice-attr">MARCH・文系</span></div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">就活すべきか迷っていましたが、自分の軸まで整理できて、内定3社もらえました。</p>
+          <div class="voice-person"><span class="voice-avatar">👨‍🎓</span><span class="voice-attr">上位国立大</span></div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">ガクチカの見せ方が変わり、面接で自信を持って話せるようになりました。</p>
+          <div class="voice-person"><span class="voice-avatar">👨‍🎓</span><span class="voice-attr">MARCH・理系</span></div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">ベンチャー or 大手で迷っていましたが、自分に合う企業選びが明確になりました。</p>
+          <div class="voice-person"><span class="voice-avatar">👩‍🎓</span><span class="voice-attr">上位私大</span></div>
+        </div>
+      </div>
+      <div class="voice-dots" id="voiceDots">
+        <button type="button" class="voice-dot active" aria-label="口コミ 1"></button>
+        <button type="button" class="voice-dot" aria-label="口コミ 2"></button>
+        <button type="button" class="voice-dot" aria-label="口コミ 3"></button>
+        <button type="button" class="voice-dot" aria-label="口コミ 4"></button>
+      </div>
+      <p class="voice-note">※個人の感想であり、成果を保証するものではありません</p>
+    </section>
+
+    <!-- ⑨ サポートの流れ（summer ⑧ を移植。summerは「30分」表記だがメインLPは60分統一のため書き換え） -->
+    <section class="nen-sec">
+      <p class="sec-label">FLOW</p>
+      <h2 class="sec-title">サポートの流れ</h2>
+      <div class="flow-list">
+        <div class="flow-step">
+          <span class="flow-no">1</span>
+          <div>
+            <h3 class="flow-title">無料相談<span class="flow-tag">60分</span></h3>
+            <p class="flow-body">いまの状況と、年内までに何をどの順でやるかを一緒に設計します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-no">2</span>
+          <div>
+            <h3 class="flow-title">求人のご提案<span class="flow-tag">希望者のみ</span></h3>
+            <p class="flow-body">あなたの軸に合う企業をご提案。一般公開されていない求人を含みます。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-no">3</span>
+          <div>
+            <h3 class="flow-title">選考対策</h3>
+            <p class="flow-body">ES添削・面接練習を実施。企業ごとの選考ポイントを踏まえて対策します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-no">4</span>
+          <div>
+            <h3 class="flow-title">内定後のフォロー</h3>
+            <p class="flow-body">複数内定の比較や意思決定も最後までサポート。内定がゴールではなく、納得できる選択まで伴走します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑩ よくある質問（summer ⑨ を移植。文言はそのまま） -->
+    <section class="nen-sec">
+      <p class="sec-label">FAQ</p>
+      <h2 class="sec-title">よくある質問</h2>
+      <details class="faq-item">
+        <summary><span class="faq-q">Q</span>本当に無料ですか？<span class="faq-arrow">▼</span></summary>
+        <p class="faq-a"><strong>完全無料です。</strong>採用が決まった企業側から紹介料をいただく仕組みのため、就活生の方から費用をいただくことは一切ありません。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q">Q</span>まだ何も始めていなくても大丈夫？<span class="faq-arrow">▼</span></summary>
+        <p class="faq-a">むしろ歓迎です。自己分析のやり方から一緒に始める方が多数です。「何から始めればいいか分からない」状態からで問題ありません。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q">Q</span>他の就活サービスと併用できますか？<span class="faq-arrow">▼</span></summary>
+        <p class="faq-a">併用OKです。他社エージェントや就活サイトを使いながらのご相談も歓迎です。選考中の企業についてのご相談も可能です。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q">Q</span>面談では何を話しますか？<span class="faq-arrow">▼</span></summary>
+        <p class="faq-a">いまの状況・悩みの整理と、就活の進め方の設計が中心です。<strong>無理な勧誘は一切ありません。</strong></p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q">Q</span>地方在住・オンラインでも利用できますか？<span class="faq-arrow">▼</span></summary>
+        <p class="faq-a">オンライン完結なので全国どこからでもご利用いただけます。スマホ1つでご参加可能です。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q">Q</span>求人は必ず紹介されますか？<span class="faq-arrow">▼</span></summary>
+        <p class="faq-a"><strong>ご希望がない限り、求人のご紹介はいたしません。</strong>キャリア相談だけの利用も歓迎です。</p>
+      </details>
+    </section>
+
+    <!-- ⑪ 最終CTA（旧: POINT直後にあった単体CTAセクションを、この位置へ作り替え） -->
+    <div class="final-cta">
+      <h2>年内に決めきる準備、<br>今日から始めませんか？</h2>
+      <p>完全無料・オンライン完結・無理な勧誘なし。<br>60分で、いまの状況から逆算した進め方を一緒に引きます。</p>
+      <a href="#booking-section" class="cta-btn">無料就活相談を予約する</a>
+      <p class="cta-note cta-note--onred">※ご希望がない限り、<span style="display:inline-block">求人のご紹介はいたしません</span></p>
+    </div>
+
+  </main>
+
+  <!-- 固定CTAバー（SPのみ・2026-09-18追加）。クラスは既存の .cta-btn を流用＝
+       既存のCTAクリック計測トリガーにそのまま乗る。 -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="cta-inner">
+      <span class="cta-badge">完全無料・オンライン</span>
+      <a href="#booking-section" class="cta-btn">無料就活相談を予約する
+        <span class="cta-arrow" aria-hidden="true">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 2l4 4-4 4" stroke="#F4701A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      <a href="https://reflame.co.jp/privacy/" style="color:#bbb; text-decoration:none;">プライバシーポリシー</a>　|
+      <a href="https://reflame.co.jp/" style="color:#bbb; text-decoration:none;">運営会社</a><br>
+      © 2026 株式会社REFLAME All rights reserved.
+    </p>
+  </footer>
+
+      </div>
+
+      <aside class="side-column hidden min-w-0 flex-col gap-4 py-5 xl:flex xl:h-screen xl:overflow-hidden" aria-label="無料相談と利用者の声">
+        <section class="side-cta-card overflow-hidden rounded-3xl bg-white shadow-[0_22px_60px_rgba(185,28,28,0.18)]">
+          <div class="bg-gradient-to-br from-[#E63946] to-[#B91C1C] px-5 py-4 text-center">
+            <p class="text-sm font-bold leading-relaxed text-white">まずは1時間、無料で相談してみませんか？</p>
+          </div>
+          <div class="p-4">
+            <div class="text-center">
+              <p class="text-lg font-bold text-[#B91C1C]">無料相談はこちら</p>
+              <p class="mt-1 text-xs font-bold text-slate-500">1時間でじっくり就活の悩みを解決！</p>
+            </div>
+            <ul class="mt-4 space-y-3">
+              <li class="flex gap-3">
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#FEF2F2]"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B91C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"></path></svg></span>
+                <span><strong class="block text-sm text-slate-800">完全無料</strong><span class="text-xs font-bold text-slate-500">一切費用はかかりません</span></span>
+              </li>
+              <li class="flex gap-3">
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#FEF2F2]"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B91C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></span>
+                <span><strong class="block text-sm text-slate-800">オンライン完結</strong><span class="text-xs font-bold text-slate-500">スマホ・PCで簡単に相談</span></span>
+              </li>
+              <li class="flex gap-3">
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#FEF2F2]"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B91C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span><strong class="block text-sm text-slate-800">無理な勧誘なし</strong><span class="text-xs font-bold text-slate-500">安心してご相談いただけます</span></span>
+              </li>
+            </ul>
+            <a href="#booking-section" class="mt-4 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E89A4D] to-[#F4B065] px-4 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(255,122,0,0.28)] transition hover:opacity-95">
+
+              1時間の無料相談を予約する
+            </a>
+          </div>
+        </section>
+
+        <section class="side-review-card rounded-3xl border border-white/75 bg-white/85 p-4 shadow-[0_20px_50px_rgba(185, 28, 28,0.14)] backdrop-blur-xl" data-review-carousel>
+          <div class="mb-3 flex items-center justify-between">
+            <h2 class="text-sm font-bold text-slate-800">相談者の声</h2>
+            <div class="flex items-center gap-1 text-xs font-bold text-slate-600"><span class="tracking-[0.16em] text-[#E89A4D]">★★★★★</span>5.0</div>
+          </div>
+          <div class="overflow-hidden rounded-2xl bg-[#FEF2F2]">
+            <article class="review-slide is-active p-3" data-review-slide>
+              <p class="text-sm font-bold leading-relaxed text-slate-700">業界が決められなかった私が、3週間で大手3社から内定をもらえました！</p>
+              <div class="mt-3 flex items-center gap-3">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#FECACA] text-lg">👩‍🎓</span>
+                <p class="text-xs font-bold text-slate-600">MARCH・文系</p>
+              </div>
+            </article>
+            <article class="review-slide p-3" data-review-slide>
+              <p class="text-sm font-bold leading-relaxed text-slate-700">就活すべきか迷っていましたが、自分の軸まで整理できて、内定3社もらえました。</p>
+              <div class="mt-3 flex items-center gap-3">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#FEE2E2] text-lg">👨‍🎓</span>
+                <p class="text-xs font-bold text-slate-600">上位国立大</p>
+              </div>
+            </article>
+            <article class="review-slide p-3" data-review-slide>
+              <p class="text-sm font-bold leading-relaxed text-slate-700">ガクチカの見せ方が変わり、面接で自信を持って話せるようになりました。</p>
+              <div class="mt-3 flex items-center gap-3">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#FEF2F2] text-lg">👨‍🎓</span>
+                <p class="text-xs font-bold text-slate-600">MARCH・理系</p>
+              </div>
+            </article>
+            <article class="review-slide p-3" data-review-slide>
+              <p class="text-sm font-bold leading-relaxed text-slate-700">ベンチャー or 大手で迷っていましたが、自分に合う企業選びが明確になりました。</p>
+              <div class="mt-3 flex items-center gap-3">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#f0fdf4] text-lg">👩‍🎓</span>
+                <p class="text-xs font-bold text-slate-600">上位私大</p>
+              </div>
+            </article>
+          </div>
+          <p class="disclaimer-inline mt-2">※個人の感想であり、成果を保証するものではありません</p>
+          <div class="mt-3 flex items-center justify-between">
+            <button type="button" class="grid h-8 w-8 place-items-center rounded-full bg-white text-sm font-bold text-[#E63946] shadow-sm" data-review-prev aria-label="前の口コミ">‹</button>
+            <div class="flex justify-center gap-2" data-review-dots>
+              <button type="button" class="review-dot is-active" data-review-dot aria-label="口コミ 1"></button>
+              <button type="button" class="review-dot" data-review-dot aria-label="口コミ 2"></button>
+              <button type="button" class="review-dot" data-review-dot aria-label="口コミ 3"></button>
+              <button type="button" class="review-dot" data-review-dot aria-label="口コミ 4"></button>
+            </div>
+            <button type="button" class="grid h-8 w-8 place-items-center rounded-full bg-white text-sm font-bold text-[#E63946] shadow-sm" data-review-next aria-label="次の口コミ">›</button>
+          </div>
+        </section>
+
+        <a href="#booking-section" class="side-chat-cta flex w-full items-center gap-3 rounded-full bg-gradient-to-r from-[#E63946] to-[#B91C1C] p-2.5 pr-3 text-white shadow-[0_20px_45px_rgba(185,28,28,0.30)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(185,28,28,0.36)]">
+          <img loading="lazy" src="assets/icon.jpg" alt="" class="h-14 w-14 rounded-full border-4 border-white object-cover object-[50%_18%]">
+          <span class="min-w-0 flex-1">
+            <span class="block text-[11px] font-bold leading-tight text-white/85">お気軽にご相談ください</span>
+            <strong class="block text-sm leading-tight">1時間の無料相談はこちら</strong>
+          </span>
+        </a>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+(() => {
+      const carousel = document.querySelector('[data-review-carousel]');
+      if (!carousel) return;
+
+      const slides = Array.from(carousel.querySelectorAll('[data-review-slide]'));
+      const dots = Array.from(carousel.querySelectorAll('[data-review-dot]'));
+      const prev = carousel.querySelector('[data-review-prev]');
+      const next = carousel.querySelector('[data-review-next]');
+      let index = 0;
+      let timer = null;
+
+      const show = (nextIndex) => {
+        index = (nextIndex + slides.length) % slides.length;
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle('is-active', slideIndex === index);
+        });
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('is-active', dotIndex === index);
+          dot.setAttribute('aria-current', dotIndex === index ? 'true' : 'false');
+        });
+      };
+
+      const stop = () => {
+        if (timer) window.clearInterval(timer);
+      };
+
+      const start = () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        stop();
+        timer = window.setInterval(() => show(index + 1), 4200);
+      };
+
+      prev.addEventListener('click', () => {
+        show(index - 1);
+        start();
+      });
+      next.addEventListener('click', () => {
+        show(index + 1);
+        start();
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => {
+          show(dotIndex);
+          start();
+        });
+      });
+
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+      show(0);
+      start();
+    })();
+
+
+  </script>
+
+
+<!-- ============ 予約完了 → サンクスページへ遷移（メインLP） ============
+     SF日程調整ツールは予約確定時に 'reflame-booking:done' を発火する（bubbles: true）。
+
+     ★ detail.type で判定してはいけない。
+       ゲートで「お断り」になった場合も type は 'booking' のまま飛んでくる
+       （embed.js の thanks() が予約確定とお断りで兼用のため）。
+       bookingId が入っているのは予約が確定したときだけ。
+       type で判定すると失注リードまでCVとして計上される。
+
+     bookingId はSFが払い出す申込ごとに一意のID。サンクスページへ引き継ぐ。
+     ★このLPはメイン（非アフィ）。ASPの成果タグは載せないこと。
+================================================================================ -->
+<script>
+(function () {
+  var moved = false;
+
+  document.addEventListener('reflame-booking:done', function (e) {
+    var d = (e && e.detail) || {};
+    var bookingId = String(d.bookingId || '');
+    if (!bookingId || moved) return;      // お断り・フォームのみ回答は成果にしない
+    moved = true;
+
+    // 着地時に退避した流入情報。サンクスページへの引き継ぎに使う。
+    var attr    = window.RF_ATTR    || {};
+    var channel = window.RF_CHANNEL || 'organic';
+
+    // ★ここで lead_submit を push してはいけない（2026-09-03 方式Aへ移行）★
+    //
+    //   予約枠 ng-ad-mk は Measure_CV_Enabled__c = true。
+    //   埋め込み(SchedulingEmbed)の fireConversion() が schedule_complete を dataLayer に積み、
+    //   GTM の tag57 が GA4 `generate_lead` を送る。
+    //   ここで lead_submit を push すると tag38 も同じ `generate_lead` を送るため、
+    //   1予約につきGA4のCVが2件計上される。Google広告のCV数も倍になる。
+    //   中途LP(/lp/midcareer/)が同じ理由でLP側pushを削除済み。作りを揃えている。
+    //
+    //   ・GA4のCV       → tag57（schedule_complete）。ペイロードは埋め込み側の方が厚い
+    //                     （link_slug / business_unit / conversion_type / booking_id /
+    //                       affiliate_id / 5階層リードソース ls_*）
+    //   ・MetaのCV      → 「Meta - CompleteRegistration - newgrads」（schedule_complete）
+    //   ・TikTokのCV    → 「TikTok - CompleteRegistration - newgrads」（schedule_complete）
+    //
+    //   fbclid / ttclid / channel は、上の着地時キャプチャが event キー無しで
+    //   dataLayer変数として積んでいるため、schedule_complete の発火時にGTMから読める。
+    //   ＝埋め込み側CVがクリックIDを運べない弱点はそちらで補っている。
+    //   このハンドラの役割はサンクスページへの遷移のみ。
+
+    // 完了メッセージを一瞬見せてからサンクスへ。
+    // utm_* に加えクリックID(fbclid/ttclid/gclid)も引き継ぐ。
+    // ここを落とすと Meta/TikTok 側でクリックとCVの突合ができなくなる。
+    var url = 'thanks/?booking_id=' + encodeURIComponent(bookingId) +
+              '&channel=' + encodeURIComponent(channel);
+    Object.keys(attr).forEach(function (k) {
+      if (attr[k]) url += '&' + encodeURIComponent(k) + '=' + encodeURIComponent(attr[k]);
+    });
+    setTimeout(function () { window.location.href = url; }, 1200);
+  });
+})();
+</script>
+
+
+  <script>
+  (() => {
+    // 相談者の声スライダー（summer LP の実装を移植・2026-09-16）
+    const carousel = document.getElementById('voiceCarousel');
+    const dots = Array.from(document.querySelectorAll('#voiceDots .voice-dot'));
+    if (!carousel || !dots.length) return;
+    const cards = Array.from(carousel.querySelectorAll('.voice-card'));
+    const setActive = (i) => dots.forEach((d, n) => d.classList.toggle('active', n === i));
+    const nearestIndex = () => {
+      const center = carousel.scrollLeft + carousel.clientWidth / 2;
+      let nearest = 0, min = Infinity;
+      cards.forEach((c, i) => {
+        const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - center);
+        if (d < min) { min = d; nearest = i; }
+      });
+      return nearest;
+    };
+    let ticking = false;
+    carousel.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { setActive(nearestIndex()); ticking = false; });
+    }, { passive: true });
+
+    let autoTimer = null, autoStopped = false;
+    const stopAuto = () => { autoStopped = true; if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } };
+    const nextCard = () => cards[(nearestIndex() + 1) % cards.length]
+      .scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const startAuto = () => {
+      if (autoStopped || autoTimer) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      autoTimer = setInterval(nextCard, 4200);
+    };
+    dots.forEach((dot, i) => dot.addEventListener('click', () => {
+      stopAuto();
+      cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }));
+    ['pointerdown', 'wheel', 'touchstart'].forEach((t) =>
+      carousel.addEventListener(t, stopAuto, { passive: true }));
+    new IntersectionObserver((e) => {
+      if (e[0].isIntersecting) startAuto();
+      else if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    }, { threshold: 0.4 }).observe(carousel);
+  })();
+
+  (() => {
+    // 固定CTAバー（SPのみ）: **ページ表示直後から出す**（2026-09-18 本人指示。
+    // 以前はFV通過後に出す設計だったが、フォームが1701pxまで下がったため最初から出す）。
+    // ただし予約フォーム本体・最終CTAが画面内にある間だけ引っ込める
+    // （フォームの入力欄や日付ピッカーに被せない／同じCTAを二重に出さない）。
+    // 監視対象は #booking-section（見出しを含む箱）ではなく #reflame-booking（フォーム本体）。
+    // 箱で判定すると見出しが少し覗いただけでバーが消え、表示時間が無駄に短くなる。
+    // 判定は毎回その場で矩形から計算する。IntersectionObserverの入退場を加算方式で
+    // 数えるとコールバックの取りこぼしでカウンタが滑り、バーが出っぱなし／消えっぱなしに
+    // なる事故が起きたため（2026-09-18 実測で確認）、状態を持たない方式にしてある。
+    const bar = document.getElementById('stickyCta');
+    if (!bar) return;
+    const hideWhenVisible = ['#reflame-booking', '.final-cta'];
+    const onScreen = (sel) => {
+      const el = document.querySelector(sel);
+      if (!el) return false;
+      const r = el.getBoundingClientRect();
+      if (r.height === 0 && r.width === 0) return false;   // 非表示要素は無視
+      return r.top < window.innerHeight && r.bottom > 0;
+    };
+    const update = () => bar.classList.toggle('show', !hideWhenVisible.some(onScreen));
+    let ticking = false;
+    const schedule = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { ticking = false; update(); });
+    };
+    update();
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule);
+    // 予約ウィジェットは非同期で描画されて高さが変わるので、描画後にも測り直す
+    const bookingEl = document.getElementById('reflame-booking');
+    if (bookingEl && 'ResizeObserver' in window) new ResizeObserver(schedule).observe(bookingEl);
+  })();
+  </script>
+</body>
+</html>
