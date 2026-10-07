@@ -1,3 +1,6 @@
 # 仕組み（自動デプロイ・検品）の変更は中山さんのレビュー必須
 /.github/ @nakyano2525
 /scripts/ @nakyano2525
+# Claude Code の指示書とフックも仕組みの一部（担当のPCでコマンドを実行するため）
+/.claude/ @nakyano2525
+/CLAUDE.md @nakyano2525
