@@ -4,372 +4,258 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="面接で評価が下がった所を、プロの模擬面接で見つけて直せる。28卒向けの新卒就活エージェントREFLAME。60分・オンライン。">
-<title>面接が上手くなりたいあなたへ｜REFLAME</title>
+<meta name="description" content="面接で落ちる人がつまずく同じ所。そこが分かれば、次の面接は変えられる。28卒向けの新卒就活エージェントREFLAMEの模擬面接。オンライン・費用はかかりません。">
+<title>面接が苦手な28卒へ｜REFLAME</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#0f2a4a; --ink:#3a4f66; --mute:#6b7f94;
-  --sky:#e9f7fd; --sky2:#c9ecfb; --blue:#18a6e3; --blue2:#0a7fc2; --blue3:#065f94;
-  --line:#d8edf8; --white:#fff; --bg:#f4fafd;
-  --cta:#ff7a5c; --cta2:#f2573a; --warn:#ff8a3d;
+  --navy:#0f2a4a; --ink:#33475e; --mute:#64788d;
+  --blue:#18a6e3; --blue2:#0a7fc2; --blue3:#065f94;
+  --sky:#e9f7fd; --sky2:#c9ecfb; --bg:#f4fafd; --line:#d8edf8; --white:#fff;
+  --cta:#ff7a5c; --cta2:#f2573a; --warn:#ef6a2b; --warnbg:#fff4ec;
+  --jp:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;
+  --en:'Montserrat','Noto Sans JP','Hiragino Sans',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;color:var(--navy);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased;font-size:15px}
-img{max-width:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--jp);color:var(--navy);background:var(--white);font-size:16px;line-height:1.9;letter-spacing:.04em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;line-break:strict;word-break:auto-phrase}
+/* 改行：言葉の途中では切らない（文節で改行）。そのうえで、短い文は行の長さをそろえ、長い文は最後の行が短くなりすぎないようにする */
+p,li,dd,summary{text-wrap:pretty}
+h1,h2,h3,.lede,.punch,.after,.conclude,.answer b,.fv-cap,.book-to,.checks li,.tried li,.qm p,.wq h3,.wq p,.tl p,.ba p,.qa summary{text-wrap:balance}
+h1,h2,h3,button,input,select,textarea{font-family:inherit}
+img{max-width:100%;display:block}
 .ph{display:inline-block}
-.memo{background:#fffbe6;border-bottom:1px solid #f0e2a8;color:#6b5a1e;font-size:12px;padding:8px 16px;text-align:center}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-.en{font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;letter-spacing:.12em;color:var(--blue);font-size:13px;text-align:center}
-.h2{font-size:24px;font-weight:700;line-height:1.45;text-align:center;margin:6px 0 10px}
+b,strong{font-weight:700}
+
+/* 記事の幅：読みやすい行の長さに揃える */
+.col{max-width:600px;margin:0 auto;padding:0 20px}
+section{padding:36px 0}
+.en{font-family:var(--en);font-weight:800;letter-spacing:.16em;color:var(--blue);font-size:14px;text-align:center;line-height:1.4}
+.h2{font-size:24px;font-weight:700;line-height:1.5;letter-spacing:.03em;text-align:center;margin:4px 0 18px}
 .h2 .c{color:var(--blue2)}
-.intro{font-size:15px;color:var(--ink);text-align:center;margin:0 auto 24px;max-width:640px}
-section{padding:56px 0}
+.mk{background:linear-gradient(transparent 64%,rgba(24,166,227,.25) 64%)}
+p+p{margin-top:1em}
+.t-c{text-align:center}
+.lede{font-size:17px;font-weight:700;line-height:1.8;text-align:center}
+.lede .c{color:var(--blue2)}
+/* 接続詞を大きく・改行して色を変える */
+.conj{display:block;text-align:center;font-size:24px;font-weight:900;color:var(--blue2);letter-spacing:.12em;line-height:1.4;margin:20px 0 6px}
 
 /* ヘッダー */
 header{background:var(--white);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
-.logo{font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;letter-spacing:.12em;font-size:18px;color:var(--navy)}
-.hd-sub{font-size:11px;font-weight:700;color:var(--ink);text-align:right;line-height:1.4}
+header .wrap{max-width:1080px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{display:flex;align-items:center}
+.logo-svg{height:24px;width:auto;display:block}
+.hd-sub{font-size:14px;font-weight:700;color:var(--ink);text-align:right;line-height:1.35;letter-spacing:.02em}
 
 /* ボタン */
-.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:420px;margin:0 auto;text-decoration:none;color:#fff;font-weight:700;font-size:17px;padding:14px 20px;border-radius:999px;background:linear-gradient(135deg,var(--cta),var(--cta2));box-shadow:0 8px 20px rgba(242,87,58,.32);position:relative;transition:transform .1s}
-.btn:active{transform:translateY(2px)}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:420px;margin:0 auto;text-decoration:none;color:#fff;font-weight:700;font-size:17px;line-height:1.5;padding:14px 44px 14px 24px;border-radius:999px;background:linear-gradient(135deg,var(--cta),var(--cta2));box-shadow:0 8px 20px rgba(242,87,58,.3);position:relative;letter-spacing:.04em}
 .btn::after{content:"";position:absolute;right:22px;top:50%;width:8px;height:8px;border-top:2.5px solid #fff;border-right:2.5px solid #fff;transform:translateY(-50%) rotate(45deg)}
-.btn small{font-size:12px;font-weight:500;opacity:.95}
-.btn-note{font-size:12px;color:var(--mute);text-align:center;margin-top:8px}
-.cta-box{margin-top:32px}
-.cta-lead{text-align:center;font-weight:700;font-size:14px;color:var(--blue2);margin-bottom:8px}
+.btn:active{transform:translateY(2px)}
 
-/* FV */
-.fv{position:relative;overflow:hidden;background:linear-gradient(165deg,#fff 0%,var(--sky) 40%,var(--sky2) 100%);padding:22px 0 0}
-.fv::before{content:"";position:absolute;right:-140px;top:-100px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(24,166,227,.2),rgba(24,166,227,0) 70%)}
-.fv .wrap{position:relative;display:grid;grid-template-columns:1fr}
-.tag{display:inline-block;background:var(--white);border:2px solid var(--blue);color:var(--blue2);font-weight:700;font-size:14px;padding:5px 14px;border-radius:999px;box-shadow:0 4px 10px rgba(24,166,227,.15)}
-.fv h1{font-weight:700;font-size:34px;line-height:1.32;margin:14px 0 12px;letter-spacing:.01em}
-.fv h1 .em{color:var(--blue2);background:linear-gradient(transparent 64%,rgba(24,166,227,.25) 64%)}
-.fv .lead{font-size:15px;color:var(--ink);font-weight:500}
-.fv .lead b{color:var(--navy)}
+/* 1. FV：青の地（オフィスの写真に青を重ねる）に白い文字。揃えは左に統一し、色の強調は黄色の下線1つと予約ボタンだけにする。
+   並びは「誰に → 見出し → 補足 → 予約ボタン → 理想の絵（担当＋通過の通知）」。予約ボタンを絵より上に置き、最初の画面に必ず入れる */
+.fv{position:relative;overflow:hidden;background:#0a6fae;color:#fff}
+.fv::before{content:"";position:absolute;inset:-24px;z-index:0;background:url("assets/bg.jpg") 30% 40%/cover no-repeat;filter:blur(3px) saturate(.6)}
+.fv::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,rgba(6,72,120,.93) 0%,rgba(8,104,166,.86) 55%,rgba(24,150,214,.78) 100%)}
+.fv-in{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:26px 20px 0}
+.fv-copy{text-align:left}
+.chip{display:inline-block;border:1.5px solid rgba(255,255,255,.75);color:#fff;font-weight:700;font-size:14px;line-height:1.6;padding:3px 12px;border-radius:999px;letter-spacing:.04em}
+.fv h1{font-weight:900;line-height:1.4;letter-spacing:.02em;margin:16px 0 14px;color:#fff}
+.fv h1 .s{display:block;font-size:19px;font-weight:700;opacity:.92}
+.fv h1 .m{display:block;font-size:30px}
+.fv h1 .b{text-decoration:underline;text-decoration-color:#ffd84d;text-decoration-thickness:4px;text-underline-offset:7px;text-decoration-skip-ink:none}
+.fv h1 .b2{display:block;font-size:38px}
+.fv .sub{margin-top:2px}
+.fv .sub1{display:block;font-size:19px;font-weight:700;line-height:1.65;color:#fff}
+.fv .sub1 em{font-style:normal;color:#ffd84d}
+.fv .btn{margin:20px 0 0;max-width:none}
+.fv-safe{position:absolute;left:20px;top:6px;z-index:2;list-style:none;display:grid;gap:6px}
+.fv-safe li{font-size:14px;font-weight:700;line-height:1.5;color:#fff;padding-left:22px;position:relative}
+.fv-safe li::before{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;background:#ffd84d}
+.fv-safe li::after{content:"";position:absolute;left:5px;top:6px;width:4px;height:8px;border:solid #0a4f80;border-width:0 2px 2px 0;transform:rotate(45deg)}
+/* 理想の絵：担当の写真の手前に、選考通過の通知 */
+.fv-vis{position:relative;height:250px;margin:18px -20px 0}
+.fv-person{position:absolute;right:-4px;bottom:0;width:190px;height:auto}
+.fv-vis .ntf{position:absolute;left:20px;bottom:44px;width:72%;max-width:300px;z-index:2}
+.fv-vis .fv-note{position:absolute;left:20px;bottom:16px;z-index:2;margin:0;font-size:11px;line-height:1.5;font-weight:400;color:#a9bccd}
+.ntf{display:flex;gap:10px;align-items:flex-start;background:#fff;color:#111;border-radius:16px;padding:11px 13px;line-height:1.45;box-shadow:0 12px 28px rgba(0,30,60,.3);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;letter-spacing:0}
+.ntf .ic{flex:none;width:34px;height:34px;border-radius:9px;background:linear-gradient(180deg,#4fb2ff,#1a7bf2);display:grid;place-items:center;margin-top:1px}
+.ntf .bd{min-width:0;flex:1}
+.ntf .r1{display:flex;justify-content:space-between;gap:6px;font-size:14px;font-weight:700;white-space:nowrap}
+.ntf .r1 span{font-weight:400;color:#6e6e73}
+.ntf .tt{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ntf .hl{color:#d63a1f}
+.ntf .pv{font-size:14px;color:#3a3a3c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ntf p+p{margin-top:0}
+/* 2. 悩みの言い当て */
+.pain{background:linear-gradient(180deg,var(--sky) 0%,#fff 100%);padding-top:36px}
+.checks{list-style:none;display:grid;gap:12px;margin-top:4px}
+.checks li{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 16px 16px 52px;font-size:16px;line-height:1.8;box-shadow:0 4px 14px rgba(15,42,74,.05)}
+.checks li::before{content:"";position:absolute;left:16px;top:19px;width:22px;height:22px;border-radius:6px;background:var(--blue)}
+.checks li::after{content:"";position:absolute;left:23px;top:22px;width:7px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.checks b{color:var(--blue3)}
+.punch{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:22px 18px;text-align:center;font-size:19px;font-weight:700;line-height:1.7}
+.punch small{display:block;font-size:15px;font-weight:500;opacity:.85;margin-top:6px;line-height:1.8}
 
-/* FVの図：評価シート */
-.sheet{position:relative;margin:20px auto 0;width:100%;max-width:400px;background:var(--white);border-radius:16px;box-shadow:0 14px 34px rgba(15,42,74,.14);padding:16px 16px 14px;border:1px solid var(--line)}
-.sheet-hd{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:6px}
-.sheet-hd b{font-size:14px}
-.sheet-hd span{font-size:11px;color:var(--mute)}
-.row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
-.row:last-child{border-bottom:0}
-.mk{font-weight:700;font-size:14px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
-.mk.ok{background:var(--sky);color:var(--blue2)}
-.mk.ng{background:#fff1e8;color:var(--warn);border:2px solid var(--warn)}
-.row.hit{background:#fff8f2;margin:0 -8px;padding:8px;border-radius:8px;border-bottom:0}
-.pin{position:absolute;right:-6px;top:84px;background:var(--warn);color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-radius:10px;box-shadow:0 6px 14px rgba(255,138,61,.35)}
-.pin::after{content:"";position:absolute;left:14px;bottom:-6px;border:6px solid transparent;border-top-color:var(--warn);border-bottom:0}
-.pin2{display:inline-block;font-style:normal;margin-top:4px;background:var(--warn);color:#fff;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px}
-.row.hit span:first-child{display:flex;flex-direction:column;align-items:flex-start}
-.sheet-cap{font-size:11px;color:var(--mute);text-align:right;margin-top:6px}
+/* 3. これまでの対策 */
+.tried{list-style:none;display:grid;gap:10px}
+.tried li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:14px 16px;font-size:16px;line-height:1.8}
+.tried li span{flex:none;font-family:var(--en);font-weight:800;color:var(--mute);font-size:14px;line-height:1.8;padding-top:1px}
+.after{text-align:center;font-size:18px;font-weight:700;line-height:1.8}
+.after .c{color:var(--warn)}
 
-.badges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 0 0}
-.badge{background:var(--white);border-radius:50%;width:100%;aspect-ratio:1/1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 6px 16px rgba(15,42,74,.1);border:2px solid var(--sky2);padding:6px}
-.badge .ic{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:3px}
-.badge p{font-size:12px;font-weight:700;line-height:1.35}
-.badge p em{font-style:normal;color:var(--blue2);font-size:14px;display:block}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--white);border-radius:14px;margin:16px 0 0;box-shadow:0 8px 20px rgba(15,42,74,.08)}
-.stat{text-align:center;padding:12px 4px;position:relative}
-.stat+.stat::before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;background:var(--line)}
-.stat .k{font-size:12px;font-weight:700;color:var(--ink)}
-.stat .v{font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;color:var(--blue2);font-size:26px;line-height:1.1}
-.stat .v small{font-family:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-left:2px}
-.stat .v{white-space:nowrap;font-size:24px}
-@media (max-width:360px){.stat .v{font-size:21px}}
-.stat .v.t{font-family:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-size:16px;font-weight:700;line-height:1.3}
-.fv .cta-box{margin:22px 0 28px}
+/* 4. 原因（2つだけ） */
+.cause{background:var(--bg)}
+.cause .pre{text-align:center;font-size:17px;font-weight:700;color:var(--ink);line-height:1.6}
+.cause .h2{font-size:28px;margin-top:4px}
+.sheet{background:#fff;border-radius:18px;box-shadow:0 14px 32px rgba(15,42,74,.1);border:1px solid var(--line);overflow:hidden}
+.sheet-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;font-size:14px;font-weight:700;line-height:1.5}
+.sheet-hd span{opacity:.85;font-weight:500}
+.axis{display:flex;gap:14px;align-items:center;padding:18px}
+.axis+.axis{border-top:1px solid var(--line)}
+.axis .no{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sky);color:var(--blue2);font-family:var(--en);font-weight:800;font-size:16px;display:grid;place-items:center}
+.axis h3{font-size:20px;font-weight:700;line-height:1.5}
+.axis p{font-size:14px;color:var(--mute);line-height:1.7}
+.note{font-size:14px;color:var(--mute);line-height:1.8}
+.qmap{margin-top:28px;display:grid;gap:14px}
+.qm{background:#fff;border-radius:14px;border:1px solid var(--line);padding:16px}
+.qm .q{font-size:17px;font-weight:700;line-height:1.6;margin-bottom:10px}
+.qm .q::before{content:"Q.";font-family:var(--en);color:var(--blue);margin-right:6px}
+.qm .ax{display:inline-block;margin:8px 0 10px;font-size:14px;font-weight:700;color:var(--blue2);background:var(--sky);border-radius:6px;padding:2px 10px;line-height:1.7}
+.qm .bad{background:#f3f5f7;border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.8;color:var(--ink)}
+.qm .bad small{display:block;font-size:14px;font-weight:700;color:var(--mute);line-height:1.6}
+.qm .why{font-size:15px;line-height:1.8;color:var(--ink);margin-top:8px;padding-left:12px;border-left:3px solid #b9c3cd}
+.qm .why small{display:block;font-size:14px;font-weight:700;color:var(--mute);line-height:1.6}
+.qm .good{margin-top:12px;background:#fff5f4;border:2px solid #e5484d;border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.85;color:var(--navy)}
+.qm .good small{display:table;font-size:14px;font-weight:700;color:#fff;background:#e5484d;border-radius:6px;padding:0 10px;line-height:1.7;margin-bottom:4px}
+.qm .good b{color:#d1242f}
+.qm p+p{margin-top:0}
+.qm .good{margin-top:12px}
+.conclude{margin-top:28px;text-align:center;font-size:18px;font-weight:700;line-height:1.8}
+.conclude .c{color:var(--blue2)}
 
-/* 予約欄 */
-.book{background:var(--bg)}
-.book .h2{font-size:22px}
-.form{max-width:520px;margin:0 auto;background:var(--white);border-radius:16px;box-shadow:0 12px 30px rgba(15,42,74,.12);overflow:hidden}
-.form-hd{background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;text-align:center;padding:14px 12px}
-.form-hd small{display:block;font-size:12px;font-weight:500;opacity:.95}
-.form-hd b{font-size:17px;font-weight:700}
-.form-bd{padding:18px 18px 22px}
-.steps{display:flex;gap:8px;margin-bottom:14px}
-.steps span{flex:1;text-align:center;font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:700;font-size:11px;padding:5px 0;border-radius:999px;background:#eef3f6;color:#a2b1bf}
-.steps span.on{background:var(--blue);color:#fff}
-.f{margin-bottom:12px}
-.f label{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
-.f label i{font-style:normal;color:var(--cta2);font-size:12px;margin-left:4px}
-.f input,.f select,.f textarea{width:100%;font:inherit;font-size:15px;border:1.5px solid #d5e3ec;border-radius:10px;padding:11px 12px;background:#fbfdfe;color:var(--mute)}
-.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.embed-note{font-size:12px;font-weight:700;color:var(--blue2);background:var(--sky);border-radius:8px;padding:8px 10px;margin-bottom:14px}
-.form .btn{max-width:none;font-size:16px}
-.form-foot{font-size:12px;color:var(--mute);text-align:center;margin-top:10px}
+/* 5. 解決策 */
+.pre-q{font-size:16px;font-weight:700;color:var(--ink);line-height:1.6;margin-bottom:-12px}
+.answer{margin-top:8px;background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;border-radius:18px;padding:24px 20px;text-align:center}
+.answer p{font-size:15px;line-height:1.8;opacity:.92}
+.answer b{display:block;font-size:20px;line-height:1.65;margin-top:6px;opacity:1}
 
-/* WHY */
-.why{background:var(--white)}
-.chain{display:grid;grid-template-columns:1fr;gap:10px;max-width:760px;margin:0 auto}
-.chain .c{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
-.chain .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-.chain h3{font-size:16px;font-weight:700;line-height:1.5}
-.chain p{font-size:14px;color:var(--ink)}
-.chain .arr{text-align:center;color:var(--blue);font-size:18px;line-height:1}
-.two{max-width:760px;margin:24px auto 0;background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;border-radius:18px;padding:22px 18px;text-align:center}
-.two .s{font-size:14px;font-weight:700;opacity:.95}
-.two .t{font-size:20px;font-weight:700;margin:4px 0 14px}
-.two .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.two .pair div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:12px;padding:12px 6px;font-size:16px;font-weight:700;line-height:1.4}
-.two .pair small{display:block;font-size:12px;font-weight:500;opacity:.9}
-.two .f{font-size:14px;margin-top:14px;opacity:.95}
-
-/* METHOD */
-.method{background:linear-gradient(180deg,var(--sky) 0%,#fff 100%)}
-.cards{display:grid;grid-template-columns:1fr;gap:16px}
-.card{background:var(--white);border-radius:18px;box-shadow:0 10px 26px rgba(15,42,74,.09);overflow:hidden;border:1px solid var(--line)}
-.card-hd{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
-.card-hd .no{font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;font-size:28px;color:var(--blue);line-height:1}
-.card-hd h3{font-size:19px;font-weight:700;line-height:1.4}
-.card-hd h3 small{display:block;font-size:13px;font-weight:700;color:var(--blue2)}
-.card-bd{padding:14px 18px 18px}
-.card dl{display:grid;grid-template-columns:1fr;gap:10px}
-.card dt{font-size:12px;font-weight:700;color:var(--white);background:var(--navy);display:inline-block;padding:2px 10px;border-radius:999px;margin-bottom:4px}
-.card dd{font-size:15px;color:var(--ink)}
-.card dd b{color:var(--navy)}
-.card .cond{background:#fff8f2;border:1px solid #ffd9bf;border-radius:10px;padding:10px 12px;font-size:14px;color:#8a4a1c}
-
-/* FLOW */
-.flow{background:var(--white)}
-.tl{max-width:640px;margin:0 auto;position:relative}
+/* 6. サービス */
+.svc{background:linear-gradient(180deg,var(--sky) 0%,#fff 100%)}
+.tl{list-style:none;position:relative}
 .tl::before{content:"";position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:var(--sky2)}
-.tl li{list-style:none;position:relative;padding:0 0 18px 56px}
+.tl li{position:relative;padding:0 0 22px 58px}
 .tl li:last-child{padding-bottom:0}
-.tl .n{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px #fff}
-.tl h3{font-size:17px;font-weight:700;line-height:1.45;padding-top:6px}
-.tl p{font-size:14px;color:var(--ink)}
-.tl .hl{background:var(--sky);border-radius:14px;padding:10px 12px;margin-top:6px}
-.leave{max-width:640px;margin:22px auto 0;border:2px dashed var(--sky2);border-radius:14px;padding:14px 16px}
-.leave b{font-size:15px}
-.leave ul{margin:6px 0 0 1.2em;font-size:14px;color:var(--ink)}
+.tl .n{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--en);font-weight:800;display:grid;place-items:center;box-shadow:0 0 0 5px #fff}
+.tl h3{font-size:18px;font-weight:700;line-height:1.55;padding-top:6px}
+.tl p{font-size:15px;color:var(--ink);line-height:1.85;margin-top:4px}
+.tl .ex{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:8px;font-size:14px;line-height:1.75;color:var(--ink)}
+.leave{margin-top:28px;background:#fff;border:2px solid var(--blue);border-radius:16px;padding:18px}
+.leave h3{font-size:17px;font-weight:700;line-height:1.5;margin-bottom:8px}
+.leave ul{list-style:none;display:grid;gap:4px}
+.leave li{position:relative;padding-left:28px;font-size:16px;line-height:1.8}
+.leave li::before{content:"✓";position:absolute;left:4px;color:var(--blue);font-weight:700}
+.extra{margin-top:14px;font-size:14px;line-height:1.8;color:var(--ink);background:var(--bg);border-radius:12px;padding:12px 14px}
+.extra b{color:var(--navy)}
 
-/* CASE */
-.case{background:var(--bg)}
-.cases{display:grid;grid-template-columns:1fr;gap:14px}
-.cs{background:var(--white);border-radius:16px;padding:16px 18px;box-shadow:0 6px 18px rgba(15,42,74,.07)}
-.cs .q{font-size:17px;font-weight:700;display:flex;gap:8px;align-items:flex-start}
-.cs .q span{flex:none;font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;color:#fff;background:var(--navy);border-radius:6px;font-size:12px;padding:3px 7px;margin-top:3px}
-.cs .lab{font-size:12px;font-weight:700;margin-top:10px}
-.cs .bad .lab{color:var(--warn)}
-.cs .good .lab{color:var(--blue2)}
-.cs .bad p{background:#fff8f2;border-radius:10px;padding:8px 10px;font-size:14px;color:#7a4a28}
-.cs .why2{font-size:14px;color:var(--ink);margin-top:6px;padding-left:10px;border-left:3px solid var(--warn)}
-.cs .good p{background:var(--sky);border-radius:10px;padding:8px 10px;font-size:14px;color:var(--navy)}
-.case-note{font-size:12px;color:var(--mute);text-align:center;margin-top:14px}
+/* 7. 直ったあとの場面 */
+.future{background:#fff}
+.ba{display:grid;gap:12px}
+.ba div{border-radius:16px;padding:18px}
+.ba .before{background:#f3f5f7;color:var(--ink)}
+.ba .after2{background:var(--sky);border:2px solid var(--blue)}
+.ba small{display:block;font-family:var(--en);font-weight:800;font-size:14px;letter-spacing:.14em;line-height:1.5;margin-bottom:6px}
+.ba .before small{color:var(--mute)}
+.ba .after2 small{color:var(--blue2)}
+.ba p{font-size:16px;line-height:1.85}
+.ba .arrow{padding:0;text-align:center;color:var(--blue);font-size:20px;line-height:1}
 
-/* ADVISOR */
-.adv{background:var(--white)}
-.advs{display:grid;grid-template-columns:1fr;gap:14px;max-width:760px;margin:0 auto}
-.ad{display:flex;gap:14px;background:var(--bg);border-radius:16px;padding:16px;border:1px solid var(--line)}
-.ad .face{flex:none;width:76px;height:76px;border-radius:50%;background:repeating-linear-gradient(45deg,#d9eef9 0 8px,#cfe8f6 8px 16px);display:flex;align-items:center;justify-content:center;font-size:11px;color:#5a7a96;font-weight:700;text-align:center}
-.ad b{font-size:16px}
-.ad p{font-size:14px;color:var(--ink)}
-.ad .ph-note{font-size:12px;color:var(--blue2);font-weight:700}
+/* 8. 不安を消す */
+.worry{background:var(--bg)}
+.wq{background:#fff;border-radius:16px;border:1px solid var(--line);padding:18px;margin-bottom:12px}
+.wq .q{font-size:15px;font-weight:700;color:var(--mute);line-height:1.7}
+.wq .q::before{content:"でも…";display:inline-block;font-size:14px;color:#fff;background:var(--mute);border-radius:6px;padding:0 8px;margin-right:8px;line-height:1.8}
+.wq h3{font-size:18px;font-weight:700;line-height:1.6;margin-top:8px;color:var(--navy)}
+.wq h3::before{content:"→ ";color:var(--blue)}
+.wq p{font-size:15px;color:var(--ink);line-height:1.85;margin-top:4px}
 
-/* SAFE */
-.safe{background:linear-gradient(180deg,#fff,var(--sky))}
-.safes{display:grid;grid-template-columns:1fr;gap:10px;max-width:760px;margin:0 auto}
-.sf{background:var(--white);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 4px 12px rgba(15,42,74,.06)}
-.sf .ck{flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
-.sf b{font-size:16px;display:block;line-height:1.4}
-.sf span{font-size:14px;color:var(--ink)}
+/* 9. 予約欄 */
+.book{background:linear-gradient(180deg,#fff 0%,var(--sky) 100%)}
+.book-to{text-align:center;font-size:15px;font-weight:700;color:var(--blue2);line-height:1.6}
+.book .h2{margin-bottom:12px}
+.book-sub{font-size:16px;line-height:1.85;color:var(--ink);margin-bottom:24px}
+.form{max-width:520px;margin:0 auto;background:var(--white);border-radius:18px;box-shadow:0 12px 30px rgba(15,42,74,.12);overflow:hidden}
+.form-hd{background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;text-align:center;padding:16px 12px;line-height:1.6}
+.form-hd small{display:block;font-size:14px;font-weight:500;opacity:.95}
+.form-hd b{font-size:18px;font-weight:700}
+.form-bd{padding:18px 18px 22px}
+.embed-fallback{font-size:14px;color:var(--ink);background:var(--sky);border-radius:10px;padding:12px}
+.form-foot{font-size:14px;color:var(--mute);text-align:center;margin-top:12px;line-height:1.7}
+.form-foot a{color:var(--blue2)}
 
-/* FAQ */
-.faq{background:var(--white)}
-.qa{max-width:760px;margin:0 auto}
+/* 10. よくある質問・追伸 */
+.faq{background:#fff}
 .qa details{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--bg)}
-.qa summary{list-style:none;cursor:pointer;padding:14px 44px 14px 16px;font-weight:700;font-size:15px;position:relative;display:flex;gap:10px}
+.qa summary{list-style:none;cursor:pointer;padding:14px 44px 14px 16px;font-weight:700;font-size:16px;line-height:1.6;position:relative;display:flex;gap:10px}
 .qa summary::-webkit-details-marker{display:none}
-.qa summary::before{content:"Q";font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;color:var(--blue)}
+.qa summary::before{content:"Q";font-family:var(--en);font-weight:800;color:var(--blue)}
 .qa summary::after{content:"";position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
 .qa details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
-.qa .a{padding:0 16px 14px 40px;font-size:14px;color:var(--ink);position:relative}
-.qa .a::before{content:"A";position:absolute;left:16px;top:0;font-family:'Montserrat','Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;font-weight:800;color:var(--cta2)}
+.qa .a{padding:0 16px 16px 42px;font-size:15px;color:var(--ink);line-height:1.85}
+.ps{margin-top:28px;border-top:2px dashed var(--sky2);padding-top:22px}
+.ps .en{text-align:left}
+.ps p{font-size:16px;line-height:1.9;margin-top:8px}
+.ps .btn{margin-top:22px}
 
-/* LAST */
-.last{background:linear-gradient(160deg,var(--blue2),var(--blue3));color:#fff;text-align:center}
-.last .en{color:#bfe9ff}
-.last .h2{color:#fff}
-.last .intro{color:#e3f4fd}
-.last .btn-note{color:#d2ecfa}
-
-footer{background:var(--navy);color:#c6d3df;text-align:center;font-size:12px;padding:20px 16px 110px}
+footer{background:var(--navy);color:#c6d3df;text-align:center;font-size:14px;line-height:1.7;padding:22px 16px 110px}
 footer a{color:#c6d3df;margin:0 8px}
 
-/* 追従ボタン */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
-.sticky .btn{font-size:16px;padding:12px 20px}
+/* 追従ボタン（予約欄が見えている間は隠す） */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);transition:transform .25s,opacity .25s}
+.sticky.off{transform:translateY(110%);opacity:0;pointer-events:none}
+.sticky .btn{font-size:16px;padding:12px 44px 12px 24px}
+/* 予約ボタン：一定の間隔で「ポンッ」と弾む（光が流れる動きはやめた） */
+.sticky .btn,.ps .btn{animation:pop 2.8s ease-in-out infinite;transform-origin:center}
+@keyframes pop{0%,62%,100%{transform:scale(1)}68%{transform:scale(1.07)}74%{transform:scale(.97)}80%{transform:scale(1.03)}86%{transform:scale(1)}}
+.sticky .btn:active,.ps .btn:active{animation:none;transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.sticky .btn,.ps .btn,.scroll::after,.ntf{animation:none}}
 
+@media (max-width:360px){
+  .fv h1 .m{font-size:27px}
+  .fv h1 .b2{font-size:34px}
+  .fv-person{width:170px}
+  .h2{font-size:23px}
+  .col{padding:0 16px}
+}
 /* PC */
 @media (min-width:860px){
-  body{font-size:16px}
-  section{padding:84px 0}
-  .h2{font-size:34px}
-  .intro{font-size:16px}
-  .fv{padding-top:44px}
-  .fv .wrap{grid-template-columns:1.05fr .95fr;column-gap:40px;align-items:center}
-  .fv .copy{grid-column:1;grid-row:1}
-  .fv .vis{grid-column:2;grid-row:1 / span 2}
-  .fv .under{grid-column:1;grid-row:2}
-  .fv h1{font-size:54px}
-  .fv .lead{font-size:18px}
-  .sheet{max-width:440px;padding:22px 22px 18px}
-  .row{font-size:15px}
-  .badges{max-width:520px;gap:14px}
-  .badge p{font-size:14px}
-  .badge p em{font-size:16px}
-  .stats{max-width:520px}
-  .fv .cta-box .btn{margin:0;max-width:440px}
-  .fv .cta-box .btn-note{text-align:left}
-  .fv .cta-box{margin:24px 0 56px}
-  .chain{grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
-  .chain .c{flex-direction:column}
-  .chain .arr{align-self:center;transform:rotate(-90deg)}
-  .two .t{font-size:26px}
-  .cards{grid-template-columns:1fr 1fr}
-  .cases{grid-template-columns:repeat(3,1fr)}
-  .advs{grid-template-columns:1fr 1fr}
-  .safes{grid-template-columns:1fr 1fr}
+  section{padding:88px 0}
+  .h2{font-size:32px;margin-bottom:32px}
+  .cause .h2{font-size:38px}
+  .logo-svg{height:30px}
+  .fv-in{padding:64px 24px 0;display:grid;grid-template-columns:1.05fr .95fr;column-gap:48px}
+  .fv-copy{grid-column:1;grid-row:1}
+  .fv-under{grid-column:1;grid-row:2;padding-bottom:64px}
+  .fv-vis{grid-column:2;grid-row:1 / span 2;height:auto;min-height:480px;margin:0}
+  .fv-person{width:380px;right:0}
+  .fv-vis .ntf{left:0;bottom:90px;width:330px}
+  .fv-vis .fv-note{left:0;bottom:56px}
+  .fv h1 .s{font-size:26px}
+  .fv h1 .m{font-size:40px}
+  .fv h1 .b2{font-size:56px}
+  .fv .sub1{font-size:24px}
+  .fv .btn{max-width:440px}
+  .lede{font-size:19px}
+  .punch{font-size:22px}
+  .ba{grid-template-columns:1fr auto 1fr;align-items:center}
+  .ba .arrow{transform:rotate(-90deg)}
   .sticky{left:auto;right:24px;bottom:24px;background:transparent;border:0;padding:0}
   .sticky .btn{width:auto;padding:14px 56px 14px 32px}
   footer{padding-bottom:28px}
 }
-h1,h2,h3,button,input,select,textarea{font-family:inherit}
-/* FV（問いかけを大きく） */
-.fv2{position:relative;overflow:hidden;background:linear-gradient(170deg,#ffffff 0%,var(--sky) 45%,var(--sky2) 100%)}
-.fv2-in{position:relative;max-width:1080px;margin:0 auto;padding:22px 16px 18px;min-height:540px}
-.photo2{position:absolute;right:-18px;bottom:92px;width:56%;max-width:300px;height:auto;z-index:1;filter:drop-shadow(0 10px 20px rgba(15,42,74,.12))}
-.fv2-copy{position:relative;z-index:2}
-.chip{display:inline-block;background:var(--blue);color:#fff;font-weight:700;font-size:14px;padding:3px 12px;border-radius:6px}
-.fv2 h1{font-weight:700;font-size:40px;line-height:1.28;margin:12px 0 10px;letter-spacing:.01em;color:var(--blue3);text-shadow:0 0 6px #fff,0 0 12px #fff,0 0 2px #fff}
-.fv2 h1 .c{color:var(--blue)}
-.fv2 .sub{font-size:18px;font-weight:700;color:var(--navy);line-height:1.5;text-shadow:0 0 6px #fff,0 0 10px #fff}
-.circles{display:flex;gap:10px;margin-top:22px}
-.cir{width:132px;height:132px;border-radius:50%;background:#fff;box-shadow:0 8px 20px rgba(15,42,74,.14);border:3px solid var(--sky2);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px}
-.cir .ck2{color:var(--blue);font-weight:700;font-size:16px;line-height:1}
-.cir p{font-size:13px;font-weight:700;line-height:1.4;color:var(--navy);margin-top:3px}
-.bar{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-radius:14px;margin-top:18px;box-shadow:0 8px 20px rgba(15,42,74,.1)}
-.bar div{text-align:center;padding:10px 4px;position:relative;display:flex;flex-direction:column}
-.bar div+div::before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;background:var(--line)}
-.bar .k{font-size:12px;font-weight:700;color:var(--ink)}
-.bar .v{font-family:'Montserrat','Noto Sans JP','Hiragino Sans',sans-serif;font-weight:800;color:var(--blue2);font-size:24px;line-height:1.15;white-space:nowrap}
-.bar .v small{font-family:'Noto Sans JP','Hiragino Sans',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-left:2px}
-.bar .v.t{font-family:'Noto Sans JP','Hiragino Sans',sans-serif;font-size:16px;font-weight:700;line-height:1.5}
-.book{padding-top:40px}
-.big{font-size:27px;font-weight:700;line-height:1.45;text-align:center;margin:0 0 22px;color:var(--navy)}
-.big .c{color:var(--blue2);background:linear-gradient(transparent 62%,rgba(24,166,227,.25) 62%)}
-@media (min-width:860px){
-  .fv2-in{padding:56px 24px 28px;min-height:620px}
-  .photo2{width:auto;max-width:none;height:540px;right:40px;bottom:96px}
-  .fv2 h1{font-size:62px}
-  .fv2 .sub{font-size:24px}
-  .cir{width:160px;height:160px}
-  .cir p{font-size:15px}
-  .bar{max-width:640px}
-  .big{font-size:42px;margin-bottom:32px}
-}
-@media (max-width:360px){.fv2 h1{font-size:34px}.cir{width:118px;height:118px}.cir p{font-size:12px}}
-
-
-
-/* FVの背景：ぼかしたオフィスの窓とビル街（Unsplash FqXI2tZenGg） */
-.fv2{background:#d7ecf8}
-.fv2::before{content:"";position:absolute;inset:-24px;z-index:0;background:url("assets/bg.jpg") 30% 40%/cover no-repeat;filter:blur(6px) brightness(1.35) saturate(.4)}
-.fv2::after{content:"";position:absolute;inset:0;z-index:0;background:
-  linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.72) 42%,rgba(235,247,254,.35) 70%,rgba(220,240,252,.25) 100%),
-  linear-gradient(180deg,rgba(201,236,251,.25) 0%,rgba(201,236,251,0) 40%,rgba(233,247,253,.9) 100%)}
-/* 人物を背景になじませる：色味を背景に寄せ、足元をふわっと消し、柔らかい影 */
-.photo2{filter:saturate(.9) contrast(.96) brightness(1.03) drop-shadow(0 18px 28px rgba(15,42,74,.22)) drop-shadow(-6px 0 18px rgba(201,236,251,.55));
-  -webkit-mask-image:linear-gradient(180deg,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 78%,transparent 100%)}
-.fv2-in{z-index:1}
-.fv2 .sub .hl{color:var(--blue2);background:linear-gradient(transparent 62%,rgba(24,166,227,.25) 62%)}
-.big-sub{text-align:center;font-size:15px;font-weight:700;color:var(--ink);margin:-12px 0 22px}
-@media (min-width:860px){.big-sub{font-size:18px;margin:-20px 0 30px}}
-@media (min-width:520px) and (max-width:859px){.fv2-copy{max-width:58%}.photo2{max-width:260px}}
-.logo{display:flex;align-items:center}
-.logo-svg{height:24px;width:auto;display:block}
-@media (min-width:860px){.logo-svg{height:30px}}
-@media (min-width:860px){.fv2-copy,.fv2 .circles{max-width:560px}.photo2{right:0;height:500px}}
-/* 人物は上端に合わせて置く（頭が切れないように） */
-.photo2{top:84px;bottom:auto}
-@media (min-width:520px) and (max-width:859px){.photo2{top:40px}}
-@media (min-width:860px){.photo2{top:36px;height:480px}}
-@media (max-width:859px){
-  .photo2{top:70px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 22%,#000 48%),linear-gradient(180deg,#000 72%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 22%,#000 48%),linear-gradient(180deg,#000 72%,transparent 100%);mask-composite:intersect}
-}
-/* 人物の下は消さず、数字の帯の後ろに隠す（サンプルと同じ重ね方） */
-.photo2{top:auto;bottom:44px;-webkit-mask-image:none;mask-image:none;filter:saturate(.92) contrast(.97) brightness(1.02) drop-shadow(0 14px 24px rgba(15,42,74,.18))}
-.bar{z-index:3}
-@media (max-width:859px){
-  .photo2{-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.45) 20%,#000 42%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.45) 20%,#000 42%)}
-}
-@media (min-width:860px){.photo2{height:520px;bottom:52px}}
-@media (max-width:519px){
-  .photo2{width:60%;max-width:300px;right:-14px}
-  .cir{width:116px;height:116px;padding:8px}
-  .cir p{font-size:12px}
-  .circles{gap:8px}
-  .fv2 .sub{max-width:62%;font-size:17px}
-}
-/* FVの下を詰めて、境目の一文を最初の画面に入れる */
-section.fv2{padding:0}
-.fv2-in{min-height:0;padding-top:18px;padding-bottom:12px}
-.circles{margin-top:16px}
-.bar{margin-top:14px}
-.book{padding-top:18px}
-.big{margin-bottom:16px}
-.big-sub{margin-top:-8px}
-@media (max-width:519px){.fv2 h1{font-size:38px;margin:10px 0 8px}}
-@media (min-width:860px){.fv2-in{padding-top:40px;padding-bottom:20px}.book{padding-top:32px}}
-@media (max-width:519px){
-  .fv2 h1{font-size:35px;margin:8px 0 6px}
-  .fv2 .sub{font-size:16px;line-height:1.5}
-  .cir{width:104px;height:104px;padding:6px}
-  .cir p{font-size:11.5px}
-  .circles{margin-top:12px}
-  .bar{margin-top:12px}
-  .bar div{padding:8px 4px}
-  .sticky{padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
-  .sticky .btn{padding:11px 20px;font-size:16px}
-  .sticky .btn small{display:none}
-  .big{font-size:25px}
-}
-.embed-fallback{font-size:13px;color:var(--ink);background:var(--sky);border-radius:10px;padding:12px}
-.form-foot a{color:var(--blue2)}
-/* 下のボタンに動き：光が流れる＋矢印がそっと動く（動きを減らす設定の人には止める） */
-.sticky .btn,.last .btn{overflow:hidden;isolation:isolate}
-.sticky .btn::before,.last .btn::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;z-index:-1;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);transform:skewX(-20deg);animation:shine 3.2s ease-in-out infinite}
-.sticky .btn::after,.last .btn::after{animation:nudge 1.6s ease-in-out infinite}
-.sticky .btn{animation:breathe 3.2s ease-in-out infinite}
-@keyframes shine{0%,55%{left:-60%}85%,100%{left:130%}}
-@keyframes nudge{0%,100%{transform:translate(0,-50%) rotate(45deg)}50%{transform:translate(4px,-50%) rotate(45deg)}}
-@keyframes breathe{0%,100%{box-shadow:0 8px 20px rgba(242,87,58,.32)}50%{box-shadow:0 10px 28px rgba(242,87,58,.5)}}
-@media (prefers-reduced-motion:reduce){.sticky .btn,.last .btn,.sticky .btn::before,.last .btn::before,.sticky .btn::after,.last .btn::after{animation:none}}
-/* 人物を背景になじませる（貼り付け感を消す）：画像は枠いっぱい、背景の青みと回り込む光を人物の形にだけ重ねる */
-.photo2{height:auto}
-.photo2 img{display:block;width:100%;height:auto;filter:saturate(.88) contrast(.95) brightness(1.03)}
-.photo2::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(100deg,rgba(214,236,250,.55) 0%,rgba(190,225,247,.18) 35%,rgba(160,205,235,.10) 70%,rgba(120,175,215,.16) 100%);
-  -webkit-mask:url("assets/person.png") center/100% 100% no-repeat;mask:url("assets/person.png") center/100% 100% no-repeat;mix-blend-mode:soft-light}
-.photo2::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 18%);
-  -webkit-mask:url("assets/person.png") center/100% 100% no-repeat;mask:url("assets/person.png") center/100% 100% no-repeat}
-.photo2{-webkit-mask-image:none!important;mask-image:none!important;filter:drop-shadow(0 12px 22px rgba(15,42,74,.16))}
-@media (max-width:859px){.photo2{-webkit-mask-image:none!important;mask-image:none!important}}
-@media (min-width:860px){.photo2{height:auto;width:432px}}
-@media (max-width:519px){
-  .photo2{width:66%;max-width:300px;right:-22px;bottom:40px}
-  .fv2 h1,.fv2 .sub{position:relative;z-index:2}
-}
-.form-hd .fh-sub{margin-top:4px;opacity:.9}
 </style>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -438,34 +324,152 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header><div class="wrap"><a class="logo" href="#" aria-label="REFLAME"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322.22 60.49" role="img" aria-label="REFLAME"><path fill="#231815" d="M89.69,38.59l8.08,11.13h-4.82l-7.46-10.69h-.71v10.69h-3.94v-26.11h4.62c3.45,0,5.94.65,7.47,1.94,1.69,1.44,2.54,3.35,2.54,5.72,0,1.85-.53,3.44-1.59,4.77-1.06,1.33-2.46,2.18-4.19,2.55ZM84.78,35.6h1.25c3.73,0,5.6-1.43,5.6-4.28,0-2.67-1.82-4.01-5.44-4.01h-1.4v8.29Z"/><path fill="#231815" d="M132.04,27.31h-11.15v6.27h10.85v3.7h-10.85v8.73h11.15v3.7h-15.09v-26.11h15.09v3.7Z"/><path fill="#231815" d="M167.54,27.31h-9.78v6.27h9.46v3.7h-9.46v12.43h-3.94v-26.11h13.72v3.7Z"/><path fill="#231815" d="M192.07,23.61v22.41h10.42v3.7h-14.36v-26.11h3.94Z"/><path fill="#231815" d="M238.06,43.38h-11.18l-2.91,6.34h-4.24l12.92-27.75,12.46,27.75h-4.31l-2.74-6.34ZM236.46,39.67l-3.87-8.88-4.06,8.88h7.93Z"/><path fill="#231815" d="M260.29,49.72l5.5-28.07,8.96,20.29,9.28-20.29,4.94,28.07h-4.04l-2.52-15.76-7.73,16.96-7.51-16.98-2.81,15.78h-4.08Z"/><path fill="#231815" d="M322.22,27.31h-11.15v6.27h10.85v3.7h-10.85v8.73h11.15v3.7h-15.09v-26.11h15.09v3.7Z"/><path fill="#757575" d="M42.86,14.14L24.43,0l.08,22.64c.05,2.49-1.24,4.81-3.36,6.04l-7.32,5.02v1.06c-.01,1.29.74,2.5,2,3.22l7.15,3.56,8.7-4.92c2.15-1.23,3.46-3.56,3.42-6.08-.07-4.66-.22-2.71-.44-6.66-.3-5.4,5.07-5.7,8.17-.43l.02-9.29v-.02Z"/><path fill="#231815" d="M15.83,37.97c-1.26-.71-2.01-1.92-2.01-3.22v-1.06s.27-29.19.27-29.19L.27,18.6l-.2,23.3c0,.86.49,1.67,1.32,2.17l8.08,5.06,4.91-2.76s.04,0,.06-.02l6.31-3.56,2.23-1.26-7.15-3.56Z"/><path fill="#231815" d="M42.91,14.18l10.85,8.71-.52,25.66c-.07.98-.58,1.78-1.34,2.16l-23.43,9.78-11.67-6.25,24.04-11.35c1.14-.56,1.88-1.77,1.97-3.24l.03-16.2.02-9.31.05.04Z"/></svg></a><div class="hd-sub">28卒向け<br>新卒就活エージェント</div></div></header>
 
-<!-- 1. FV -->
-<section class="fv2">
-  <div class="fv2-in">
-    <div class="photo2"><img src="assets/person.png" alt="REFLAMEの就活アドバイザー" width="360" height="435" fetchpriority="high"></div>
-    <div class="fv2-copy">
-      <span class="chip">28卒向け</span>
-      <h1><span class="ph"><span class="c">面接</span>が</span><br><span class="ph">上手くなりたい</span><br><span class="ph">あなたへ</span></h1>
-      <p class="sub"><span class="ph">REFLAMEなら、</span><span class="ph">模擬面接で</span><span class="ph"><span class="hl">評価が下がった所</span>を</span><span class="ph">見つけて直せる！</span></p>
-      <div class="circles">
-        <div class="cir"><span class="ck2">✓</span><p><span class="ph">模擬面接で</span><span class="ph">評価が下がった</span><span class="ph">所が分かる</span></p></div>
-        <div class="cir"><span class="ck2">✓</span><p><span class="ph">エージェント</span><span class="ph">経由なら</span><span class="ph">人事の評価</span><span class="ph">が届く</span></p></div>
-      </div>
+<!-- 1. FV：動画の冒頭5秒（面接で落ちる人は、同じ所でつまずいている）の続き → 理想の姿 -->
+<section class="fv" style="padding:0">
+  <div class="fv-in">
+    <div class="fv-copy">
+      <span class="chip">面接が苦手な28卒へ</span>
+      <h1><span class="s">落ちた理由が分かれば、</span><span class="m">もう<span class="b">同じ所</span>で</span><span class="b2">つまずかない。</span></h1>
+      <p class="sub"><span class="sub1"><span class="ph">模擬面接で、</span><span class="ph">苦手な面接を<em>強みに変えよう！</em></span></span></p>
     </div>
-    <div class="bar">
-      <div><span class="k">キャリア相談</span><span class="v">2,000<small>人以上</small></span></div>
-      <div><span class="k">面談の時間</span><span class="v">60<small>分</small></span></div>
-      <div><span class="k">参加の方法</span><span class="v t">オンライン</span></div>
+    <div class="fv-vis">
+      <ul class="fv-safe"><li>オンラインで完結</li><li>費用はかかりません</li><li>今の選考の相談だけでもOK</li></ul>
+      <img class="fv-person" src="assets/person.png" alt="REFLAMEの就活アドバイザー" width="360" height="435" fetchpriority="high">
+      <div class="ntf" role="img" aria-label="スマホの通知の例：一次面接の選考通過のお知らせ"><span class="ic"><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><rect x="0.75" y="0.75" width="16.5" height="12.5" rx="2" fill="#fff"/><path d="M1.5 1.8 9 7.6l7.5-5.8" fill="none" stroke="#1a7bf2" stroke-width="1.5"/></svg></span><div class="bd"><p class="r1">株式会社〇〇 採用担当<span>今</span></p><p class="tt"><span class="hl">【選考通過】</span>一次面接の結果について</p><p class="pv">二次面接へお進みいただきたく、ご連絡いたしました。</p></div></div>
+      <p class="fv-note">※イメージです。結果をお約束するものではありません。</p>
     </div>
   </div>
 </section>
 
-<!-- 2. 境目の大きな一文＋予約欄 -->
+<!-- 2. 悩みの言い当て（抽象→具体） -->
+<section class="pain">
+  <div class="col">
+    <h2 class="h2"><span class="ph">書類は通るのに、</span><br><span class="ph"><span class="c">面接で落ちる。</span></span></h2>
+    <p class="lede" style="margin-bottom:18px">こんなこと、ありませんか？</p>
+    <ul class="checks">
+      <li>「就活の軸は？」と聞かれて、<br><b>言葉に詰まった</b></li>
+      <li>「なぜうちなの？」に、<br><b>会社を褒めることしかできなかった</b></li>
+      <li>お祈りメールには、<br><b>どこが悪かったか書いていない</b></li>
+    </ul>
+    <p class="punch"><span class="ph">直したくても、</span><span class="ph">何を直せばいいか</span><span class="ph">分からない。</span><small><span class="ph">企業は、落ちた理由を</span><span class="ph">ほとんど教えてくれません。</span></small></p>
+  </div>
+</section>
+
+<!-- 3. これまでの対策と、その否定 -->
+<section class="tried-s">
+  <div class="col">
+    <h2 class="h2"><span class="ph">自分なりに、</span><span class="ph">対策はしてきた。</span></h2>
+    <ul class="tried">
+      <li><span>01</span>ネットで回答例を調べて、覚えた</li>
+      <li><span>02</span>友達や大学のキャリアセンターに見てもらった</li>
+      <li><span>03</span>話し方や表情を練習した</li>
+    </ul>
+    <span class="conj">しかし、</span>
+    <p class="after"><span class="ph">それでもまた、</span><span class="ph">同じような質問で</span><span class="ph c">落ちてしまう。</span></p>
+    <p class="t-c" style="margin-top:14px"><span class="ph">それは、</span><span class="ph">直している所と、</span><span class="ph">評価が下がっている所が</span><span class="ph">ずれているからかもしれません。</span></p>
+  </div>
+</section>
+
+<!-- 4. 原因：面接官が見ているのは2つだけ -->
+<section class="cause">
+  <div class="col">
+    <p class="pre">実は、</p>
+    <h2 class="h2"><span class="ph">面接官が見ているのは、</span><br><span class="ph"><span class="c mk">2つだけ。</span></span></h2>
+    <div class="sheet" aria-label="面接官が見ている2つ">
+      <div class="sheet-hd">面接官の評価<span>この学生は…</span></div>
+      <div class="axis"><span class="no">01</span><div><h3>活躍できるか</h3><p>入社後に、成果を出せそうか</p></div></div>
+      <div class="axis"><span class="no">02</span><div><h3>長く働けるか</h3><p>この会社で、続けられそうか</p></div></div>
+    </div>
+    <p class="t-c" style="margin-top:24px"><span class="ph">「軸は？」「なぜうち？」「ガクチカは？」</span><br><span class="ph">どの質問も、</span><span class="ph">この2つを確かめるためのものです。</span></p>
+
+    <div class="qmap">
+      <div class="qm">
+        <p class="q">就活の軸は何ですか？</p>
+        <p class="bad"><small>よくある答え</small>人の役に立てる仕事がしたいです。</p>
+        <p class="why"><small>ここで下がる</small>どの会社にも言えて、<span class="ph">この会社で</span>何をするかが見えない</p>
+        <p class="good"><small>理想の回答</small>相手の困りごとを、<b>先回りして解決する仕事</b>がしたいです。飲食店のアルバイトで常連さんの好みを覚えて先に提案したら、<b>指名してもらえるようになった</b>経験からです。</p>
+      </div>
+      <div class="qm">
+        <p class="q">なぜ弊社なのですか？</p>
+        <p class="bad"><small>よくある答え</small>業界トップで、成長できる環境だと思ったからです。</p>
+        <p class="why"><small>ここで下がる</small>会社を褒めているだけで、ここで続ける理由が見えない</p>
+        <p class="good"><small>理想の回答</small>私の軸は「相手の困りごとを先回りして解決すること」です。説明会で、<b>導入後の支援まで同じ担当が続ける</b>と伺い、お客様と長く関われる点が<b>自分の軸に一番合う</b>と感じました。</p>
+      </div>
+      <div class="qm">
+        <p class="q">学生時代に力を入れたことは？</p>
+        <p class="bad"><small>よくある答え</small>サークルの部長として、大会を成功させました。</p>
+        <p class="why"><small>ここで下がる</small>結果だけで、何を考えて動いたかが見えない</p>
+        <p class="good"><small>理想の回答</small>練習の参加率が半分まで落ちていました。<b>原因は練習の目的が伝わっていないこと</b>だと考え、学年ごとに話を聞いて内容を見直しました。<b>大会前には参加率が9割に戻りました。</b></p>
+      </div>
+    </div>
+    <p class="note t-c" style="margin-top:12px">※ 答えの例です。どこで下がるかは、人や面接によって違います。</p>
+    <p class="conclude"><span class="ph">落ちる人がつまずく“同じ所”は、</span><br><span class="ph c">この2つのどちらか</span><span class="ph">です。</span></p>
+  </div>
+</section>
+
+<!-- 5. 解決策 -->
+<section class="sol">
+  <div class="col">
+    <p class="pre-q t-c">でも、困ったことに</p>
+    <h2 class="h2"><span class="ph">面接は、</span><br><span class="ph"><span class="c">答え合わせのないテスト。</span></span></h2>
+    <p>企業から届くのは「合格」か「不合格」だけ。<b>どの答えで点が下がったのかは、教えてもらえません。</b></p>
+    <p>回答例を覚えても、友達に聞いてもらっても、分かるのは「良い答えかどうか」まで。<b>面接官がどう採点したか</b>は、分からないままです。</p>
+    <span class="conj">だからこそ、</span>
+    <div class="answer">
+      <p>大事なのは</p>
+      <b><span class="ph">本番の前に、</span><span class="ph">面接官の目線で</span><span class="ph">採点してもらうこと。</span></b>
+    </div>
+  </div>
+</section>
+
+<!-- 6. サービス -->
+<section class="svc">
+  <div class="col">
+    <p class="en">REFLAME</p>
+    <h2 class="h2"><span class="ph">REFLAMEの</span><span class="ph"><span class="c">模擬面接</span>でやること</span></h2>
+    <ol class="tl">
+      <li><span class="n">1</span><h3>今の選考状況を聞く</h3><p>受けている企業、落ちた面接、そこで聞かれた質問を教えてください。</p></li>
+      <li><span class="n">2</span><h3>本番どおりの模擬面接</h3><p>よく聞かれる質問に、本番と同じ流れで答えてもらいます。</p><p class="ex">例：「就活の軸は？」「なぜ弊社なのか」「学生時代に力を入れたこと」</p></li>
+      <li><span class="n">3</span><h3>どちらで下がったかと、直し方</h3><p>「活躍できるか」「長く働けるか」のどちらで評価が下がったか。<span class="ph">言い直しまで</span>一緒に組み立てます。</p></li>
+      <li><span class="n">4</span><h3>次の面接までにやること</h3><p>次の選考の日から逆算して、やることを決めます。</p></li>
+    </ol>
+    <div class="leave"><h3>面談のあとに残るもの</h3><ul><li>評価が下がっていた所</li><li>言い直した答え</li><li>次の面接までにやること</li></ul></div>
+    <p class="extra"><b>REFLAMEから応募した選考なら、</b>面接のあとに人事からの評価も担当に届きます。ご自身で応募した企業の評価は届きません。</p>
+  </div>
+</section>
+
+<!-- 7. 直ったあとの場面 -->
+<section class="future">
+  <div class="col">
+    <h2 class="h2"><span class="ph">次の面接では、</span><br><span class="ph"><span class="c">こう変わります</span></span></h2>
+    <div class="ba">
+      <div class="before"><small>BEFORE</small><p>「軸は？」と聞かれて、なんとなく答える。何がだめだったか分からないまま、また落ちる。</p></div>
+      <div class="arrow" aria-hidden="true">▼</div>
+      <div class="after2"><small>AFTER</small><p>面接官が何を確かめたいかが分かっている。言い直した答えで、<b>落ち着いて話せる。</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 不安を消す -->
+<section class="worry">
+  <div class="col">
+    <h2 class="h2"><span class="ph">気になることも、</span><span class="ph">先にお答えします</span></h2>
+    <div class="wq"><p class="q">求人を押し付けられない？</p><h3>ご希望がない限り、求人のご紹介はしません</h3><p>まずは、あなたの面接の直し方を考えるところからです。</p></div>
+    <div class="wq"><p class="q">お金がかかるんじゃない？</p><h3>費用はかかりません</h3><p>採用が決まった企業からいただく紹介料で運営しているため、学生の方から費用をいただくことはありません。</p></div>
+    <div class="wq"><p class="q">今の選考の相談だけでもいい？</p><h3>大丈夫です</h3><p>ほかのサービスと一緒に使っても構いません。</p></div>
+    <div class="wq"><p class="q">まだ面接を受けたことがない</p><h3>初めての面接の前の練習にも使えます</h3><p>本番の前に一度、面接官の目線で確かめておきましょう。</p></div>
+    <div class="wq"><p class="q">わざわざ出かけるのは大変</p><h3>オンラインで完結します</h3><p>スマホからでも参加できます。</p></div>
+  </div>
+</section>
+
+<!-- 9. 予約欄 -->
 <section class="book" id="booking">
-  <div class="wrap">
-    <h2 class="big"><span class="ph">次の面接は、</span><br><span class="ph"><span class="c">自信を持って</span></span><span class="ph">話せるように！</span></h2>
-    <p class="big-sub"><span class="ph">まずは60分の模擬面接から、</span><span class="ph">一緒に始めましょう</span></p>
+  <div class="col">
+    <p class="book-to">面接が上手くなりたい28卒の方へ</p>
+    <h2 class="h2"><span class="ph">“答え合わせ”は、</span><br><span class="ph"><span class="c mk">次の面接の前に。</span></span></h2>
+    <p class="book-sub t-c"><span class="ph">本番どおりの模擬面接で、</span><span class="ph">評価が下がっている所を見つけて、</span><span class="ph">言い直しまで一緒にやります。</span></p>
     <div class="form">
-      <div class="form-hd"><small>＼ 60分・オンライン ／</small><b><span class="ph">模擬面接・</span><span class="ph">面接対策のご予約</span></b><small class="fh-sub">入力のあと、空いている日程を選べます</small></div>
+      <div class="form-hd"><small>＼ オンライン・費用はかかりません ／</small><b><span class="ph">模擬面接・</span><span class="ph">面接対策のご予約</span></b><small>入力のあと、空いている日程を選べます</small></div>
       <div class="form-bd">
         <div id="reflame-booking"></div>
         <noscript><p class="embed-fallback"><a href="https://designer.my.site.com/scheduling?slug=ng-ad-mk">こちらから予約できます</a></p></noscript>
@@ -537,149 +541,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- 3. WHY -->
-<section class="why">
-  <div class="wrap">
-    <p class="en">WHY</p>
-    <h2 class="h2"><span class="ph">落ちた理由が分からないのは、</span><span class="ph"><span class="c">あなたのせいではありません</span></span></h2>
-    <p class="intro">企業は、不合格の理由をほとんど伝えません。だから、多くの人が同じ所でつまずき続けます。</p>
-    <div class="chain">
-      <div class="c"><span class="n">01</span><div><h3>企業は理由を伝えない</h3><p>届くのは「今回はご縁がなく…」の結果だけ。どの答えで評価が下がったのかは分かりません。</p></div></div>
-      <div class="arr">▼</div>
-      <div class="c"><span class="n">02</span><div><h3>推測で直すしかない</h3><p>話し方？志望理由？ガクチカ？ 当たりをつけて直しても、直す所がずれていることがあります。</p></div></div>
-      <div class="arr">▼</div>
-      <div class="c"><span class="n">03</span><div><h3>同じ質問で、また落ちる</h3><p>本当の原因が残ったまま次の面接へ。秋冬インターンの選考でも、同じことが起きます。</p></div></div>
-    </div>
-    <div class="two">
-      <p class="s">面接官が見ているのは、実はシンプルです</p>
-      <p class="t">この学生は…</p>
-      <div class="pair">
-        <div>活躍できるか<small><span class="ph">入社後に成果を</span><span class="ph">出せそうか</span></small></div>
-        <div>長く働けるか<small><span class="ph">この会社で</span><span class="ph">続けられそうか</span></small></div>
-      </div>
-      <p class="f">どの質問も、この2つを確かめるためのもの。<br>どちらで評価が下がったかが分かれば、直す所がはっきりします。</p>
-    </div>
-  </div>
-</section>
-
-<!-- 4. METHOD -->
-<section class="method">
-  <div class="wrap">
-    <p class="en">METHOD</p>
-    <h2 class="h2"><span class="ph">評価が下がった所を、</span><span class="ph"><span class="c">2つの方法で確かめられます</span></span></h2>
-    <p class="intro">推測ではなく、実際の受け答えと評価から、直す所を決めます。</p>
-    <div class="cards">
-      <div class="card">
-        <div class="card-hd"><span class="no">01</span><h3><small>本番と同じ形で練習する</small>模擬面接</h3></div>
-        <div class="card-bd"><dl>
-          <div><dt>何をする</dt><dd>プロが面接官役になり、<b>本番と同じ質問・同じ流れ</b>で面接をします。どの答えのどこで評価が下がったかをその場で伝え、言い直しまで一緒にやります。</dd></div>
-          <div><dt>こんな時に</dt><dd>次の面接が決まっている。どの質問で詰まっているのか、自分では分からない。</dd></div>
-          <div><dt>受け方</dt><dd class="cond">60分の面談の中で受けられます。</dd></div>
-        </dl></div>
-      </div>
-      <div class="card">
-        <div class="card-hd"><span class="no">02</span><h3><small>実際の評価を知る</small>人事の評価を聞く</h3></div>
-        <div class="card-bd"><dl>
-          <div><dt>何をする</dt><dd>REFLAMEを通して応募した企業の選考では、面接のあと<b>人事からの評価が担当に届きます</b>。良かった所と下がった所を、そのまま聞けます。</dd></div>
-          <div><dt>こんな時に</dt><dd>次の選考に進む前に、本当の評価を知って直したい。</dd></div>
-          <div><dt>条件</dt><dd class="cond">REFLAMEから応募した選考に限ります。ご自身で応募した企業の評価は届きません。評価の内容は企業によって異なります。</dd></div>
-        </dl></div>
-      </div>
-    </div>
-    <div class="cta-box"><p class="cta-lead">＼ 評価が下がった所を、模擬面接で見つける ／</p><a class="btn" href="#booking">模擬面接を予約する<small>60分・オンライン</small></a></div>
-  </div>
-</section>
-
-<!-- 5. FLOW -->
-<section class="flow">
-  <div class="wrap">
-    <p class="en">FLOW</p>
-    <h2 class="h2"><span class="ph">60分の面談で</span><span class="ph"><span class="c">やること</span></span></h2>
-    <p class="intro">話を聞くだけで終わらせず、次の面接で使える形にして持ち帰ってもらいます。</p>
-    <ol class="tl">
-      <li><span class="n">1</span><h3>今の選考状況を聞く</h3><p>受けている企業、落ちた面接、そこで聞かれた質問を教えてください。</p></li>
-      <li><span class="n">2</span><h3>模擬面接</h3><p>よく聞かれる質問を、本番と同じ流れで答えてもらいます。</p><div class="hl"><p>例：「就活の軸は？」「なぜ弊社なのか」「学生時代に力を入れたこと」</p></div></li>
-      <li><span class="n">3</span><h3>評価が下がった所と、直し方</h3><p>どの答えのどこで評価が下がったか。何をどう言い直せばいいかを、一緒に組み立てます。</p></li>
-      <li><span class="n">4</span><h3>次の面接までにやること</h3><p>次の選考の日から逆算して、やることを決めます。</p></li>
-    </ol>
-    <div class="leave"><b>面談のあとに残るもの</b><ul><li>評価が下がっていた所</li><li>言い直した答え</li><li>次の面接までにやること</li></ul></div>
-    <div class="cta-box"><a class="btn" href="#booking">模擬面接を予約する<small>60分・オンライン</small></a></div>
-  </div>
-</section>
-
-<!-- 6. CASE -->
-<section class="case">
-  <div class="wrap">
-    <p class="en">CASE</p>
-    <h2 class="h2"><span class="ph">よくある落ち方と、</span><span class="ph"><span class="c">直し方</span></span></h2>
-    <p class="intro">面談で実際によく見つかる「評価が下がる答え方」の例です。</p>
-    <div class="cases">
-      <div class="cs">
-        <p class="q"><span>Q</span>就活の軸は何ですか？</p>
-        <div class="bad"><p class="lab">よくある答え</p><p>人の役に立てる仕事がしたいです。</p></div>
-        <p class="why2">どの会社にも言えて、この会社を選ぶ理由が見えない</p>
-        <div class="good"><p class="lab">直し方</p><p>軸を1つに絞り、そう考えるようになった経験と、この会社のどこが軸に合うかまでつなげる。</p></div>
-      </div>
-      <div class="cs">
-        <p class="q"><span>Q</span>なぜ弊社なのですか？</p>
-        <div class="bad"><p class="lab">よくある答え</p><p>業界トップで、成長できる環境だと思ったからです。</p></div>
-        <p class="why2">会社を褒めているだけで、入って何をしたいかがない</p>
-        <div class="good"><p class="lab">直し方</p><p>「自分の軸」→「この会社でしかできないこと」→「入社してやりたいこと」の順で話す。</p></div>
-      </div>
-      <div class="cs">
-        <p class="q"><span>Q</span>学生時代に力を入れたことは？</p>
-        <div class="bad"><p class="lab">よくある答え</p><p>サークルの部長として、大会を成功させました。</p></div>
-        <p class="why2">結果だけで、何を考えて動いたかが見えない＝活躍できるかが判断できない</p>
-        <div class="good"><p class="lab">直し方</p><p>課題 → 自分の考え → 行動 → 結果 のうち、「考え」と「行動」を厚くする。</p></div>
-      </div>
-    </div>
-    <p class="case-note">※ よくある例です。実際にどこで評価が下がるかは、人や面接によって違います。</p>
-  </div>
-</section>
-
-<!-- 8. SAFE -->
-<section class="safe">
-  <div class="wrap">
-    <p class="en">SAFE</p>
-    <h2 class="h2"><span class="ph">面接の相談だけでも、</span><span class="ph"><span class="c">大丈夫です</span></span></h2>
-    <div class="safes">
-      <div class="sf"><span class="ck">✓</span><div><b>求人の押し付けはしません</b><span>ご希望がない限り、求人のご紹介はしません。</span></div></div>
-      <div class="sf"><span class="ck">✓</span><div><b>今受けている会社の相談だけでもOK</b><span>ほかのサービスと一緒に使っても大丈夫です。</span></div></div>
-      <div class="sf"><span class="ck">✓</span><div><b>オンラインで完結</b><span>スマホからでも参加できます。</span></div></div>
-      <div class="sf"><span class="ck">✓</span><div><b>費用はかかりません</b><span>学生の方から費用をいただくことはありません。</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 9. FAQ -->
+<!-- 10. よくある質問・追伸 -->
 <section class="faq">
-  <div class="wrap">
+  <div class="col">
     <p class="en">Q&amp;A</p>
     <h2 class="h2">よくある質問</h2>
     <div class="qa">
-      <details><summary>求人を紹介されないと使えませんか？</summary><p class="a">いいえ。ご希望がない限り、求人のご紹介はしません。今受けている会社の面接対策だけでも大丈夫です。</p></details>
+      <details><summary>時間はどれくらいですか？</summary><p class="a">1回の面談は60分ほどです。オンラインで、スマホからでも参加できます。</p></details>
       <details><summary>人事の評価は、どの会社でも聞けますか？</summary><p class="a">REFLAMEを通して応募した企業の選考に限ります。ご自身で応募した企業については、模擬面接で評価が下がった所を確かめます。</p></details>
-      <details><summary>秋冬インターンの面接でも相談できますか？</summary><p class="a">はい。インターンの選考の面接も、本選考と同じように練習できます。</p></details>
-      <details><summary>まだ面接を受けたことがなくても大丈夫ですか？</summary><p class="a">大丈夫です。初めての面接の前に練習しておきたい方も歓迎です。</p></details>
-      <details><summary>費用はかかりますか？</summary><p class="a">かかりません。採用が決まった企業からいただく紹介料で運営しているため、学生の方から費用をいただくことはありません。</p></details>
-      <details><summary>オンラインで受けられますか？</summary><p class="a">はい。オンラインで完結します。スマホからでも参加できます。</p></details>
+      <details><summary>インターンの選考の面接でも相談できますか？</summary><p class="a">はい。インターンの選考の面接も、本選考と同じように練習できます。</p></details>
     </div>
-  </div>
-</section>
-
-<!-- 10. LAST -->
-<section class="last">
-  <div class="wrap">
-    <p class="en">NEXT INTERVIEW</p>
-    <h2 class="h2"><span class="ph">秋冬インターンの面接までに、</span><span class="ph">面接を得意にしよう！</span></h2>
-    <p class="intro">次の面接は、推測ではなく、本当の理由で直してから受けましょう。</p>
-    <a class="btn" href="#booking">模擬面接を予約する<small>60分・オンライン</small></a>
-    <p class="btn-note">求人の押し付けはしません</p>
+    <div class="ps">
+      <p class="en">P.S.</p>
+      <p>同じ答え方のまま次の面接を受けると、また同じ所で評価が下がるかもしれません。次の選考の日が来る前に、どちらで下がっているかだけでも確かめておきませんか。</p>
+      <a class="btn" href="#booking">模擬面接を予約する</a>
+    </div>
   </div>
 </section>
 
 <footer><a href="https://reflame.co.jp/privacy/">プライバシーポリシー</a>|<a href="https://reflame.co.jp/">運営会社</a><p style="margin-top:8px">株式会社REFLAME／〒542-0076 大阪府大阪市中央区難波5-1-60 なんばスカイオ27F／有料職業紹介事業許可番号 27-ユ-303562</p><p style="margin-top:6px">© 2026 株式会社REFLAME</p></footer>
 
-<div class="sticky"><a class="btn" href="#booking">模擬面接を予約する<small>60分・オンライン</small></a></div>
+<div class="sticky" id="sticky"><a class="btn" href="#booking">模擬面接を予約する</a></div>
+<script>
+// 下の予約ボタンは常に出しておく。予約欄そのものが画面に出ている間だけ隠す（予約欄の入力の邪魔をしないように）
+(function () {
+  var s = document.getElementById('sticky');
+  var targets = [document.getElementById('booking')].filter(Boolean);
+  if (!s || !targets.length) return;
+  var tick = false;
+  function update() {
+    tick = false;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var seen = targets.some(function (t) {
+      var r = t.getBoundingClientRect();
+      return r.bottom > 0 && r.top < vh * 0.9;
+    });
+    s.classList.toggle('off', seen);
+  }
+  function req() { if (!tick) { tick = true; setTimeout(update, 50); } }
+  window.addEventListener('scroll', req, { passive: true });
+  window.addEventListener('resize', req);
+  update();
+})();
+</script>
 </body>
 </html>
