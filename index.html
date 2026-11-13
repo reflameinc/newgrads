@@ -4,254 +4,342 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="面接で落ちる人がつまずく同じ所。そこが分かれば、次の面接は変えられる。28卒向けの新卒就活エージェントREFLAMEの模擬面接。オンライン・費用はかかりません。">
+<meta name="description" content="1次は通るのに、最後まで受からない28卒へ。REFLAMEの担当と、本番の前に面接と志望動機を見直す60分の面談。オンライン・費用はかかりません。">
 <title>面接が苦手な28卒へ｜REFLAME</title>
+<script>
+// 訴求の出し分け。志望動機の広告から来た人だけ <html> に v-sb を付ける（印が無い・知らない印は面接診断＝既定のまま）。
+// 印は ?bid=（バナーID）→ ?fv= → utm_content の順に見る。広告名に shiboudouki を含むか、ng-V-011・012 なら志望動機。
+// URLに流入元の値が1つも無い時（同じタブでの再読み込み等）は、最初に着地した時の値（rf_attr_newgrads）を使う。
+(function () {
+  var RE = /shiboudouki|^ng-V-01[12](?:[_-]|$)/i;
+  var KEEP = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','bid','fbclid','ttclid','gclid'];
+  var sb = false;
+  try {
+    var p = new URLSearchParams(location.search);
+    var landed = KEEP.some(function (k) { return p.get(k); });
+    var src = {};
+    if (landed || p.get('fv')) { ['bid','fv','utm_content'].forEach(function (k) { src[k] = p.get(k); }); }
+    else { src = JSON.parse(sessionStorage.getItem('rf_attr_newgrads') || '{}'); }
+    sb = ['bid','fv','utm_content'].some(function (k) { return src[k] && RE.test(src[k]); });
+  } catch (e) {}
+  if (sb) document.documentElement.classList.add('v-sb');
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&text=0123456789%2C%25&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <style>
+/* 色：主＝水色〜青（帯・番号・強調の1語・小見出し）／予約ボタン＝コーラル／下線＝黄色／文字＝紺／地＝白と淡い水色 */
 :root{
-  --navy:#0f2a4a; --ink:#33475e; --mute:#64788d;
+  --navy:#0f2a4a; --ink:#33475e; --mute:#5f7389;
   --blue:#18a6e3; --blue2:#0a7fc2; --blue3:#065f94;
-  --sky:#e9f7fd; --sky2:#c9ecfb; --bg:#f4fafd; --line:#d8edf8; --white:#fff;
-  --cta:#ff7a5c; --cta2:#f2573a; --warn:#ef6a2b; --warnbg:#fff4ec;
+  --sky:#e9f7fd; --sky2:#c9ecfb; --bg:#f4fafd; --line:#d8edf8; --white:#fff; --warm:#f2f9fd;
+  --cta:#ff7a5c; --cta2:#f2573a; --warn:#e5484d; --warnbg:#fff4ec;
   --jp:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','YuGothic','Meiryo',sans-serif;
   --en:'Montserrat','Noto Sans JP','Hiragino Sans',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--jp);color:var(--navy);background:var(--white);font-size:16px;line-height:1.9;letter-spacing:.04em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;line-break:strict;word-break:auto-phrase}
-/* 改行：言葉の途中では切らない（文節で改行）。そのうえで、短い文は行の長さをそろえ、長い文は最後の行が短くなりすぎないようにする */
-p,li,dd,summary{text-wrap:pretty}
-h1,h2,h3,.lede,.punch,.after,.conclude,.answer b,.fv-cap,.book-to,.checks li,.tried li,.qm p,.wq h3,.wq p,.tl p,.ba p,.qa summary{text-wrap:balance}
+body{font-family:var(--jp);color:var(--navy);background:var(--white);font-size:16px;line-height:1.9;letter-spacing:.04em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;line-break:strict}
+/* 改行：行の長さを均す指定（text-wrap・auto-phrase）は使わない。詰めて折り返し、切りたくない塊だけ .ph で包む */
 h1,h2,h3,button,input,select,textarea{font-family:inherit}
+/* 訴求の出し分け：.sd＝面接診断だけ／.sb＝志望動機だけ。既定は面接診断 */
+html:not(.v-sb) .sb,html.v-sb .sd{display:none!important}
 img{max-width:100%;display:block}
 .ph{display:inline-block}
 b,strong{font-weight:700}
 
-/* 記事の幅：読みやすい行の長さに揃える */
+/* ── 見た目の決まり
+   見出し: 全部の欄を「英語の小見出し（.lbl）＋見出し（.ttl・強調は1語の em）」にそろえる
+   カード: 白・角丸16px・薄い枠と影の1種類（.card）。濃い地は「面談でやること」の帯と「大事なのは」の箱の2か所だけ */
 .col{max-width:600px;margin:0 auto;padding:0 20px}
-section{padding:36px 0}
-.en{font-family:var(--en);font-weight:800;letter-spacing:.16em;color:var(--blue);font-size:14px;text-align:center;line-height:1.4}
-.h2{font-size:24px;font-weight:700;line-height:1.5;letter-spacing:.03em;text-align:center;margin:4px 0 18px}
-.h2 .c{color:var(--blue2)}
-.mk{background:linear-gradient(transparent 64%,rgba(24,166,227,.25) 64%)}
+section{padding:56px 0}
+.sec-cream{background:linear-gradient(180deg,#f6fbfe 0%,#e8f5fc 100%)}
+.sec-band{background:linear-gradient(135deg,#1fb0ea 0%,#0a6fb5 100%);color:#fff}
+.lbl{display:block;margin:0 0 6px;text-align:center;font-family:var(--en);font-size:14px;font-weight:800;letter-spacing:.16em;line-height:1.4;color:var(--blue2)}
+.ttl{margin:0 0 22px;text-align:center;font-size:23px;font-weight:900;line-height:1.5;letter-spacing:.02em;color:var(--navy)}
+.ttl em{font-style:normal;color:var(--blue2)}
+.pre{display:block;text-align:center;font-size:16px;font-weight:700;line-height:1.6;color:var(--ink);margin:0 0 2px}
+.mk{background:linear-gradient(transparent 64%,#ffe27a 64%);padding:0 2px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 26px rgba(15,42,74,.08)}
+.note{font-size:14px;color:var(--mute);line-height:1.8}
 p+p{margin-top:1em}
 .t-c{text-align:center}
-.lede{font-size:17px;font-weight:700;line-height:1.8;text-align:center}
-.lede .c{color:var(--blue2)}
-/* 接続詞を大きく・改行して色を変える */
-.conj{display:block;text-align:center;font-size:24px;font-weight:900;color:var(--blue2);letter-spacing:.12em;line-height:1.4;margin:20px 0 6px}
-
-/* ヘッダー */
-header{background:var(--white);border-bottom:1px solid var(--line)}
-header .wrap{max-width:1080px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.logo{display:flex;align-items:center}
-.logo-svg{height:24px;width:auto;display:block}
-.hd-sub{font-size:14px;font-weight:700;color:var(--ink);text-align:right;line-height:1.35;letter-spacing:.02em}
-
-/* ボタン */
-.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:420px;margin:0 auto;text-decoration:none;color:#fff;font-weight:700;font-size:17px;line-height:1.5;padding:14px 44px 14px 24px;border-radius:999px;background:linear-gradient(135deg,var(--cta),var(--cta2));box-shadow:0 8px 20px rgba(242,87,58,.3);position:relative;letter-spacing:.04em}
-.btn::after{content:"";position:absolute;right:22px;top:50%;width:8px;height:8px;border-top:2.5px solid #fff;border-right:2.5px solid #fff;transform:translateY(-50%) rotate(45deg)}
-.btn:active{transform:translateY(2px)}
-
-/* 1. FV：青の地（オフィスの写真に青を重ねる）に白い文字。揃えは左に統一し、色の強調は黄色の下線1つと予約ボタンだけにする。
-   並びは「誰に → 見出し → 補足 → 予約ボタン → 理想の絵（担当＋通過の通知）」。予約ボタンを絵より上に置き、最初の画面に必ず入れる */
-.fv{position:relative;overflow:hidden;background:#0a6fae;color:#fff}
-.fv::before{content:"";position:absolute;inset:-24px;z-index:0;background:url("assets/bg.jpg") 30% 40%/cover no-repeat;filter:blur(3px) saturate(.6)}
-.fv::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,rgba(6,72,120,.93) 0%,rgba(8,104,166,.86) 55%,rgba(24,150,214,.78) 100%)}
-.fv-in{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:26px 20px 0}
-.fv-copy{text-align:left}
-.chip{display:inline-block;border:1.5px solid rgba(255,255,255,.75);color:#fff;font-weight:700;font-size:14px;line-height:1.6;padding:3px 12px;border-radius:999px;letter-spacing:.04em}
-.fv h1{font-weight:900;line-height:1.4;letter-spacing:.02em;margin:16px 0 14px;color:#fff}
-.fv h1 .s{display:block;font-size:19px;font-weight:700;opacity:.92}
-.fv h1 .m{display:block;font-size:30px}
-.fv h1 .b{text-decoration:underline;text-decoration-color:#ffd84d;text-decoration-thickness:4px;text-underline-offset:7px;text-decoration-skip-ink:none}
-.fv h1 .b2{display:block;font-size:38px}
-.fv .sub{margin-top:2px}
-.fv .sub1{display:block;font-size:19px;font-weight:700;line-height:1.65;color:#fff}
-.fv .sub1 em{font-style:normal;color:#ffd84d}
-.fv .btn{margin:20px 0 0;max-width:none}
-.fv-safe{position:absolute;left:20px;top:6px;z-index:2;list-style:none;display:grid;gap:6px}
-.fv-safe li{font-size:14px;font-weight:700;line-height:1.5;color:#fff;padding-left:22px;position:relative}
-.fv-safe li::before{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;background:#ffd84d}
-.fv-safe li::after{content:"";position:absolute;left:5px;top:6px;width:4px;height:8px;border:solid #0a4f80;border-width:0 2px 2px 0;transform:rotate(45deg)}
-/* 理想の絵：担当の写真の手前に、選考通過の通知 */
-.fv-vis{position:relative;height:250px;margin:18px -20px 0}
-.fv-person{position:absolute;right:-4px;bottom:0;width:190px;height:auto}
-.fv-vis .ntf{position:absolute;left:20px;bottom:44px;width:72%;max-width:300px;z-index:2}
-.fv-vis .fv-note{position:absolute;left:20px;bottom:16px;z-index:2;margin:0;font-size:11px;line-height:1.5;font-weight:400;color:#a9bccd}
-.ntf{display:flex;gap:10px;align-items:flex-start;background:#fff;color:#111;border-radius:16px;padding:11px 13px;line-height:1.45;box-shadow:0 12px 28px rgba(0,30,60,.3);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;letter-spacing:0}
-.ntf .ic{flex:none;width:34px;height:34px;border-radius:9px;background:linear-gradient(180deg,#4fb2ff,#1a7bf2);display:grid;place-items:center;margin-top:1px}
-.ntf .bd{min-width:0;flex:1}
-.ntf .r1{display:flex;justify-content:space-between;gap:6px;font-size:14px;font-weight:700;white-space:nowrap}
-.ntf .r1 span{font-weight:400;color:#6e6e73}
-.ntf .tt{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ntf .hl{color:#d63a1f}
-.ntf .pv{font-size:14px;color:#3a3a3c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ntf p+p{margin-top:0}
-/* 2. 悩みの言い当て */
-.pain{background:linear-gradient(180deg,var(--sky) 0%,#fff 100%);padding-top:36px}
-.checks{list-style:none;display:grid;gap:12px;margin-top:4px}
-.checks li{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 16px 16px 52px;font-size:16px;line-height:1.8;box-shadow:0 4px 14px rgba(15,42,74,.05)}
-.checks li::before{content:"";position:absolute;left:16px;top:19px;width:22px;height:22px;border-radius:6px;background:var(--blue)}
-.checks li::after{content:"";position:absolute;left:23px;top:22px;width:7px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
-.checks b{color:var(--blue3)}
-.punch{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:22px 18px;text-align:center;font-size:19px;font-weight:700;line-height:1.7}
-.punch small{display:block;font-size:15px;font-weight:500;opacity:.85;margin-top:6px;line-height:1.8}
-
-/* 3. これまでの対策 */
-.tried{list-style:none;display:grid;gap:10px}
-.tried li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:14px 16px;font-size:16px;line-height:1.8}
-.tried li span{flex:none;font-family:var(--en);font-weight:800;color:var(--mute);font-size:14px;line-height:1.8;padding-top:1px}
-.after{text-align:center;font-size:18px;font-weight:700;line-height:1.8}
-.after .c{color:var(--warn)}
-
-/* 4. 原因（2つだけ） */
-.cause{background:var(--bg)}
-.cause .pre{text-align:center;font-size:17px;font-weight:700;color:var(--ink);line-height:1.6}
-.cause .h2{font-size:28px;margin-top:4px}
-.sheet{background:#fff;border-radius:18px;box-shadow:0 14px 32px rgba(15,42,74,.1);border:1px solid var(--line);overflow:hidden}
-.sheet-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;font-size:14px;font-weight:700;line-height:1.5}
-.sheet-hd span{opacity:.85;font-weight:500}
-.axis{display:flex;gap:14px;align-items:center;padding:18px}
-.axis+.axis{border-top:1px solid var(--line)}
-.axis .no{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sky);color:var(--blue2);font-family:var(--en);font-weight:800;font-size:16px;display:grid;place-items:center}
-.axis h3{font-size:20px;font-weight:700;line-height:1.5}
-.axis p{font-size:14px;color:var(--mute);line-height:1.7}
-.note{font-size:14px;color:var(--mute);line-height:1.8}
-.qmap{margin-top:28px;display:grid;gap:14px}
-.qm{background:#fff;border-radius:14px;border:1px solid var(--line);padding:16px}
-.qm .q{font-size:17px;font-weight:700;line-height:1.6;margin-bottom:10px}
-.qm .q::before{content:"Q.";font-family:var(--en);color:var(--blue);margin-right:6px}
-.qm .ax{display:inline-block;margin:8px 0 10px;font-size:14px;font-weight:700;color:var(--blue2);background:var(--sky);border-radius:6px;padding:2px 10px;line-height:1.7}
-.qm .bad{background:#f3f5f7;border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.8;color:var(--ink)}
-.qm .bad small{display:block;font-size:14px;font-weight:700;color:var(--mute);line-height:1.6}
-.qm .why{font-size:15px;line-height:1.8;color:var(--ink);margin-top:8px;padding-left:12px;border-left:3px solid #b9c3cd}
-.qm .why small{display:block;font-size:14px;font-weight:700;color:var(--mute);line-height:1.6}
-.qm .good{margin-top:12px;background:#fff5f4;border:2px solid #e5484d;border-radius:12px;padding:10px 12px;font-size:15px;line-height:1.85;color:var(--navy)}
-.qm .good small{display:table;font-size:14px;font-weight:700;color:#fff;background:#e5484d;border-radius:6px;padding:0 10px;line-height:1.7;margin-bottom:4px}
-.qm .good b{color:#d1242f}
-.qm p+p{margin-top:0}
-.qm .good{margin-top:12px}
-.conclude{margin-top:28px;text-align:center;font-size:18px;font-weight:700;line-height:1.8}
+.body-t{font-size:16px;line-height:1.9;color:var(--ink)}
+.body-t b{color:var(--navy)}
+/* 欄の結び（大きめの一文） */
+.conclude{margin-top:28px;text-align:center;font-size:19px;font-weight:900;line-height:1.7;color:var(--navy)}
 .conclude .c{color:var(--blue2)}
 
-/* 5. 解決策 */
-.pre-q{font-size:16px;font-weight:700;color:var(--ink);line-height:1.6;margin-bottom:-12px}
-.answer{margin-top:8px;background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;border-radius:18px;padding:24px 20px;text-align:center}
-.answer p{font-size:15px;line-height:1.8;opacity:.92}
-.answer b{display:block;font-size:20px;line-height:1.65;margin-top:6px;opacity:1}
+/* 予約ボタン（立体の押しボタン） */
+.btn{display:flex;align-items:center;justify-content:center;width:100%;max-width:420px;margin:0 auto;text-decoration:none;color:#fff;font-weight:900;font-size:17px;line-height:1.5;padding:15px 44px 15px 24px;border-radius:999px;background:linear-gradient(to right,#ff7a5c,#f2573a);box-shadow:0 5px 0 #c8401f,0 12px 24px rgba(242,87,58,.28);position:relative;letter-spacing:.04em}
+.btn::after{content:"";position:absolute;right:22px;top:50%;width:8px;height:8px;border-top:3px solid #fff;border-right:3px solid #fff;transform:translateY(-50%) rotate(45deg)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c8401f,0 6px 14px rgba(242,87,58,.25)}
 
-/* 6. サービス */
-.svc{background:linear-gradient(180deg,var(--sky) 0%,#fff 100%)}
-.tl{list-style:none;position:relative}
-.tl::before{content:"";position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:var(--sky2)}
-.tl li{position:relative;padding:0 0 22px 58px}
-.tl li:last-child{padding-bottom:0}
-.tl .n{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--en);font-weight:800;display:grid;place-items:center;box-shadow:0 0 0 5px #fff}
-.tl h3{font-size:18px;font-weight:700;line-height:1.55;padding-top:6px}
-.tl p{font-size:15px;color:var(--ink);line-height:1.85;margin-top:4px}
-.tl .ex{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:8px;font-size:14px;line-height:1.75;color:var(--ink)}
-.leave{margin-top:28px;background:#fff;border:2px solid var(--blue);border-radius:16px;padding:18px}
-.leave h3{font-size:17px;font-weight:700;line-height:1.5;margin-bottom:8px}
+/* 1. FV：左に見出し、右に人物、下に丸い札3つ、その下に予約ボタン。スマホ優先 */
+.fv{position:relative;overflow:hidden;background:#eef6fb url("assets/fv_bg.webp") 30% 50%/cover no-repeat;color:var(--navy)}
+.fv::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.35) 45%,rgba(255,255,255,0) 70%)}
+.fv-in{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:18px 16px 0;display:flex;flex-direction:column}
+.fv-copy{position:relative;z-index:2;width:64%;margin-bottom:16px}
+.chip-2{letter-spacing:0;padding:2px 10px}
+.chip{display:inline-block;white-space:nowrap;background:rgba(255,255,255,.85);border:1.5px solid var(--blue2);color:var(--blue2);font-weight:900;font-size:14px;line-height:1.6;padding:2px 12px;border-radius:999px;letter-spacing:.02em}
+.fv h1{margin:12px 0 10px;font-weight:900;line-height:1.3;letter-spacing:0;color:var(--navy);text-shadow:0 0 12px rgba(255,255,255,.9),0 0 3px rgba(255,255,255,.9)}
+.fv h1 .s{display:block;font-size:18px;font-weight:900;line-height:1.5;margin-bottom:4px}
+.fv h1 .m{display:block;font-size:clamp(26px,8.4vw,36px)}
+/* 志望動機の版：大きい行を1行に収める／札が長いぶん人物を下げる */
+.fv h1 .m1{white-space:nowrap;font-size:clamp(19px,6.3vw,36px)}
+html.v-sb .fv-person{height:calc(100% - 10px);right:4%}
+.fv h1 .b{color:var(--blue2);background:linear-gradient(transparent 70%,#ffe27a 70%);padding:0 2px}
+.fv-person{position:absolute;z-index:1;right:-2%;bottom:0;height:calc(100% - 14px);max-height:calc(48vw * 1.68);width:auto;max-width:none}
+/* 月桂冠の実績（支援実績・満足度）：細い枝で囲み、上に王冠、数字は明朝体。小さい文字は月桂冠バッジの例外（14px未満可） */
+.fv-proof{display:grid;grid-template-columns:repeat(3,max-content);gap:0 2px;margin-top:8px}
+.pf{position:relative;flex:none;width:72px;height:66px}
+.pf .wr{position:absolute;inset:0;width:100%;height:100%}
+.pf .crown{position:absolute;top:1px;left:50%;width:11px;height:8px;transform:translateX(-50%)}
+.pf p{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0;padding-top:3px;line-height:1.1;white-space:nowrap}
+.pf .k{font-size:9.5px;font-weight:900;color:var(--navy);letter-spacing:0}
+.pf .v{position:relative;font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;font-size:15px;font-weight:700;color:var(--navy);letter-spacing:-.02em;margin:0}
+.pf .v small{font-family:var(--jp);font-size:9px;font-weight:900;margin-left:1px}
+.pf .v sup{position:absolute;top:0;right:-7px;font-family:var(--jp);font-size:6px;font-weight:700;color:var(--mute)}
+.pf .u{font-size:8.5px;font-weight:900;color:var(--navy);margin-top:0}
+.pf .t{font-size:9.5px;font-weight:900;line-height:1.35;color:var(--navy);text-align:center}
+.pf .t sup{font-size:6px;font-weight:700;color:var(--mute);vertical-align:top;margin-left:1px}
+.fv-under{position:relative;z-index:1;background:linear-gradient(180deg,#f6fbfe,#e8f5fc);padding:20px 16px 22px;text-align:center}
+.fv-under .btn{max-width:420px}
+
+/* 1.5 掲載メディア：ロゴを横に流す（同じ並びを2回並べて半分ずつ送る） */
+.media{padding:10px 0;background:#fff}
+.mq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.mq-track{display:flex;gap:10px;width:max-content;list-style:none;animation:mq 32s linear infinite}
+.mq-track li{flex:none;width:104px;height:42px;display:grid;place-items:center;padding:2px 4px}
+.mq-track img{width:100%;height:auto;max-height:38px;object-fit:contain}
+@keyframes mq{to{transform:translateX(calc(-50% - 5px))}}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none}.mq{overflow-x:auto}}
+@media (min-width:860px){.media{padding:14px 0 10px}.mq-track li{width:140px;height:54px}.mq-track img{max-height:48px}}
+
+/* 2. 悩み（人物＋吹き出し・左右交互） */
+.pain-title{margin:0 0 26px;text-align:center;font-size:23px;font-weight:900;line-height:1.5;color:var(--navy)}
+.pmk{color:var(--blue2);background:linear-gradient(transparent 66%,#ffe27a 66%);padding:0 2px}
+.pain-list{display:grid;gap:22px;list-style:none}
+.pain-row{display:flex;align-items:center;gap:24px}
+.pain-row:nth-child(even){flex-direction:row-reverse}
+.pain-fig{flex:0 0 96px;width:96px;height:96px;border-radius:50%;background:#fff;padding:10px 8px 0;object-fit:contain;object-position:center bottom;box-shadow:0 8px 20px rgba(15,42,74,.10)}
+.bubble{position:relative;flex:1 1 auto;min-width:0;margin:0;padding:18px 14px;border-radius:22px;background:#fff;text-align:center;box-shadow:0 8px 22px rgba(15,42,74,.08);font-size:16px;font-weight:700;line-height:1.65;color:var(--navy)}
+.bubble em{font-style:normal;color:var(--blue2)}
+.bubble::before,.bubble::after{content:"";position:absolute;top:50%;border-radius:50%;background:#fff;box-shadow:0 4px 10px rgba(15,42,74,.06);transform:translateY(-50%)}
+.bubble::before{width:14px;height:14px;left:-12px}
+.bubble::after{width:8px;height:8px;left:-22px}
+.pain-row:nth-child(even) .bubble::before{left:auto;right:-12px}
+.pain-row:nth-child(even) .bubble::after{left:auto;right:-22px}
+.pain-close{margin:32px 0 0;text-align:center;font-size:23px;font-weight:900;line-height:1.5;color:var(--navy)}
+.pain-close em{font-style:normal;color:var(--blue2)}
+.pain-sub{margin-top:12px;text-align:center;font-size:15px;line-height:1.85;color:var(--ink)}
+
+/* 3. これまでの対策 → 「しかし」 */
+.tried{list-style:none;padding:6px 18px}
+.tried li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;font-size:16px;line-height:1.75;color:var(--navy)}
+.tried li+li{border-top:1px dashed var(--line)}
+.tried li span{flex:none;font-family:var(--en);font-weight:800;font-size:16px;line-height:1.75;color:var(--blue)}
+.turn{margin-top:22px;text-align:center}
+.turn .but{display:inline-block;font-size:16px;font-weight:900;letter-spacing:.12em;color:#fff;background:var(--navy);border-radius:999px;padding:2px 18px;line-height:1.8}
+.turn .after{margin-top:12px;font-size:20px;font-weight:900;line-height:1.6;color:var(--navy)}
+.turn .after .c{color:var(--warn)}
+.turn .why{margin-top:10px;font-size:15px;line-height:1.85;color:var(--ink)}
+
+/* 4. 原因：大きな番号のカード（面接診断）／深掘り3段（志望動機） */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two .card{padding:18px 14px 16px;text-align:center}
+.big-no{display:block;font-family:var(--en);font-size:34px;font-weight:800;line-height:1;background:linear-gradient(135deg,#1fb0ea,#0a6fb5);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.two h3{margin-top:10px;font-size:19px;font-weight:900;line-height:1.45;color:var(--navy)}
+.two p{margin-top:4px;font-size:14px;line-height:1.7;color:var(--mute)}
+.two-cap{text-align:center;font-size:14px;font-weight:700;color:var(--mute);margin:0 0 10px;line-height:1.6}
+.dig{padding:6px 16px}
+.dig .row{display:flex;gap:12px;align-items:flex-start;padding:14px 0}
+.dig .row+.row{border-top:1px dashed var(--line)}
+.dig .no{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1fb0ea,#0a6fb5);color:#fff;font-family:var(--en);font-weight:800;font-size:15px;display:grid;place-items:center}
+.dig h3{font-size:17px;font-weight:900;line-height:1.6;color:var(--navy)}
+.dig p{margin-top:2px;font-size:15px;line-height:1.7;color:var(--ink)}
+.dig .row:last-child p{color:var(--warn);font-weight:900}
+.qmap{margin-top:28px;display:grid;gap:14px}
+.qm{padding:18px 16px}
+.qm .q{font-size:17px;font-weight:900;line-height:1.6;margin-bottom:10px;color:var(--navy)}
+.qm .q::before{content:"Q.";font-family:var(--en);color:var(--blue2);margin-right:6px}
+.qm .bad{background:#f1f4f7;border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.8;color:var(--ink)}
+.qm .bad small,.qm .why small{display:block;font-size:14px;font-weight:700;color:var(--mute);line-height:1.6}
+.qm .why{font-size:15px;line-height:1.8;color:var(--ink);margin-top:10px;padding-left:12px;border-left:3px solid #cdd7e1}
+.qm .good{display:flex;gap:10px;align-items:flex-start;margin-top:14px}
+.qm .good .adv{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--sky);border:2px solid #fff;box-shadow:0 4px 12px rgba(15,42,74,.14)}
+.qm .gb{position:relative;flex:1 1 auto;min-width:0;margin:0;background:#f1f9fe;border:2px solid var(--blue);border-radius:14px;padding:12px;font-size:15px;line-height:1.85;color:var(--navy)}
+/* 吹き出しの口（アイコン側） */
+.qm .gb::before,.qm .gb::after{content:"";position:absolute;top:16px;width:0;height:0;border-style:solid}
+.qm .gb::before{left:-11px;border-width:8px 11px 8px 0;border-color:transparent var(--blue) transparent transparent}
+.qm .gb::after{left:-8px;top:17px;border-width:7px 9px 7px 0;border-color:transparent #f1f9fe transparent transparent}
+.qm .gb small{display:table;font-size:14px;font-weight:700;color:#fff;background:var(--blue2);border-radius:6px;padding:0 10px;line-height:1.7;margin-bottom:6px}
+.qm .gb b{color:var(--blue2)}
+.qm p+p{margin-top:0}
+
+/* 5. 解決策：最後に濃い「大事なのは」の箱 */
+.so-q{display:block;text-align:center;font-size:16px;font-weight:700;color:var(--ink);line-height:1.6;margin-bottom:2px}
+.so-turn{display:block;text-align:center;margin:26px 0 10px;font-size:18px;font-weight:900;letter-spacing:.12em;color:var(--blue2)}
+.answer{background:var(--navy);color:#fff;border-radius:18px;padding:24px 20px;text-align:center}
+.answer p{font-size:15px;line-height:1.8;opacity:.9}
+.answer b{display:block;font-size:20px;font-weight:900;line-height:1.65;margin-top:6px}
+.answer b .y{color:#ffd27a}
+
+/* 6. 面談でやること：青の帯＋白いカード＋大きな番号 */
+.sec-band .lbl{color:rgba(255,255,255,.9)}
+.sec-band .ttl{color:#fff}
+.sec-band .ttl em{color:#ffe27a}
+.do-list{list-style:none;display:grid;gap:12px}
+.do{display:flex;gap:14px;align-items:flex-start;padding:18px 16px;border-radius:16px;background:#fff;box-shadow:0 10px 26px rgba(10,40,80,.18)}
+.do .big-no{flex:none;font-size:30px;padding-top:2px}
+.do h3{font-size:18px;font-weight:900;line-height:1.5;color:var(--navy)}
+.do p{margin-top:4px;font-size:15px;line-height:1.8;color:var(--ink)}
+.do .ex{background:var(--bg);border-radius:10px;padding:8px 12px;margin-top:8px;font-size:14px;line-height:1.75}
+.leave{margin-top:16px;padding:18px;border-radius:16px;background:#fff;box-shadow:0 10px 26px rgba(10,40,80,.18)}
+.leave h3{font-size:17px;font-weight:900;line-height:1.5;margin-bottom:8px;color:var(--navy)}
 .leave ul{list-style:none;display:grid;gap:4px}
-.leave li{position:relative;padding-left:28px;font-size:16px;line-height:1.8}
-.leave li::before{content:"✓";position:absolute;left:4px;color:var(--blue);font-weight:700}
-.extra{margin-top:14px;font-size:14px;line-height:1.8;color:var(--ink);background:var(--bg);border-radius:12px;padding:12px 14px}
-.extra b{color:var(--navy)}
+.leave li{position:relative;padding-left:28px;font-size:16px;line-height:1.8;color:var(--navy)}
+.leave li::before{content:"✓";position:absolute;left:4px;color:var(--blue2);font-weight:900}
+.extra{margin-top:12px;font-size:14px;line-height:1.8;color:#fff;font-weight:500;background:rgba(0,30,70,.25);border-radius:12px;padding:12px 14px}
+.extra b{color:#ffe27a}
 
-/* 7. 直ったあとの場面 */
-.future{background:#fff}
-.ba{display:grid;gap:12px}
-.ba div{border-radius:16px;padding:18px}
-.ba .before{background:#f3f5f7;color:var(--ink)}
-.ba .after2{background:var(--sky);border:2px solid var(--blue)}
-.ba small{display:block;font-family:var(--en);font-weight:800;font-size:14px;letter-spacing:.14em;line-height:1.5;margin-bottom:6px}
-.ba .before small{color:var(--mute)}
-.ba .after2 small{color:var(--blue2)}
-.ba p{font-size:16px;line-height:1.85}
-.ba .arrow{padding:0;text-align:center;color:var(--blue);font-size:20px;line-height:1}
+/* 6.5 担当について */
+.tr{list-style:none;display:grid;gap:12px}
+.tr li{display:flex;gap:14px;align-items:flex-start;padding:16px}
+.tr .no{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1fb0ea,#0a6fb5);color:#fff;font-family:var(--en);font-weight:800;font-size:15px;display:grid;place-items:center}
+.tr h3{font-size:17px;font-weight:900;line-height:1.6;color:var(--navy)}
+.tr p{font-size:15px;color:var(--ink);line-height:1.85;margin-top:2px}
+.lic{margin-top:14px;font-size:14px;color:var(--mute);line-height:1.8;text-align:center}
+
+/* 7. 面談の前と後（BEFORE → AFTER の箱） */
+.ba{padding:18px 16px}
+.ba .be,.ba .af{border-radius:12px;padding:12px 14px}
+.ba .be{background:#f1f4f7}
+.ba .af{background:#e9f7fd;border:2px solid var(--blue)}
+.ba small{display:block;font-family:var(--en);font-weight:800;font-size:14px;letter-spacing:.12em;line-height:1.5;margin-bottom:4px}
+.ba .be small{color:var(--mute)}
+.ba .af small{color:var(--blue2)}
+.ba p{font-size:16px;line-height:1.85;color:var(--navy)}
+.ba .af b{color:var(--blue2)}
+.ba .arw{display:block;text-align:center;color:var(--blue);font-size:22px;line-height:1;margin:8px 0}
 
 /* 8. 不安を消す */
-.worry{background:var(--bg)}
-.wq{background:#fff;border-radius:16px;border:1px solid var(--line);padding:18px;margin-bottom:12px}
+.wq{padding:18px;margin-bottom:12px}
 .wq .q{font-size:15px;font-weight:700;color:var(--mute);line-height:1.7}
-.wq .q::before{content:"でも…";display:inline-block;font-size:14px;color:#fff;background:var(--mute);border-radius:6px;padding:0 8px;margin-right:8px;line-height:1.8}
-.wq h3{font-size:18px;font-weight:700;line-height:1.6;margin-top:8px;color:var(--navy)}
+.wq .q::before{content:"でも…";display:inline-block;font-size:14px;color:#fff;background:#5f7389;border-radius:6px;padding:0 8px;margin-right:8px;line-height:1.8}
+.wq h3{font-size:18px;font-weight:900;line-height:1.6;margin-top:8px;color:var(--navy)}
 .wq h3::before{content:"→ ";color:var(--blue)}
 .wq p{font-size:15px;color:var(--ink);line-height:1.85;margin-top:4px}
 
-/* 9. 予約欄 */
-.book{background:linear-gradient(180deg,#fff 0%,var(--sky) 100%)}
-.book-to{text-align:center;font-size:15px;font-weight:700;color:var(--blue2);line-height:1.6}
-.book .h2{margin-bottom:12px}
-.book-sub{font-size:16px;line-height:1.85;color:var(--ink);margin-bottom:24px}
-.form{max-width:520px;margin:0 auto;background:var(--white);border-radius:18px;box-shadow:0 12px 30px rgba(15,42,74,.12);overflow:hidden}
-.form-hd{background:linear-gradient(135deg,var(--blue2),var(--blue3));color:#fff;text-align:center;padding:16px 12px;line-height:1.6}
+/* 9. 予約欄：3つの枠＋フォーム */
+.book-to{text-align:center;font-size:15px;font-weight:700;color:var(--blue2);line-height:1.6;margin-bottom:2px}
+.book-sub{font-size:16px;line-height:1.85;color:var(--ink);margin:-8px 0 18px}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;list-style:none;margin:0 0 18px}
+.info li{padding:12px 4px;border-radius:12px;background:#fff;border:1px solid var(--line);text-align:center}
+.info .k{display:block;font-size:14px;font-weight:700;color:var(--mute);line-height:1.5}
+.info .v{display:block;margin-top:2px;font-size:16px;font-weight:900;color:var(--blue2);line-height:1.5}
+.form{max-width:520px;margin:0 auto;background:var(--white);border-radius:18px;box-shadow:0 12px 30px rgba(15,42,74,.14);overflow:hidden;border:1px solid var(--line)}
+.form-hd{background:linear-gradient(135deg,#1fb0ea,#0a6fb5);color:#fff;text-align:center;padding:16px 12px;line-height:1.6}
 .form-hd small{display:block;font-size:14px;font-weight:500;opacity:.95}
-.form-hd b{font-size:18px;font-weight:700}
+.form-hd b{font-size:18px;font-weight:900}
 .form-bd{padding:18px 18px 22px}
 .embed-fallback{font-size:14px;color:var(--ink);background:var(--sky);border-radius:10px;padding:12px}
 .form-foot{font-size:14px;color:var(--mute);text-align:center;margin-top:12px;line-height:1.7}
 .form-foot a{color:var(--blue2)}
 
-/* 10. よくある質問・追伸 */
-.faq{background:#fff}
-.qa details{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--bg)}
-.qa summary{list-style:none;cursor:pointer;padding:14px 44px 14px 16px;font-weight:700;font-size:16px;line-height:1.6;position:relative;display:flex;gap:10px}
-.qa summary::-webkit-details-marker{display:none}
-.qa summary::before{content:"Q";font-family:var(--en);font-weight:800;color:var(--blue)}
-.qa summary::after{content:"";position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
-.qa details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
-.qa .a{padding:0 16px 16px 42px;font-size:15px;color:var(--ink);line-height:1.85}
-.ps{margin-top:28px;border-top:2px dashed var(--sky2);padding-top:22px}
-.ps .en{text-align:left}
-.ps p{font-size:16px;line-height:1.9;margin-top:8px}
+/* 10. よくある質問（＋で開け閉め）・追伸 */
+.faq-list{display:grid;gap:10px}
+.faq-list details{border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 22px rgba(15,42,74,.06)}
+.faq-list summary{position:relative;list-style:none;cursor:pointer;padding:16px 44px 16px 16px;font-size:16px;font-weight:700;line-height:1.6;color:var(--navy)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::before{content:"Q.";margin-right:6px;color:var(--blue2);font-weight:900;font-family:var(--en)}
+.faq-list summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:700;color:var(--blue2)}
+.faq-list details[open] summary::after{content:"−"}
+.faq-list .a{margin:0;padding:0 16px 16px;font-size:15px;line-height:1.8;color:var(--ink)}
+.ps{margin-top:32px;padding:22px 18px}
+.ps .lbl{text-align:left}
+.ps p{font-size:16px;line-height:1.9;margin-top:6px;color:var(--navy)}
 .ps .btn{margin-top:22px}
 
+.foot-notes{background:#fff;padding:14px 16px;text-align:center}
+.foot-notes p{font-size:12px;line-height:1.7;color:var(--mute)}
 footer{background:var(--navy);color:#c6d3df;text-align:center;font-size:14px;line-height:1.7;padding:22px 16px 110px}
 footer a{color:#c6d3df;margin:0 8px}
 
-/* 追従ボタン（予約欄が見えている間は隠す） */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);transition:transform .25s,opacity .25s}
+/* 追従ボタン（最初の画面のボタンか予約欄が見えている間は隠す） */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line);transition:transform .25s,opacity .25s}
 .sticky.off{transform:translateY(110%);opacity:0;pointer-events:none}
 .sticky .btn{font-size:16px;padding:12px 44px 12px 24px}
-/* 予約ボタン：一定の間隔で「ポンッ」と弾む（光が流れる動きはやめた） */
-.sticky .btn,.ps .btn{animation:pop 2.8s ease-in-out infinite;transform-origin:center}
-@keyframes pop{0%,62%,100%{transform:scale(1)}68%{transform:scale(1.07)}74%{transform:scale(.97)}80%{transform:scale(1.03)}86%{transform:scale(1)}}
-.sticky .btn:active,.ps .btn:active{animation:none;transform:scale(.97)}
-@media (prefers-reduced-motion:reduce){.sticky .btn,.ps .btn,.scroll::after,.ntf{animation:none}}
+/* 予約ボタン：一定の間隔で「ポンッ」と弾む */
+.fv-under .btn,.sticky .btn,.ps .btn{animation:pop 2.8s ease-in-out infinite;transform-origin:center}
+@keyframes pop{0%,62%,100%{transform:scale(1)}68%{transform:scale(1.06)}74%{transform:scale(.97)}80%{transform:scale(1.02)}86%{transform:scale(1)}}
+.fv-under .btn:active,.sticky .btn:active,.ps .btn:active{animation:none}
+@media (prefers-reduced-motion:reduce){.fv-under .btn,.sticky .btn,.ps .btn{animation:none}}
 
 @media (max-width:360px){
-  .fv h1 .m{font-size:27px}
-  .fv h1 .b2{font-size:34px}
-  .fv-person{width:170px}
-  .h2{font-size:23px}
+  .fv h1 .s{font-size:16px}
+  .fv-proof{gap:0 1px}
+  .fv-copy{width:64%}
+  .pf{width:64px;height:59px}
+  .pf .crown{width:10px;height:7px}
+  .pf .k{font-size:8.5px}
+  .pf .v{font-size:13.5px}
+  .pf .v small{font-size:8px}
+  .pf .u{font-size:7.5px}
+  .pf .t{font-size:8.5px}
+  .chip{padding:2px 10px}
+  .fv-person{top:auto;height:auto;width:42%;right:-8%}
+  html.v-sb .fv-person{height:auto;width:40%;right:-8%}
+  .fv-in{min-height:calc(74vw + 22px)}
   .col{padding:0 16px}
+  .ttl,.pain-title,.pain-close{font-size:21px}
+  .pain-fig{flex-basis:80px;width:80px;height:80px}
+  .pain-row{gap:20px}
+  .bubble{font-size:15px}
+  .two h3{font-size:17px}
+  .info{gap:6px}
+  .info li{padding:12px 2px}
+  .info .v{font-size:15px}
+}
+@media (min-width:410px) and (max-width:859px){
+  .pf{width:80px;height:72px}
+  .pf .k{font-size:10px}
+  .pf .v{font-size:17px}
+  .pf .u{font-size:9px}
+  .pf .t{font-size:10px}
+}
+/* タブレット：人物は帯の境目にそろえる（頭が切れない高さにする） */
+@media (min-width:600px) and (max-width:859px){
+  .fv-person{right:4%}
 }
 /* PC */
 @media (min-width:860px){
   section{padding:88px 0}
-  .h2{font-size:32px;margin-bottom:32px}
-  .cause .h2{font-size:38px}
-  .logo-svg{height:30px}
-  .fv-in{padding:64px 24px 0;display:grid;grid-template-columns:1.05fr .95fr;column-gap:48px}
-  .fv-copy{grid-column:1;grid-row:1}
-  .fv-under{grid-column:1;grid-row:2;padding-bottom:64px}
-  .fv-vis{grid-column:2;grid-row:1 / span 2;height:auto;min-height:480px;margin:0}
-  .fv-person{width:380px;right:0}
-  .fv-vis .ntf{left:0;bottom:90px;width:330px}
-  .fv-vis .fv-note{left:0;bottom:56px}
+  .ttl,.pain-title,.pain-close{font-size:32px;margin-bottom:32px}
+  .pain-close{margin-bottom:0}
+  .fv-in{padding:40px 24px 0;min-height:540px}
+  .fv-copy{margin-top:auto;margin-bottom:auto}
+  .fv-copy{width:56%}
   .fv h1 .s{font-size:26px}
-  .fv h1 .m{font-size:40px}
-  .fv h1 .b2{font-size:56px}
-  .fv .sub1{font-size:24px}
-  .fv .btn{max-width:440px}
-  .lede{font-size:19px}
-  .punch{font-size:22px}
-  .ba{grid-template-columns:1fr auto 1fr;align-items:center}
-  .ba .arrow{transform:rotate(-90deg)}
+  .fv h1 .m{font-size:52px}
+  .fv h1 .m1{font-size:46px}
+  html.v-sb .fv-person{height:auto}
+  .fv-person{right:6%;top:auto;bottom:0;height:auto;width:310px;max-width:none}
+  .fv-under{padding-top:28px}
+  .fv-proof{gap:0 12px;margin-top:14px}
+  .pf .t{font-size:14px}
+  .pf{width:118px;height:106px}
+  .pf .crown{width:18px;height:13px}
+  .pf .k{font-size:12px}
+  .pf .v{font-size:25px}
+  .pf .v small{font-size:13px}
+  .pf .u{font-size:12px}
+  .pf .v sup{font-size:8px;right:-12px}
+  .fv-under .btn{max-width:460px}
+  .turn .after{font-size:24px}
+  .conclude{font-size:22px}
   .sticky{left:auto;right:24px;bottom:24px;background:transparent;border:0;padding:0}
   .sticky .btn{width:auto;padding:14px 56px 14px 32px}
   footer{padding-bottom:28px}
@@ -322,130 +410,227 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<header><div class="wrap"><a class="logo" href="#" aria-label="REFLAME"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322.22 60.49" role="img" aria-label="REFLAME"><path fill="#231815" d="M89.69,38.59l8.08,11.13h-4.82l-7.46-10.69h-.71v10.69h-3.94v-26.11h4.62c3.45,0,5.94.65,7.47,1.94,1.69,1.44,2.54,3.35,2.54,5.72,0,1.85-.53,3.44-1.59,4.77-1.06,1.33-2.46,2.18-4.19,2.55ZM84.78,35.6h1.25c3.73,0,5.6-1.43,5.6-4.28,0-2.67-1.82-4.01-5.44-4.01h-1.4v8.29Z"/><path fill="#231815" d="M132.04,27.31h-11.15v6.27h10.85v3.7h-10.85v8.73h11.15v3.7h-15.09v-26.11h15.09v3.7Z"/><path fill="#231815" d="M167.54,27.31h-9.78v6.27h9.46v3.7h-9.46v12.43h-3.94v-26.11h13.72v3.7Z"/><path fill="#231815" d="M192.07,23.61v22.41h10.42v3.7h-14.36v-26.11h3.94Z"/><path fill="#231815" d="M238.06,43.38h-11.18l-2.91,6.34h-4.24l12.92-27.75,12.46,27.75h-4.31l-2.74-6.34ZM236.46,39.67l-3.87-8.88-4.06,8.88h7.93Z"/><path fill="#231815" d="M260.29,49.72l5.5-28.07,8.96,20.29,9.28-20.29,4.94,28.07h-4.04l-2.52-15.76-7.73,16.96-7.51-16.98-2.81,15.78h-4.08Z"/><path fill="#231815" d="M322.22,27.31h-11.15v6.27h10.85v3.7h-10.85v8.73h11.15v3.7h-15.09v-26.11h15.09v3.7Z"/><path fill="#757575" d="M42.86,14.14L24.43,0l.08,22.64c.05,2.49-1.24,4.81-3.36,6.04l-7.32,5.02v1.06c-.01,1.29.74,2.5,2,3.22l7.15,3.56,8.7-4.92c2.15-1.23,3.46-3.56,3.42-6.08-.07-4.66-.22-2.71-.44-6.66-.3-5.4,5.07-5.7,8.17-.43l.02-9.29v-.02Z"/><path fill="#231815" d="M15.83,37.97c-1.26-.71-2.01-1.92-2.01-3.22v-1.06s.27-29.19.27-29.19L.27,18.6l-.2,23.3c0,.86.49,1.67,1.32,2.17l8.08,5.06,4.91-2.76s.04,0,.06-.02l6.31-3.56,2.23-1.26-7.15-3.56Z"/><path fill="#231815" d="M42.91,14.18l10.85,8.71-.52,25.66c-.07.98-.58,1.78-1.34,2.16l-23.43,9.78-11.67-6.25,24.04-11.35c1.14-.56,1.88-1.77,1.97-3.24l.03-16.2.02-9.31.05.04Z"/></svg></a><div class="hd-sub">28卒向け<br>新卒就活エージェント</div></div></header>
 
-<!-- 1. FV：動画の冒頭5秒（面接で落ちる人は、同じ所でつまずいている）の続き → 理想の姿 -->
+<!-- 月桂冠と王冠の図（実績の飾り） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9c977"/><stop offset=".55" stop-color="#c99a3c"/><stop offset="1" stop-color="#a87a28"/></linearGradient><symbol id="wreath" viewBox="0 0 100 94"><g id="wr-l"><path d="M34.1 86.4 L31.8 85.4 L29.5 84.2 L27.4 83.0 L25.3 81.6 L23.3 80.0 L21.3 78.4 L19.5 76.6 L17.8 74.8 L16.2 72.8 L14.8 70.8 L13.4 68.6 L12.2 66.4 L11.1 64.2 L10.2 61.8 L9.4 59.4 L8.7 57.0 L8.2 54.5 L7.8 52.0 L7.6 49.5 L7.5 47.0 L7.6 44.5 L7.8 42.0 L8.2 39.5 L8.7 37.0 L9.4 34.6 L10.2 32.2 L11.1 29.8 L12.2 27.6 L13.4 25.4 L14.8 23.2 L16.2 21.2 L17.8 19.2 L19.5 17.4 L21.3 15.6 L23.3 14.0 L25.3 12.4 L27.4 11.0 L29.5 9.8 L31.8 8.6 L34.1 7.6" fill="none" stroke="url(#gd)" stroke-width="1" stroke-linecap="round"/><ellipse cx="35.0" cy="84.2" rx="1.80" ry="4.70" transform="rotate(-34.0 35.0 84.2)" fill="url(#gd)"/><ellipse cx="33.2" cy="88.6" rx="1.80" ry="4.70" transform="rotate(-102.0 33.2 88.6)" fill="url(#gd)"/><ellipse cx="26.7" cy="79.6" rx="1.74" ry="4.54" transform="rotate(-20.4 26.7 79.6)" fill="url(#gd)"/><ellipse cx="23.9" cy="83.5" rx="1.74" ry="4.54" transform="rotate(-88.4 23.9 83.5)" fill="url(#gd)"/><ellipse cx="19.6" cy="73.2" rx="1.67" ry="4.37" transform="rotate(-6.8 19.6 73.2)" fill="url(#gd)"/><ellipse cx="16.0" cy="76.3" rx="1.67" ry="4.37" transform="rotate(-74.8 16.0 76.3)" fill="url(#gd)"/><ellipse cx="14.3" cy="65.3" rx="1.61" ry="4.21" transform="rotate(6.8 14.3 65.3)" fill="url(#gd)"/><ellipse cx="10.1" cy="67.5" rx="1.61" ry="4.21" transform="rotate(-61.2 10.1 67.5)" fill="url(#gd)"/><ellipse cx="11.0" cy="56.4" rx="1.55" ry="4.04" transform="rotate(20.4 11.0 56.4)" fill="url(#gd)"/><ellipse cx="6.4" cy="57.6" rx="1.55" ry="4.04" transform="rotate(-47.6 6.4 57.6)" fill="url(#gd)"/><ellipse cx="9.9" cy="47.0" rx="1.48" ry="3.88" transform="rotate(34.0 9.9 47.0)" fill="url(#gd)"/><ellipse cx="5.1" cy="47.0" rx="1.48" ry="3.88" transform="rotate(-34.0 5.1 47.0)" fill="url(#gd)"/><ellipse cx="11.0" cy="37.6" rx="1.42" ry="3.71" transform="rotate(47.6 11.0 37.6)" fill="url(#gd)"/><ellipse cx="6.4" cy="36.4" rx="1.42" ry="3.71" transform="rotate(-20.4 6.4 36.4)" fill="url(#gd)"/><ellipse cx="14.3" cy="28.7" rx="1.36" ry="3.55" transform="rotate(61.2 14.3 28.7)" fill="url(#gd)"/><ellipse cx="10.1" cy="26.5" rx="1.36" ry="3.55" transform="rotate(-6.8 10.1 26.5)" fill="url(#gd)"/><ellipse cx="19.6" cy="20.8" rx="1.30" ry="3.38" transform="rotate(74.8 19.6 20.8)" fill="url(#gd)"/><ellipse cx="16.0" cy="17.7" rx="1.30" ry="3.38" transform="rotate(6.8 16.0 17.7)" fill="url(#gd)"/><ellipse cx="26.7" cy="14.4" rx="1.23" ry="3.22" transform="rotate(88.4 26.7 14.4)" fill="url(#gd)"/><ellipse cx="23.9" cy="10.5" rx="1.23" ry="3.22" transform="rotate(20.4 23.9 10.5)" fill="url(#gd)"/><ellipse cx="35.0" cy="9.8" rx="1.17" ry="3.06" transform="rotate(102.0 35.0 9.8)" fill="url(#gd)"/><ellipse cx="33.2" cy="5.4" rx="1.17" ry="3.06" transform="rotate(34.0 33.2 5.4)" fill="url(#gd)"/></g><use href="#wr-l" transform="matrix(-1 0 0 1 100 0)"/></symbol><symbol id="crown" viewBox="0 0 24 16"><path d="M2 5l5 4 5-7 5 7 5-4-2 10H4z" fill="url(#gd)"/><circle cx="2" cy="4" r="1.6" fill="url(#gd)"/><circle cx="12" cy="1.8" r="1.6" fill="url(#gd)"/><circle cx="22" cy="4" r="1.6" fill="url(#gd)"/></symbol></defs></svg>
+<!-- 1. FV -->
 <section class="fv" style="padding:0">
   <div class="fv-in">
     <div class="fv-copy">
-      <span class="chip">面接が苦手な28卒へ</span>
-      <h1><span class="s">落ちた理由が分かれば、</span><span class="m">もう<span class="b">同じ所</span>で</span><span class="b2">つまずかない。</span></h1>
-      <p class="sub"><span class="sub1"><span class="ph">模擬面接で、</span><span class="ph">苦手な面接を<em>強みに変えよう！</em></span></span></p>
+      <span class="chip sd">面接が苦手な28卒へ</span>
+      <span class="chip chip-2 sb">「なぜうちに？」に答えづらい28卒へ</span>
+      <h1 class="sd"><span class="s">落ちた理由が分かれば、</span><span class="m">もう<span class="b">同じ所</span>で</span><span class="m">つまずかない。</span></h1>
+      <h1 class="sb"><span class="s">志望動機は、</span><span class="m m1">もう<span class="b">作らなくていい</span></span></h1>
+      <div class="fv-proof">
+        <div class="pf"><svg class="wr" viewBox="0 0 100 94" aria-hidden="true"><use href="#wreath"/></svg><svg class="crown" viewBox="0 0 24 16" aria-hidden="true"><use href="#crown"/></svg><p><span class="k">支援実績</span><span class="v">4,200</span><span class="u">名以上</span></p></div>
+        <div class="pf"><svg class="wr" viewBox="0 0 100 94" aria-hidden="true"><use href="#wreath"/></svg><svg class="crown" viewBox="0 0 24 16" aria-hidden="true"><use href="#crown"/></svg><p><span class="k">満足度</span><span class="v">97<small>%</small><sup>※</sup></span></p></div>
+        <div class="pf pf-media"><svg class="wr" viewBox="0 0 100 94" aria-hidden="true"><use href="#wreath"/></svg><svg class="crown" viewBox="0 0 24 16" aria-hidden="true"><use href="#crown"/></svg><p><span class="t">メディア<br>掲載多数</span></p></div>
+      </div>
     </div>
-    <div class="fv-vis">
-      <ul class="fv-safe"><li>オンラインで完結</li><li>費用はかかりません</li><li>今の選考の相談だけでもOK</li></ul>
-      <img class="fv-person" src="assets/person.png" alt="REFLAMEの就活アドバイザー" width="360" height="435" fetchpriority="high">
-      <div class="ntf" role="img" aria-label="スマホの通知の例：一次面接の選考通過のお知らせ"><span class="ic"><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><rect x="0.75" y="0.75" width="16.5" height="12.5" rx="2" fill="#fff"/><path d="M1.5 1.8 9 7.6l7.5-5.8" fill="none" stroke="#1a7bf2" stroke-width="1.5"/></svg></span><div class="bd"><p class="r1">株式会社〇〇 採用担当<span>今</span></p><p class="tt"><span class="hl">【選考通過】</span>一次面接の結果について</p><p class="pv">二次面接へお進みいただきたく、ご連絡いたしました。</p></div></div>
-      <p class="fv-note">※イメージです。結果をお約束するものではありません。</p>
-    </div>
+    <img class="fv-person" src="assets/fv_mika.webp" alt="笑顔で腕を組むスーツ姿の女性（イメージ）" width="640" height="1076" fetchpriority="high">
   </div>
 </section>
 
+<!-- 1.5 掲載メディア（流れるロゴ）と予約ボタン -->
+<section class="media" aria-label="掲載メディア">
+  <div class="mq"><ul class="mq-track"><li><img src="assets/media_01.png" alt="NewsPicks" width="140" height="58"></li><li><img src="assets/media_02.png" alt="日刊SPA!" width="140" height="58"></li><li><img src="assets/media_03.png" alt="新R25" width="140" height="58"></li><li><img src="assets/media_04.png" alt="読売新聞オンライン" width="140" height="58"></li><li><img src="assets/media_05.png" alt="朝日新聞DIGITAL" width="140" height="58"></li><li><img src="assets/media_06.png" alt="毎日新聞社" width="140" height="58"></li><li><img src="assets/media_07.png" alt="東洋経済ONLINE" width="140" height="58"></li><li><img src="assets/media_08.png" alt="現代ビジネス" width="140" height="58"></li><li><img src="assets/media_09.png" alt="PRESIDENT Online" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_01.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_02.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_03.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_04.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_05.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_06.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_07.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_08.png" alt="" width="140" height="58"></li><li aria-hidden="true"><img src="assets/media_09.png" alt="" width="140" height="58"></li></ul></div>
+</section>
+<div class="fv-under">
+    <a class="btn sd" href="#booking">無料相談を予約する</a>
+    <a class="btn sb" href="#booking">志望動機の相談を予約する</a>
+</div>
+
 <!-- 2. 悩みの言い当て（抽象→具体） -->
-<section class="pain">
+<section class="pain sec-cream">
   <div class="col">
-    <h2 class="h2"><span class="ph">書類は通るのに、</span><br><span class="ph"><span class="c">面接で落ちる。</span></span></h2>
-    <p class="lede" style="margin-bottom:18px">こんなこと、ありませんか？</p>
-    <ul class="checks">
-      <li>「就活の軸は？」と聞かれて、<br><b>言葉に詰まった</b></li>
-      <li>「なぜうちなの？」に、<br><b>会社を褒めることしかできなかった</b></li>
-      <li>お祈りメールには、<br><b>どこが悪かったか書いていない</b></li>
+    <h2 class="pain-title"><span class="ph">Q.こんな<span class="pmk">お悩み</span>は</span><span class="ph">ないですか？</span></h2>
+    <ul class="pain-list sd">
+      <li class="pain-row"><img class="pain-fig" src="assets/pain_01.png" alt="" width="216" height="220"><p class="bubble"><span class="ph">「就活の軸は？」と</span><span class="ph">聞かれて</span><br><em>言葉に詰まった</em></p></li>
+      <li class="pain-row"><img class="pain-fig" src="assets/pain_02.png" alt="" width="216" height="200"><p class="bubble">「なぜうちなの？」に<br><em><span class="ph">会社を褒めることしか</span><span class="ph">できなかった</span></em></p></li>
+      <li class="pain-row"><img class="pain-fig" src="assets/pain_03.png" alt="" width="226" height="222"><p class="bubble">お祈りメールには<br><em><span class="ph">どこが悪かったか</span><span class="ph">書いていない</span></em></p></li>
     </ul>
-    <p class="punch"><span class="ph">直したくても、</span><span class="ph">何を直せばいいか</span><span class="ph">分からない。</span><small><span class="ph">企業は、落ちた理由を</span><span class="ph">ほとんど教えてくれません。</span></small></p>
+    <ul class="pain-list sb">
+      <li class="pain-row"><img class="pain-fig" src="assets/pain_01.png" alt="" width="216" height="220"><p class="bubble">志望動機は<br><em><span class="ph">会社のことを</span><span class="ph">調べて作った</span></em></p></li>
+      <li class="pain-row"><img class="pain-fig" src="assets/pain_02.png" alt="" width="216" height="200"><p class="bubble"><span class="ph">「他の会社では</span><span class="ph">だめなの？」</span><br>と聞かれて<em>詰まった</em></p></li>
+      <li class="pain-row"><img class="pain-fig" src="assets/pain_03.png" alt="" width="226" height="222"><p class="bubble">AIで整えた志望動機が<br><em>テンプレっぽい</em></p></li>
+    </ul>
+    <p class="pain-close"><span class="ph">直したくても、</span><br><em><span class="ph">何を直せばいいか</span><span class="ph">分からない。</span></em></p>
+    <p class="pain-sub"><span class="ph">企業は、落ちた理由を</span><span class="ph">ほとんど教えてくれません。</span></p>
   </div>
 </section>
 
 <!-- 3. これまでの対策と、その否定 -->
 <section class="tried-s">
   <div class="col">
-    <h2 class="h2"><span class="ph">自分なりに、</span><span class="ph">対策はしてきた。</span></h2>
-    <ul class="tried">
+    <span class="lbl">TRIED</span>
+    <h2 class="ttl sd"><span class="ph">自分なりに、</span><span class="ph"><em>対策はしてきた。</em></span></h2>
+    <h2 class="ttl sb"><span class="ph">志望動機は、</span><span class="ph"><em>ちゃんと準備してきた。</em></span></h2>
+    <ul class="tried card sd">
       <li><span>01</span>ネットで回答例を調べて、覚えた</li>
       <li><span>02</span>友達や大学のキャリアセンターに見てもらった</li>
       <li><span>03</span>話し方や表情を練習した</li>
     </ul>
-    <span class="conj">しかし、</span>
-    <p class="after"><span class="ph">それでもまた、</span><span class="ph">同じような質問で</span><span class="ph c">落ちてしまう。</span></p>
-    <p class="t-c" style="margin-top:14px"><span class="ph">それは、</span><span class="ph">直している所と、</span><span class="ph">評価が下がっている所が</span><span class="ph">ずれているからかもしれません。</span></p>
+    <ul class="tried card sb">
+      <li><span>01</span>会社のホームページや説明会で、事業や理念を調べた</li>
+      <li><span>02</span>AIに聞いて、志望動機の文を整えた</li>
+      <li><span>03</span>友達や大学のキャリアセンターに読んでもらった</li>
+    </ul>
+    <div class="turn">
+      <span class="but">しかし、</span>
+      <p class="after sd"><span class="ph">それでもまた、</span><span class="ph">同じような質問で</span><span class="ph c">落ちてしまう。</span></p>
+      <p class="after sb"><span class="ph">2回、3回と</span><span class="ph">深掘りされると、</span><span class="ph c">答えに詰まってしまう。</span></p>
+      <p class="why sd"><span class="ph">それは、</span><span class="ph">直している所と、</span><span class="ph">評価が下がっている所が</span><span class="ph">ずれているからかもしれません。</span></p>
+      <p class="why sb"><span class="ph">それは、</span><span class="ph">志望動機の作り方そのものが、</span><span class="ph">ずれているからかもしれません。</span></p>
+    </div>
   </div>
 </section>
 
-<!-- 4. 原因：面接官が見ているのは2つだけ -->
-<section class="cause">
-  <div class="col">
-    <p class="pre">実は、</p>
-    <h2 class="h2"><span class="ph">面接官が見ているのは、</span><br><span class="ph"><span class="c mk">2つだけ。</span></span></h2>
-    <div class="sheet" aria-label="面接官が見ている2つ">
-      <div class="sheet-hd">面接官の評価<span>この学生は…</span></div>
-      <div class="axis"><span class="no">01</span><div><h3>活躍できるか</h3><p>入社後に、成果を出せそうか</p></div></div>
-      <div class="axis"><span class="no">02</span><div><h3>長く働けるか</h3><p>この会社で、続けられそうか</p></div></div>
+<!-- 4. 原因（面接診断：面接官が見ているのは2つだけ／志望動機：会社を調べるだけでは作れない） -->
+<section class="cause sec-cream">
+  <div class="col sd">
+    <span class="lbl">CAUSE</span>
+    <span class="pre">実は、</span>
+    <h2 class="ttl"><span class="ph">面接官が見ているのは、</span><br><span class="ph"><em class="mk">2つだけ。</em></span></h2>
+    <p class="two-cap">面接官の評価　この学生は…</p>
+    <div class="two" aria-label="面接官が見ている2つ">
+      <div class="card"><span class="big-no">01</span><h3>活躍できるか</h3><p><span class="ph">入社後に、</span><span class="ph">成果を出せそうか</span></p></div>
+      <div class="card"><span class="big-no">02</span><h3>長く働けるか</h3><p><span class="ph">この会社で、</span><span class="ph">続けられそうか</span></p></div>
     </div>
-    <p class="t-c" style="margin-top:24px"><span class="ph">「軸は？」「なぜうち？」「ガクチカは？」</span><br><span class="ph">どの質問も、</span><span class="ph">この2つを確かめるためのものです。</span></p>
+    <p class="t-c body-t" style="margin-top:22px"><span class="ph">「軸は？」「なぜうち？」「ガクチカは？」</span><br><span class="ph">どの質問も、</span><span class="ph">この2つを確かめるためのものです。</span></p>
 
     <div class="qmap">
-      <div class="qm">
+      <div class="qm card">
         <p class="q">就活の軸は何ですか？</p>
         <p class="bad"><small>よくある答え</small>人の役に立てる仕事がしたいです。</p>
-        <p class="why"><small>ここで下がる</small>どの会社にも言えて、<span class="ph">この会社で</span>何をするかが見えない</p>
-        <p class="good"><small>理想の回答</small>相手の困りごとを、<b>先回りして解決する仕事</b>がしたいです。飲食店のアルバイトで常連さんの好みを覚えて先に提案したら、<b>指名してもらえるようになった</b>経験からです。</p>
+        <p class="why"><small>面接官NG目線</small>どの会社にも言えて、<span class="ph">この会社で</span>何をするかが見えない</p>
+        <div class="good"><img class="adv" src="assets/advisor_icon.webp" alt="" width="96" height="96"><p class="gb"><small>理想の回答</small>相手の困りごとを、<b>先回りして解決する仕事</b>がしたいです。飲食店のアルバイトで常連さんの好みを覚えて先に提案したら、<b>指名してもらえるようになった</b>経験からです。</p></div>
       </div>
-      <div class="qm">
+      <div class="qm card">
         <p class="q">なぜ弊社なのですか？</p>
         <p class="bad"><small>よくある答え</small>業界トップで、成長できる環境だと思ったからです。</p>
-        <p class="why"><small>ここで下がる</small>会社を褒めているだけで、ここで続ける理由が見えない</p>
-        <p class="good"><small>理想の回答</small>私の軸は「相手の困りごとを先回りして解決すること」です。説明会で、<b>導入後の支援まで同じ担当が続ける</b>と伺い、お客様と長く関われる点が<b>自分の軸に一番合う</b>と感じました。</p>
+        <p class="why"><small>面接官NG目線</small>会社を褒めているだけで、ここで続ける理由が見えない</p>
+        <div class="good"><img class="adv" src="assets/advisor_icon.webp" alt="" width="96" height="96"><p class="gb"><small>理想の回答</small>私の軸は「相手の困りごとを先回りして解決すること」です。説明会で、<b>導入後の支援まで同じ担当が続ける</b>と伺い、お客様と長く関われる点が<b>自分の軸に一番合う</b>と感じました。</p></div>
       </div>
-      <div class="qm">
+      <div class="qm card">
         <p class="q">学生時代に力を入れたことは？</p>
         <p class="bad"><small>よくある答え</small>サークルの部長として、大会を成功させました。</p>
-        <p class="why"><small>ここで下がる</small>結果だけで、何を考えて動いたかが見えない</p>
-        <p class="good"><small>理想の回答</small>練習の参加率が半分まで落ちていました。<b>原因は練習の目的が伝わっていないこと</b>だと考え、学年ごとに話を聞いて内容を見直しました。<b>大会前には参加率が9割に戻りました。</b></p>
+        <p class="why"><small>面接官NG目線</small>結果だけで、<span class="ph">何を考えて動いたかが見えない</span></p>
+        <div class="good"><img class="adv" src="assets/advisor_icon.webp" alt="" width="96" height="96"><p class="gb"><small>理想の回答</small>練習の参加率が半分まで落ちていました。<b>原因は練習の目的が伝わっていないこと</b>だと考え、学年ごとに話を聞いて内容を見直しました。<b>大会前には参加率が9割に戻りました。</b></p></div>
       </div>
     </div>
     <p class="note t-c" style="margin-top:12px">※ 答えの例です。どこで下がるかは、人や面接によって違います。</p>
     <p class="conclude"><span class="ph">落ちる人がつまずく“同じ所”は、</span><br><span class="ph c">この2つのどちらか</span><span class="ph">です。</span></p>
   </div>
+  <div class="col sb">
+    <span class="lbl">CAUSE</span>
+    <span class="pre">実は、</span>
+    <h2 class="ttl"><span class="ph">志望動機は、</span><br><span class="ph"><em class="mk">会社を調べるだけでは</em></span><span class="ph"><em class="mk">作れない。</em></span></h2>
+    <p class="two-cap">面接官の深掘り　1回目から3回目まで</p>
+    <div class="dig card" aria-label="面接官の深掘りの例">
+      <div class="row"><span class="no">01</span><div><h3>なぜ弊社なのですか？</h3><p>「業界トップで、成長できる環境だと思ったからです」</p></div></div>
+      <div class="row"><span class="no">02</span><div><h3>成長できる会社は、<span class="ph">他にもありますよね？</span></h3><p>「御社の理念に共感したからです」</p></div></div>
+      <div class="row"><span class="no">03</span><div><h3>その理念は、<span class="ph">あなたのどんな経験と</span><span class="ph">つながりますか？</span></h3><p>ここで、言葉に詰まる</p></div></div>
+    </div>
+    <p class="t-c body-t" style="margin-top:22px"><span class="ph">会社の情報は、</span><span class="ph">誰が調べても同じ。</span><br><span class="ph">だから、深掘りされるほど</span><span class="ph">答えが続かなくなります。</span></p>
+
+    <div class="qmap">
+      <div class="qm card">
+        <p class="q">なぜ弊社なのですか？</p>
+        <p class="bad"><small>よくある答え</small>業界トップで、成長できる環境だと思ったからです。</p>
+        <p class="why"><small>ここで止まる</small>会社の情報だけで、<span class="ph">誰でも言える。</span>「他社でもいいのでは？」と聞かれると続かない</p>
+        <div class="good"><img class="adv" src="assets/advisor_icon.webp" alt="" width="96" height="96"><p class="gb"><small>経験から作った答え</small>飲食店のアルバイトで、常連さんの好みを覚えて先に提案したら、<b>指名してもらえるようになりました</b>。説明会で、<b>導入後の支援まで同じ担当が続ける</b>と伺い、お客様と長く関われる点が<b>この経験に一番合う</b>と感じました。</p></div>
+      </div>
+      <div class="qm card">
+        <p class="q">入社したら、何をしたいですか？</p>
+        <p class="bad"><small>よくある答え</small>御社の主力の事業に携わり、成長したいです。</p>
+        <p class="why"><small>ここで止まる</small>会社の説明をなぞっているだけで、<span class="ph">あなたがそこで</span>何をするかが見えない</p>
+        <div class="good"><img class="adv" src="assets/advisor_icon.webp" alt="" width="96" height="96"><p class="gb"><small>経験から作った答え</small>アルバイトで続けてきた<b>「相手の困りごとを先回りして解決する」</b>ことを、お客様の担当として続けたいです。導入したあとに困りそうな所を先に見つけて、<b>長く使ってもらえる形</b>をつくりたいです。</p></div>
+      </div>
+    </div>
+    <p class="note t-c" style="margin-top:12px"><span class="ph">※ 答えの例です。</span><span class="ph">合う所は、人や会社によって違います。</span></p>
+    <p class="conclude"><span class="ph">深掘りされても止まらないのは、</span><br><span class="ph c">あなたの経験から作った志望動機</span><span class="ph">です。</span></p>
+  </div>
 </section>
 
 <!-- 5. 解決策 -->
 <section class="sol">
-  <div class="col">
-    <p class="pre-q t-c">でも、困ったことに</p>
-    <h2 class="h2"><span class="ph">面接は、</span><br><span class="ph"><span class="c">答え合わせのないテスト。</span></span></h2>
-    <p>企業から届くのは「合格」か「不合格」だけ。<b>どの答えで点が下がったのかは、教えてもらえません。</b></p>
-    <p>回答例を覚えても、友達に聞いてもらっても、分かるのは「良い答えかどうか」まで。<b>面接官がどう採点したか</b>は、分からないままです。</p>
-    <span class="conj">だからこそ、</span>
+  <div class="col sb">
+    <span class="lbl">SOLUTION</span>
+    <span class="so-q">でも、ひとりで作ろうとすると</span>
+    <h2 class="ttl"><span class="ph">経験と会社を</span><br><span class="ph"><em>つなぐ所が分からない。</em></span></h2>
+    <p class="body-t">自分の経験は、自分が一番よく知っています。でも、<b>その会社が面接で何を確かめたいのか</b>は、外から調べても分かりません。</p>
+    <p class="body-t">AIや例文で文を整えても、つなぐ所が自分の言葉になっていなければ、<b>深掘りされたところで止まってしまいます。</b></p>
+    <span class="so-turn">だからこそ、</span>
     <div class="answer">
       <p>大事なのは</p>
-      <b><span class="ph">本番の前に、</span><span class="ph">面接官の目線で</span><span class="ph">採点してもらうこと。</span></b>
+      <b><span class="ph">あなたの経験と、</span><span class="ph y">会社が確かめたいことを、</span><span class="ph y">つなげて言葉にすること。</span></b>
+    </div>
+  </div>
+  <div class="col sd">
+    <span class="lbl">SOLUTION</span>
+    <span class="so-q">でも、困ったことに</span>
+    <h2 class="ttl"><span class="ph">面接は、</span><br><span class="ph"><em>答え合わせのないテスト。</em></span></h2>
+    <p class="body-t">企業から届くのは「合格」か「不合格」だけ。<b>どの答えで点が下がったのかは、<span class="ph">教えてもらえません。</span></b></p>
+    <p class="body-t">回答例を覚えても、友達に聞いてもらっても、分かるのは「良い答えかどうか」まで。<b>面接官がどう採点したか</b>は、分からないままです。</p>
+    <span class="so-turn">だからこそ、</span>
+    <div class="answer">
+      <p>大事なのは</p>
+      <b><span class="ph">本番の前に、</span><span class="ph y">面接官の目線で</span><span class="ph y">採点してもらうこと。</span></b>
     </div>
   </div>
 </section>
 
-<!-- 6. サービス -->
-<section class="svc">
+<!-- 6. サービス（青の帯） -->
+<section class="svc sec-band">
   <div class="col">
-    <p class="en">REFLAME</p>
-    <h2 class="h2"><span class="ph">REFLAMEの</span><span class="ph"><span class="c">模擬面接</span>でやること</span></h2>
-    <ol class="tl">
-      <li><span class="n">1</span><h3>今の選考状況を聞く</h3><p>受けている企業、落ちた面接、そこで聞かれた質問を教えてください。</p></li>
-      <li><span class="n">2</span><h3>本番どおりの模擬面接</h3><p>よく聞かれる質問に、本番と同じ流れで答えてもらいます。</p><p class="ex">例：「就活の軸は？」「なぜ弊社なのか」「学生時代に力を入れたこと」</p></li>
-      <li><span class="n">3</span><h3>どちらで下がったかと、直し方</h3><p>「活躍できるか」「長く働けるか」のどちらで評価が下がったか。<span class="ph">言い直しまで</span>一緒に組み立てます。</p></li>
-      <li><span class="n">4</span><h3>次の面接までにやること</h3><p>次の選考の日から逆算して、やることを決めます。</p></li>
+    <span class="lbl">SERVICE</span>
+    <h2 class="ttl sd"><span class="ph">REFLAMEの</span><span class="ph"><em>模擬面接</em>でやること</span></h2>
+    <h2 class="ttl sb"><span class="ph">REFLAMEの</span><span class="ph"><em>志望動機づくり</em>でやること</span></h2>
+    <ol class="do-list sd">
+      <li class="do"><span class="big-no">01</span><div><h3>今の選考状況を聞く</h3><p>受けている企業、落ちた面接、そこで聞かれた質問を教えてください。</p></div></li>
+      <li class="do"><span class="big-no">02</span><div><h3>本番どおりの模擬面接</h3><p>よく聞かれる質問に、本番と同じ流れで答えてもらいます。</p><p class="ex">例：「就活の軸は？」「なぜ弊社なのか」「学生時代に力を入れたこと」</p></div></li>
+      <li class="do"><span class="big-no">03</span><div><h3>どちらで下がったかと、直し方</h3><p>「活躍できるか」「長く働けるか」のどちらで評価が下がったか。<span class="ph">言い直しまで</span>一緒に組み立てます。</p></div></li>
+      <li class="do"><span class="big-no">04</span><div><h3>次の面接までにやること</h3><p>次の選考の日から逆算して、やることを決めます。</p></div></li>
     </ol>
-    <div class="leave"><h3>面談のあとに残るもの</h3><ul><li>評価が下がっていた所</li><li>言い直した答え</li><li>次の面接までにやること</li></ul></div>
+    <ol class="do-list sb">
+      <li class="do"><span class="big-no">01</span><div><h3>今の選考状況を聞く</h3><p>受けている企業と、面接で詰まった質問を教えてください。</p></div></li>
+      <li class="do"><span class="big-no">02</span><div><h3>あなたの経験をふり返る</h3><p>サークル・アルバイト・ゼミで、何を考えて、どう動いたかを一緒に掘り下げます。</p></div></li>
+      <li class="do"><span class="big-no">03</span><div><h3>その会社の何と合うかをつなぐ</h3><p>担当は、企業の人事とも直接やりとりしています。面接で何を確かめているかを踏まえて、<span class="ph">あなたの経験と</span>つなげます。</p></div></li>
+      <li class="do"><span class="big-no">04</span><div><h3>深掘りされても話せるか確かめる</h3><p>「なぜうち？」「他の会社ではだめ？」と、本番どおりに聞いて確かめます。</p></div></li>
+    </ol>
+    <div class="leave sd"><h3>面談のあとに残るもの</h3><ul><li>評価が下がっていた所</li><li>言い直した答え</li><li>次の面接までにやること</li></ul></div>
+    <div class="leave sb"><h3>面談のあとに残るもの</h3><ul><li>あなたの経験から作った志望動機の骨組み</li><li>深掘りされた時の答え方</li><li>次の面接までにやること</li></ul></div>
     <p class="extra"><b>REFLAMEから応募した選考なら、</b>面接のあとに人事からの評価も担当に届きます。ご自身で応募した企業の評価は届きません。</p>
   </div>
 </section>
 
-<!-- 7. 直ったあとの場面 -->
-<section class="future">
+<!-- 6.5 担当について（確かめられた事実だけ） -->
+<section class="trust">
   <div class="col">
-    <h2 class="h2"><span class="ph">次の面接では、</span><br><span class="ph"><span class="c">こう変わります</span></span></h2>
-    <div class="ba">
-      <div class="before"><small>BEFORE</small><p>「軸は？」と聞かれて、なんとなく答える。何がだめだったか分からないまま、また落ちる。</p></div>
-      <div class="arrow" aria-hidden="true">▼</div>
-      <div class="after2"><small>AFTER</small><p>面接官が何を確かめたいかが分かっている。言い直した答えで、<b>落ち着いて話せる。</b></p></div>
+    <span class="lbl">ADVISOR</span>
+    <h2 class="ttl"><span class="ph">担当するのは、</span><br><span class="ph"><em>企業の人事とも</em></span><span class="ph"><em>話している人</em>です</span></h2>
+    <ul class="tr">
+      <li class="card"><span class="no">01</span><div><h3><span class="ph">学生と企業、</span><span class="ph">両方と話している</span></h3><p>担当は、学生の就活の相談に乗りながら、企業の人事とも直接やりとりしています。</p></div></li>
+      <li class="card"><span class="no">02</span><div><h3><span class="ph">面接で見られている所から、</span><span class="ph">答えを見直す</span></h3><p>人事が面接で何を確かめているかを踏まえて、<span class="ph">あなたの答えを</span>一緒に見直します。</p></div></li>
+    </ul>
+    <p class="lic">REFLAMEは、厚生労働大臣の許可を受けた<span class="ph">有料職業紹介事業者です</span><br><span class="ph">（許可番号 27-ユ-303562）</span></p>
+  </div>
+</section>
+
+<!-- 7. 直ったあとの場面（BEFORE → AFTER） -->
+<section class="future sec-cream">
+  <div class="col">
+    <span class="lbl">CHANGE</span>
+    <h2 class="ttl"><span class="ph">次の面接では、</span><br><span class="ph"><em>こう変わります</em></span></h2>
+    <div class="ba card sd">
+      <div class="be"><small>BEFORE</small><p>「軸は？」と聞かれて、なんとなく答える。何がだめだったか分からないまま、また落ちる。</p></div>
+      <span class="arw" aria-hidden="true">▼</span>
+      <div class="af"><small>AFTER</small><p>面接官が何を確かめたいかが分かっている。言い直した答えで、<b>落ち着いて話せる。</b></p></div>
+    </div>
+    <div class="ba card sb">
+      <div class="be"><small>BEFORE</small><p>会社の説明をなぞった志望動機。「他の会社ではだめなの？」と聞かれて、言葉に詰まる。</p></div>
+      <span class="arw" aria-hidden="true">▼</span>
+      <div class="af"><small>AFTER</small><p>自分の経験から話せるので、深掘りされても、<b>自分の言葉で答えられる。</b></p></div>
     </div>
   </div>
 </section>
@@ -453,29 +638,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- 8. 不安を消す -->
 <section class="worry">
   <div class="col">
-    <h2 class="h2"><span class="ph">気になることも、</span><span class="ph">先にお答えします</span></h2>
-    <div class="wq"><p class="q">求人を押し付けられない？</p><h3>ご希望がない限り、求人のご紹介はしません</h3><p>まずは、あなたの面接の直し方を考えるところからです。</p></div>
-    <div class="wq"><p class="q">お金がかかるんじゃない？</p><h3>費用はかかりません</h3><p>採用が決まった企業からいただく紹介料で運営しているため、学生の方から費用をいただくことはありません。</p></div>
-    <div class="wq"><p class="q">今の選考の相談だけでもいい？</p><h3>大丈夫です</h3><p>ほかのサービスと一緒に使っても構いません。</p></div>
-    <div class="wq"><p class="q">まだ面接を受けたことがない</p><h3>初めての面接の前の練習にも使えます</h3><p>本番の前に一度、面接官の目線で確かめておきましょう。</p></div>
-    <div class="wq"><p class="q">わざわざ出かけるのは大変</p><h3>オンラインで完結します</h3><p>スマホからでも参加できます。</p></div>
+    <span class="lbl">CONCERN</span>
+    <h2 class="ttl"><span class="ph">気になることも、</span><span class="ph"><em>先にお答えします</em></span></h2>
+    <div class="wq card"><p class="q">求人を押し付けられない？</p><h3>ご希望がない限り、求人のご紹介はしません</h3><p class="sd">まずは、あなたの面接の直し方を考えるところからです。</p><p class="sb">まずは、あなたの志望動機を考えるところからです。</p></div>
+    <div class="wq card"><p class="q">お金がかかるんじゃない？</p><h3>費用はかかりません</h3><p>採用が決まった企業からいただく紹介料で運営しているため、学生の方から費用をいただくことはありません。</p></div>
+    <div class="wq card"><p class="q">今の選考の相談だけでもいい？</p><h3>大丈夫です</h3><p><span class="ph">ほかのサービスと</span><span class="ph">一緒に使っても構いません。</span></p></div>
+    <div class="wq card sd"><p class="q">まだ面接を受けたことがない</p><h3><span class="ph">初めての面接の前の</span><span class="ph">練習にも使えます</span></h3><p>本番の前に一度、面接官の目線で確かめておきましょう。</p></div>
+    <div class="wq card sb"><p class="q">志望動機が、まだできていない</p><h3>ゼロからでも大丈夫です</h3><p>これまでの経験をふり返るところから、一緒に始めます。</p></div>
+    <div class="wq card"><p class="q">わざわざ出かけるのは大変</p><h3>オンラインで完結します</h3><p>スマホからでも参加できます。</p></div>
   </div>
 </section>
 
-<!-- 9. 予約欄 -->
-<section class="book" id="booking">
+<!-- 9. 予約欄（3つの枠＋フォーム） -->
+<section class="book sec-cream" id="booking">
   <div class="col">
+    <span class="lbl">RESERVE</span>
     <p class="book-to">面接が上手くなりたい28卒の方へ</p>
-    <h2 class="h2"><span class="ph">“答え合わせ”は、</span><br><span class="ph"><span class="c mk">次の面接の前に。</span></span></h2>
-    <p class="book-sub t-c"><span class="ph">本番どおりの模擬面接で、</span><span class="ph">評価が下がっている所を見つけて、</span><span class="ph">言い直しまで一緒にやります。</span></p>
+    <h2 class="ttl sd"><span class="ph">“答え合わせ”は、</span><br><span class="ph"><em class="mk">次の面接の前に。</em></span></h2>
+    <h2 class="ttl sb"><span class="ph">志望動機は、</span><br><span class="ph"><em class="mk">本命の選考が来る前に。</em></span></h2>
+    <p class="book-sub t-c sd"><span class="ph">本番どおりの模擬面接で、</span><span class="ph">評価が下がっている所を見つけて、</span><span class="ph">言い直しまで一緒にやります。</span></p>
+    <p class="book-sub t-c sb"><span class="ph">あなたの経験と、</span><span class="ph">その会社の合う所をつないで、</span><span class="ph">深掘りされても話せるまで一緒にやります。</span></p>
+    <ul class="info"><li><span class="k">所要時間</span><span class="v">60分</span></li><li><span class="k">場所</span><span class="v">オンライン</span></li><li><span class="k">費用</span><span class="v">なし</span></li></ul>
     <div class="form">
-      <div class="form-hd"><small>＼ オンライン・費用はかかりません ／</small><b><span class="ph">模擬面接・</span><span class="ph">面接対策のご予約</span></b><small>入力のあと、空いている日程を選べます</small></div>
+      <div class="form-hd"><small>＼ 60分・オンライン・費用はかかりません ／</small><b class="sd"><span class="ph">模擬面接・</span><span class="ph">面接対策のご予約</span></b><b class="sb"><span class="ph">志望動機・</span><span class="ph">面接対策のご予約</span></b><small>入力のあと、空いている日程を選べます</small></div>
       <div class="form-bd">
         <div id="reflame-booking"></div>
         <noscript><p class="embed-fallback"><a href="https://designer.my.site.com/scheduling?slug=ng-ad-mk">こちらから予約できます</a></p></noscript>
         <p class="embed-fallback" id="embed-fallback" hidden>予約欄を読み込めませんでした。お手数ですが、ページを再読み込みしてください。</p>
         <script src="https://designer.my.site.com/schedulingvforcesite/services/apexrest/booking/v1/embed.js" data-slug="ng-ad-mk" data-target="#reflame-booking"></script>
-        <!-- 予約フォームの色を、このLPに合わせて上書き（新卒メインLPの上書きを水色・珊瑚色にしたもの） -->
+        <!-- 予約フォームの色を、このLPに合わせて上書き（水色・珊瑚色） -->
         <script>
         (function () {
           var TARGETS = ['#reflame-booking', '#reflame-booking-widget'];
@@ -544,29 +735,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- 10. よくある質問・追伸 -->
 <section class="faq">
   <div class="col">
-    <p class="en">Q&amp;A</p>
-    <h2 class="h2">よくある質問</h2>
-    <div class="qa">
+    <span class="lbl">FAQ</span>
+    <h2 class="ttl">よくある質問</h2>
+    <div class="faq-list">
       <details><summary>時間はどれくらいですか？</summary><p class="a">1回の面談は60分ほどです。オンラインで、スマホからでも参加できます。</p></details>
       <details><summary>人事の評価は、どの会社でも聞けますか？</summary><p class="a">REFLAMEを通して応募した企業の選考に限ります。ご自身で応募した企業については、模擬面接で評価が下がった所を確かめます。</p></details>
       <details><summary>インターンの選考の面接でも相談できますか？</summary><p class="a">はい。インターンの選考の面接も、本選考と同じように練習できます。</p></details>
     </div>
-    <div class="ps">
-      <p class="en">P.S.</p>
-      <p>同じ答え方のまま次の面接を受けると、また同じ所で評価が下がるかもしれません。次の選考の日が来る前に、どちらで下がっているかだけでも確かめておきませんか。</p>
-      <a class="btn" href="#booking">模擬面接を予約する</a>
+    <div class="ps card">
+      <span class="lbl">P.S.</span>
+      <p class="sd">同じ答え方のまま次の面接を受けると、また同じ所で評価が下がるかもしれません。次の選考の日が来る前に、どちらで下がっているかだけでも確かめておきませんか。</p>
+      <p class="sb">会社の情報だけで作った志望動機のまま本命の面接を受けると、深掘りされたところで、また言葉に詰まるかもしれません。本命の選考が来る前に、あなたの経験から作り直しておきませんか。</p>
+      <a class="btn sd" href="#booking">無料相談を予約する</a>
+      <a class="btn sb" href="#booking">志望動機の相談を予約する</a>
     </div>
   </div>
 </section>
 
+<div class="foot-notes"><p><span class="ph">※満足度：自社調べ／</span><span class="ph">2025年4月〜2026年4月／</span><span class="ph">有効回答数2,000件</span><br>掲載メディアには、プレスリリース配信による掲載を含みます。</p></div>
 <footer><a href="https://reflame.co.jp/privacy/">プライバシーポリシー</a>|<a href="https://reflame.co.jp/">運営会社</a><p style="margin-top:8px">株式会社REFLAME／〒542-0076 大阪府大阪市中央区難波5-1-60 なんばスカイオ27F／有料職業紹介事業許可番号 27-ユ-303562</p><p style="margin-top:6px">© 2026 株式会社REFLAME</p></footer>
 
-<div class="sticky" id="sticky"><a class="btn" href="#booking">模擬面接を予約する</a></div>
+<div class="sticky" id="sticky"><a class="btn sd" href="#booking">無料相談を予約する</a><a class="btn sb" href="#booking">志望動機の相談を予約する</a></div>
 <script>
-// 下の予約ボタンは常に出しておく。予約欄そのものが画面に出ている間だけ隠す（予約欄の入力の邪魔をしないように）
+// 下の予約ボタンは常に出しておく。予約欄そのものか、最初の画面の予約ボタンが画面に出ている間だけ隠す（同じボタンを2つ並べない・予約欄の入力の邪魔をしない）
 (function () {
   var s = document.getElementById('sticky');
-  var targets = [document.getElementById('booking')].filter(Boolean);
+  var targets = [document.getElementById('booking'), document.querySelector('.fv-under')].filter(Boolean);
   if (!s || !targets.length) return;
   var tick = false;
   function update() {
